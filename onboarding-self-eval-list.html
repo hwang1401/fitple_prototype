@@ -6,7 +6,7 @@
     <title>핏플 - 온보딩 관리</title>
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=4">
-    <link rel="stylesheet" href="css/pages/onboarding-self-eval.css?v=1">
+    <link rel="stylesheet" href="css/pages/onboarding-self-eval.css?v=2">
 </head>
 <body class="page--onboarding-self-eval">
     <div class="app">
@@ -122,30 +122,63 @@
 
                 <!-- Tab Navigation -->
                 <div class="se-tabs">
-                    <button class="se-tab" data-tab="fitcheck" type="button">핏 체크</button>
-                    <button class="se-tab se-tab--active" data-tab="self-eval" type="button">자기 평가</button>
-                    <button class="se-tab" data-tab="cross-verify" type="button">교차 검증</button>
+                    <button class="se-tab" data-tab="fitcheck" type="button">
+                        핏 체크
+                        <span class="se-tab-badge se-tab-badge--secondary">43</span>
+                    </button>
+                    <button class="se-tab se-tab--active" data-tab="self-eval" type="button">
+                        자기 평가
+                        <span class="se-tab-badge se-tab-badge--primary">4</span>
+                    </button>
+                    <button class="se-tab" data-tab="cross-verify" type="button">
+                        교차 검증
+                        <span class="se-tab-badge se-tab-badge--secondary">5</span>
+                    </button>
                 </div>
 
                 <!-- Toolbar -->
                 <div class="se-toolbar">
-                    <!-- Filters -->
-                    <div class="se-filters">
-                        <div class="se-filter">
-                            <select class="se-filter-select">
-                                <option value="">전체 부서</option>
-                                <option value="dev">개발팀</option>
-                                <option value="design">디자인팀</option>
-                                <option value="marketing">마케팅팀</option>
-                                <option value="sales">영업팀</option>
-                            </select>
-                            <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" class="se-filter-icon">
-                        </div>
+                    <!-- Segment Control -->
+                    <div class="se-segment">
+                        <button class="se-segment-item se-segment-item--active" type="button">
+                            전체
+                            <span class="se-segment-badge se-segment-badge--primary">43</span>
+                        </button>
+                        <button class="se-segment-item" type="button">
+                            요청 완료
+                            <span class="se-segment-badge">2</span>
+                        </button>
+                        <button class="se-segment-item" type="button">
+                            작성 완료
+                            <span class="se-segment-badge">3</span>
+                        </button>
+                        <button class="se-segment-item" type="button">
+                            미작성
+                            <span class="se-segment-badge">3</span>
+                        </button>
                     </div>
 
+                    <!-- Filter -->
+                    <div class="se-filter">
+                        <select class="se-filter-select">
+                            <option value="">전체 부서</option>
+                            <option value="dev">개발팀</option>
+                            <option value="design">디자인팀</option>
+                            <option value="marketing">마케팅팀</option>
+                            <option value="sales">영업팀</option>
+                        </select>
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" class="se-filter-icon">
+                    </div>
+
+                    <!-- Spacer -->
+                    <div style="flex: 1;"></div>
+
                     <!-- Action Button -->
-                    <button class="btn-pfto btn-pfto--lg" type="button" onclick="openModal('modal-self-eval')">
-                        <span class="btn-pfto__label">자기평가 요청</span>
+                    <button class="btn-ctoto btn-ctoto--lg" type="button" onclick="openModal('modal-self-eval')">
+                        <span class="btn-c__icon">
+                            <img src="assets/에셋/Icons/Paper Plane.svg" alt="">
+                        </span>
+                        <span class="btn-ctoto__label">자기평가 요청</span>
                     </button>
                 </div>
 
@@ -165,7 +198,7 @@
                                     </th>
                                     <th class="se-table__th se-table__th--employee">직원</th>
                                     <th class="se-table__th">부서</th>
-                                    <th class="se-table__th">최근 체크일</th>
+                                    <th class="se-table__th">최근 체크</th>
                                     <th class="se-table__th">점수</th>
                                     <th class="se-table__th">상태</th>
                                     <th class="se-table__th se-table__th--actions"></th>
@@ -174,7 +207,7 @@
                             <tbody>
                                 <!-- Row 1 -->
                                 <tr class="se-table__row">
-                                    <td class="se-table__td se-table__td--checkbox" onclick="event.stopPropagation()">
+                                    <td class="se-table__td se-table__td--checkbox">
                                         <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
                                             <input class="fi-check__input" type="checkbox" />
                                             <span class="fi-check__wrap" aria-hidden="true">
@@ -191,24 +224,29 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="se-table__td">개발팀</td>
-                                    <td class="se-table__td">2024.12.01</td>
+                                    <td class="se-table__td">프론트엔드 개발자</td>
+                                    <td class="se-table__td">2025.09.01</td>
                                     <td class="se-table__td">
-                                        <span class="se-score-value">4.0</span>
+                                        <div class="se-score">
+                                            <div class="se-score-bar">
+                                                <div class="se-score-bar-fill" style="width: 84%;"></div>
+                                            </div>
+                                            <span class="se-score-value">4.2</span>
+                                        </div>
                                     </td>
                                     <td class="se-table__td">
-                                        <span class="se-badge se-badge--complete">완료</span>
+                                        <span class="se-badge se-badge--complete">정상</span>
                                     </td>
                                     <td class="se-table__td se-table__td--actions">
-                                        <button class="se-action-btn" type="button" onclick="navigateToSelfEvalDetail('김민수')">
-                                            결과 보기
+                                        <button class="se-action-btn" type="button" onclick="navigateToSelfEvalDetail()">
+                                            리마인드
                                         </button>
                                     </td>
                                 </tr>
 
                                 <!-- Row 2 -->
                                 <tr class="se-table__row">
-                                    <td class="se-table__td se-table__td--checkbox" onclick="event.stopPropagation()">
+                                    <td class="se-table__td se-table__td--checkbox">
                                         <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
                                             <input class="fi-check__input" type="checkbox" />
                                             <span class="fi-check__wrap" aria-hidden="true">
@@ -225,24 +263,29 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="se-table__td">디자인팀</td>
-                                    <td class="se-table__td">2024.11.28</td>
+                                    <td class="se-table__td">백엔드 개발자</td>
+                                    <td class="se-table__td">2025.06.15</td>
                                     <td class="se-table__td">
-                                        <span class="se-score-value">3.8</span>
+                                        <div class="se-score">
+                                            <div class="se-score-bar">
+                                                <div class="se-score-bar-fill se-score-bar-fill--error" style="width: 58%;"></div>
+                                            </div>
+                                            <span class="se-score-value">2.9</span>
+                                        </div>
                                     </td>
                                     <td class="se-table__td">
-                                        <span class="se-badge se-badge--waiting">응답 대기</span>
+                                        <span class="se-badge se-badge--error">컬처 갭 발생</span>
                                     </td>
                                     <td class="se-table__td se-table__td--actions">
-                                        <button class="se-action-btn" type="button" onclick="remindSelfEval('이지은')">
-                                            리마인드
+                                        <button class="btn-pfto btn-pfto--md" type="button">
+                                            <span class="btn-pfto__label">재요청</span>
                                         </button>
                                     </td>
                                 </tr>
 
                                 <!-- Row 3 -->
                                 <tr class="se-table__row">
-                                    <td class="se-table__td se-table__td--checkbox" onclick="event.stopPropagation()">
+                                    <td class="se-table__td se-table__td--checkbox">
                                         <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
                                             <input class="fi-check__input" type="checkbox" />
                                             <span class="fi-check__wrap" aria-hidden="true">
@@ -259,18 +302,21 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="se-table__td">마케팅팀</td>
+                                    <td class="se-table__td">프로덕트 디자이너</td>
+                                    <td class="se-table__td">2025.11.01</td>
                                     <td class="se-table__td">
-                                        <span class="se-no-data">-</span>
+                                        <div class="se-score">
+                                            <div class="se-score-bar">
+                                                <div class="se-score-bar-fill se-score-bar-fill--warning" style="width: 64%;"></div>
+                                            </div>
+                                            <span class="se-score-value">3.2</span>
+                                        </div>
                                     </td>
                                     <td class="se-table__td">
-                                        <span class="se-no-data">-</span>
-                                    </td>
-                                    <td class="se-table__td">
-                                        <span class="se-badge se-badge--not-started">미요청</span>
+                                        <span class="se-badge se-badge--warning">주의</span>
                                     </td>
                                     <td class="se-table__td se-table__td--actions">
-                                        <button class="se-action-btn se-action-btn--disabled" type="button" disabled>
+                                        <button class="se-action-btn" type="button">
                                             결과 보기
                                         </button>
                                     </td>
@@ -278,7 +324,7 @@
 
                                 <!-- Row 4 -->
                                 <tr class="se-table__row">
-                                    <td class="se-table__td se-table__td--checkbox" onclick="event.stopPropagation()">
+                                    <td class="se-table__td se-table__td--checkbox">
                                         <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
                                             <input class="fi-check__input" type="checkbox" />
                                             <span class="fi-check__wrap" aria-hidden="true">
@@ -295,17 +341,22 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="se-table__td">개발팀</td>
-                                    <td class="se-table__td">2024.12.03</td>
+                                    <td class="se-table__td">데이터 분석가</td>
+                                    <td class="se-table__td">2025.03.01</td>
                                     <td class="se-table__td">
-                                        <span class="se-score-value">4.5</span>
+                                        <div class="se-score">
+                                            <div class="se-score-bar">
+                                                <div class="se-score-bar-fill" style="width: 92%;"></div>
+                                            </div>
+                                            <span class="se-score-value">4.6</span>
+                                        </div>
                                     </td>
                                     <td class="se-table__td">
-                                        <span class="se-badge se-badge--complete">완료</span>
+                                        <span class="se-badge se-badge--complete">정상</span>
                                     </td>
                                     <td class="se-table__td se-table__td--actions">
-                                        <button class="se-action-btn" type="button" onclick="navigateToSelfEvalDetail('최서연')">
-                                            결과 보기
+                                        <button class="se-action-btn" type="button">
+                                            리마인드
                                         </button>
                                     </td>
                                 </tr>
@@ -318,7 +369,7 @@
                         <!-- Search Box (Left) -->
                         <div class="se-search">
                             <img src="assets/에셋/Icons/Search.svg" alt="" class="se-search-icon">
-                            <input type="text" placeholder="이름, 부서로 검색" class="se-search-input">
+                            <input type="text" placeholder="이름, 기술, 회사로 검색" class="se-search-input">
                         </div>
 
                         <!-- Pagination (Right) -->
@@ -339,7 +390,7 @@
         </div>
     </div>
 
-    <!-- Modal: Self Evaluation Request (reuse from employee-list) -->
+    <!-- Modal: Self Evaluation Request -->
     <div id="modal-self-eval" class="modal" style="display: none;">
         <div class="modal__overlay" onclick="closeModal('modal-self-eval')"></div>
         <div class="modal__dialog modal__dialog--self-eval">
@@ -363,8 +414,9 @@
         </div>
     </div>
 
+    <div id="toast-container"></div>
+
     <script src="js/app.js?v=1.0.9"></script>
     <script src="js/onboarding-self-eval.js?v=1"></script>
 </body>
 </html>
-

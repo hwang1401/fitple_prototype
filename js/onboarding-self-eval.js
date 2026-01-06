@@ -1,63 +1,89 @@
-// Onboarding Self Evaluation - JavaScript
+// Onboarding Management - Self Evaluation JS
 
 document.addEventListener('DOMContentLoaded', function() {
-    initTabs();
+    // Initialize
+    initSegmentControls();
+    initTabNavigation();
+    initHistoryCards();
 });
 
-// Tab Navigation
-function initTabs() {
-    const tabs = document.querySelectorAll('.se-tab');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const targetTab = this.dataset.tab;
-            handleTabSwitch(targetTab);
+// Segment Controls
+function initSegmentControls() {
+    const segmentItems = document.querySelectorAll('.se-segment-item');
+    
+    segmentItems.forEach(item => {
+        item.addEventListener('click', function() {
+            segmentItems.forEach(i => i.classList.remove('se-segment-item--active'));
+            this.classList.add('se-segment-item--active');
+            
+            // Here you would filter the table based on selected segment
+            console.log('Filter changed:', this.textContent.trim());
         });
     });
 }
 
-function handleTabSwitch(tabName) {
-    // Update active state
+// Tab Navigation
+function initTabNavigation() {
     const tabs = document.querySelectorAll('.se-tab');
+    
     tabs.forEach(tab => {
-        if (tab.dataset.tab === tabName) {
-            tab.classList.add('se-tab--active');
-        } else {
-            tab.classList.remove('se-tab--active');
-        }
+        tab.addEventListener('click', function() {
+            const targetTab = this.dataset.tab;
+            
+            // Navigate based on tab
+            switch(targetTab) {
+                case 'fitcheck':
+                    window.location.href = 'onboarding-fitcheck-list.html';
+                    break;
+                case 'self-eval':
+                    // Already on self-eval page
+                    break;
+                case 'cross-verify':
+                    // Cross verify not implemented yet
+                    console.log('Cross verify clicked');
+                    break;
+            }
+        });
     });
-
-    // Navigate to appropriate page
-    if (tabName === 'fitcheck') {
-        window.location.href = 'onboarding-fitcheck-list.html';
-    } else if (tabName === 'cross-verify') {
-        showToast('교차 검증 페이지는 준비 중입니다.', 'info');
-    }
-    // 'self-eval' stays on current page
 }
 
-// Navigate to self evaluation detail page
-function navigateToSelfEvalDetail(employeeName) {
+// History Cards (Detail Page)
+function initHistoryCards() {
+    // Add click listeners to all history cards if on detail page
+    const historyCards = document.querySelectorAll('.sed-history-card');
+    if (historyCards.length === 0) return; // Not on detail page
+    
+    // Cards are already set up with onclick in HTML
+}
+
+function toggleHistoryCard(headerElement) {
+    const card = headerElement.closest('.sed-history-card');
+    card.classList.toggle('sed-history-card--expanded');
+}
+
+// Navigation Functions
+function navigateToSelfEvalDetail() {
     window.location.href = 'onboarding-self-eval-detail.html';
 }
 
-// Remind self evaluation
-function remindSelfEval(employeeName) {
-    showToast(`${employeeName}님에게 리마인드가 발송되었습니다.`);
-}
-
-// Navigate back to list
 function backToList() {
     window.location.href = 'onboarding-self-eval-list.html';
 }
 
-// Submit self evaluation request
-function submitSelfEvalRequest() {
-    closeModal('modal-self-eval');
-    showToast('자기평가 요청이 발송되었습니다.');
-}
-
-// View cross verification
 function viewCrossVerification() {
-    showToast('교차 검증 페이지로 이동합니다.');
+    showToast('교차검증 페이지로 이동합니다.', 'info');
+    // Implementation would navigate to cross verification page
 }
 
+// Modal Functions
+function submitSelfEvalRequest() {
+    showToast('자기평가 요청이 발송되었습니다.', 'success');
+    closeModal('modal-self-eval');
+}
+
+// Make functions globally available
+window.toggleHistoryCard = toggleHistoryCard;
+window.navigateToSelfEvalDetail = navigateToSelfEvalDetail;
+window.backToList = backToList;
+window.viewCrossVerification = viewCrossVerification;
+window.submitSelfEvalRequest = submitSelfEvalRequest;
