@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 인재 추천</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 화면 높이 고정 */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .app {
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .main {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 16px 24px;
+            gap: 12px;
+        }
+        
+        /* 인재 추천 페이지 전용 스타일 */
+        .page-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        .page-title-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin: 0;
+        }
+        
+        .ticket-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #e9e8f3;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c9371;
+        }
+        
+        .ticket-info img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* 툴바 */
+        .page-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        /* 탭 */
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 2px;
+            background: #e0e0e0;
+            border-radius: 4px;
+        }
+        
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 32px;
+            padding: 0 12px;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5b5b5b;
+        }
+        
+        .tab.active {
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        
+        .tab-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 18px;
+            padding: 0 6px;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .tab.active .tab-count {
+            background: #2c9371;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* 검색 박스 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 240px;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #d6d6d6;
+            border-radius: 4px;
+            background: #fff;
+        }
+        
+        .search-box img {
+            width: 18px;
+            height: 18px;
+            opacity: 0.5;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+        
+        .search-box input::placeholder {
+            color: #999;
+        }
+        
+        /* 필터 버튼 */
+        .btn-filter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 36px;
+            padding: 0 12px;
+            background: none;
+            border: 1px solid #2c9371;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c9371;
+        }
+        
+        .btn-filter img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* 뷰 토글 */
+        .view-toggle {
+            display: flex;
+            align-items: center;
+            padding: 2px;
+            background: #e0e0e0;
+            border-radius: 4px;
+        }
+        
+        .view-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .view-btn img {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .view-btn.active {
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* 테이블 */
+        .talent-table-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .table-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        
+        .talent-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .talent-table th {
+            padding: 12px 16px;
+            background: #fafafa;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666666;
+            text-transform: uppercase;
+            text-align: left;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .talent-table th:first-child {
+            width: 50px;
+            text-align: center;
+        }
+        
+        .talent-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        
+        .talent-table td:first-child {
+            text-align: center;
+        }
+        
+        .talent-table tbody tr {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .talent-table tbody tr:hover {
+            background: #f9fafb;
+        }
+        
+        /* 인재 셀 */
+        .talent-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .talent-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        
+        .talent-avatar.green { background: linear-gradient(135deg, #2c9371, #a8ddcb); }
+        .talent-avatar.blue { background: linear-gradient(135deg, #3b82f6, #93c5fd); }
+        .talent-avatar.purple { background: linear-gradient(135deg, #8b5cf6, #c4b5fd); }
+        .talent-avatar.pink { background: linear-gradient(135deg, #ec4899, #f9a8d4); }
+        .talent-avatar.orange { background: linear-gradient(135deg, #f97316, #fdba74); }
+        .talent-avatar.teal { background: linear-gradient(135deg, #14b8a6, #5eead4); }
+        .talent-avatar.indigo { background: linear-gradient(135deg, #6366f1, #a5b4fc); }
+        .talent-avatar.rose { background: linear-gradient(135deg, #f43f5e, #fda4af); }
+        .talent-avatar.amber { background: linear-gradient(135deg, #f59e0b, #fcd34d); }
+        .talent-avatar.cyan { background: linear-gradient(135deg, #06b6d4, #67e8f9); }
+        
+        .talent-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .talent-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .talent-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .talent-role {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 배지 */
+        .badge-viewed {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: #dceee8;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #0d7a5f;
+        }
+        
+        .badge-viewed img {
+            width: 12px;
+            height: 12px;
+        }
+        
+        /* 점수 */
+        .score-cell {
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+        
+        .score-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c9371;
+        }
+        
+        .score-total {
+            font-size: 12px;
+            color: #a3a3a3;
+        }
+        
+        /* 매칭률 */
+        .match-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .match-bar {
+            width: 80px;
+            height: 6px;
+            background: #e5e5e5;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .match-fill {
+            height: 100%;
+            background: #2c9371;
+            border-radius: 3px;
+        }
+        
+        .match-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #10b981;
+            min-width: 36px;
+        }
+        
+        /* 기술 태그 */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .skill-tag {
+            padding: 2px 8px;
+            background: #f5f5f5;
+            border-radius: 2px;
+            font-size: 11px;
+            color: #525252;
+        }
+        
+        /* 상태 배지 */
+        .status-badge {
+            display: inline-flex;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .status-badge.new {
+            background: #fbeaed;
+            color: #cd3d36;
+        }
+        
+        .status-badge.viewed {
+            background: #dceee8;
+            color: #0d7a5f;
+        }
+        
+        .status-badge.proposed {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #525252;
+        }
+        
+        .page-btn.active {
+            background: #2c9371;
+            border-color: #2c9371;
+            color: #fff;
+        }
+        
+        .page-btn.nav {
+            border: none;
+        }
+        
+        .page-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* 검색 결과 없음 */
+        .no-results {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .no-results p {
+            margin-top: 12px;
+        }
+        
+        /* 필터 패널 오버레이 */
+        .filter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .filter-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 필터 패널 */
+        .filter-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 520px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+            border-radius: 4px 0 0 4px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .filter-panel.active {
+            transform: translateX(0);
+        }
+        
+        /* 필터 헤더 */
+        .filter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #ffffff;
+            flex-shrink: 0;
+        }
+        
+        .filter-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        
+        .filter-close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .filter-close-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .filter-close-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* 필터 컨텐츠 */
+        .filter-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        /* 적용된 필터 섹션 */
+        .applied-filters-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 20px;
+        }
+        
+        .applied-filters-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .applied-filters-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .applied-filter-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: #2c9371;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .applied-filter-remove {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .applied-filter-remove svg {
+            width: 10px;
+            height: 10px;
+        }
+        
+        /* 필터 그룹 */
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .filter-group-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+        }
+        
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .filter-chip {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 400;
+            color: #525252;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .filter-chip:hover {
+            border-color: #2c9371;
+        }
+        
+        .filter-chip.selected {
+            background: #e9e8f3;
+            border-color: #2c9371;
+            color: #2c9371;
+        }
+        
+        /* 체크박스 옵션 */
+        .filter-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .filter-checkbox input {
+            display: none;
+        }
+        
+        .filter-checkbox-box {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d6d6d6;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-checkbox input:checked + .filter-checkbox-box {
+            background: #2c9371;
+            border-color: #2c9371;
+        }
+        
+        .filter-checkbox input:checked + .filter-checkbox-box svg {
+            display: block;
+        }
+        
+        .filter-checkbox-box svg {
+            display: none;
+            width: 12px;
+            height: 12px;
+        }
+        
+        .filter-checkbox-label {
+            font-size: 14px;
+            color: #333333;
+        }
+        
+        /* 필터 푸터 */
+        .filter-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+            background: #ffffff;
+            border-top: 1px solid #e5e5e5;
+            flex-shrink: 0;
+        }
+        
+        .filter-count {
+            text-align: center;
+            font-size: 14px;
+            color: #525252;
+        }
+        
+        .filter-count strong {
+            font-weight: 700;
+            color: #2c9371;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-filter-reset {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 8px;
+            min-width: 58px;
+            background: none;
+            border: 1px solid #c1c1c1;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #5b5b5b;
+            cursor: pointer;
+        }
+        
+        .btn-filter-apply {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 8px;
+            min-width: 44px;
+            background: #2c9371;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        
+        /* ===== 카드 그리드 뷰 ===== */
+        .talent-grid-wrapper {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .talent-grid-wrapper.active {
+            display: flex;
+        }
+        
+        .talent-table-wrapper.hidden {
+            display: none;
+        }
+        
+        .grid-header {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            flex-shrink: 0;
+        }
+        
+        .grid-count {
+            font-size: 14px;
+            color: #666666;
+        }
+        
+        .grid-count strong {
+            font-weight: 700;
+            color: #333333;
+        }
+        
+        .grid-scroll-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+        
+        .talent-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        /* 카드 기본 스타일 */
+        .talent-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: box-shadow 0.2s, border-color 0.2s;
+            min-height: 0;
+            overflow: hidden;
+        }
+        
+        .talent-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .talent-card.viewed {
+            border-color: #10b981;
+        }
+        
+        /* 카드 헤더 */
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .card-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+        
+        .card-avatar.green { background: linear-gradient(135deg, #10b981, #0d7a5f); }
+        .card-avatar.blue { background: linear-gradient(135deg, #3b82f6, #93c5fd); }
+        .card-avatar.purple { background: linear-gradient(135deg, #4f46e5, #746ee2); }
+        .card-avatar.pink { background: linear-gradient(135deg, #ec4899, #f9a8d4); }
+        .card-avatar.orange { background: linear-gradient(135deg, #f97316, #fdba74); }
+        .card-avatar.teal { background: linear-gradient(135deg, #14b8a6, #5eead4); }
+        .card-avatar.indigo { background: linear-gradient(135deg, #6366f1, #a5b4fc); }
+        .card-avatar.rose { background: linear-gradient(135deg, #f43f5e, #fda4af); }
+        .card-avatar.amber { background: linear-gradient(135deg, #f59e0b, #fcd34d); }
+        .card-avatar.cyan { background: linear-gradient(135deg, #06b6d4, #67e8f9); }
+        
+        .card-header-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            min-width: 0;
+        }
+        
+        .card-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+        
+        .card-role {
+            font-size: 12px;
+            color: #666666;
+            line-height: 1.4;
+        }
+        
+        .card-badge {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 2px 6px;
+            background: #dceee8;
+            border-radius: 2px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #0d7a5f;
+            flex-shrink: 0;
+        }
+        
+        .card-badge img {
+            width: 10px;
+            height: 10px;
+        }
+        
+        /* 카드 바디 */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+        
+        /* 카드 정보 그리드 */
+        .card-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        
+        .card-info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-info-label {
+            font-size: 12px;
+            color: #666666;
+        }
+        
+        .card-info-value {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333333;
+        }
+        
+        .card-score-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2c9371;
+        }
+        
+        .card-score-total {
+            font-size: 11px;
+            color: #a3a3a3;
+            margin-left: 2px;
+        }
+        
+        .card-match-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6277ff;
+        }
+        
+        /* 카드 기술 태그 */
+        .card-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            flex-shrink: 0;
+            overflow: hidden;
+            max-height: 38px;
+        }
+        
+        .card-skill-tag {
+            padding: 1px 6px;
+            background: #f5f5f5;
+            border-radius: 2px;
+            font-size: 10px;
+            color: #525252;
+        }
+        
+        /* 카드 퇴사 사유 */
+        .card-reason-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: #fafafa;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        
+        .card-reason-box img {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .card-reason-text {
+            font-size: 11px;
+            color: #525252;
+        }
+        
+        /* 카드 액션 버튼 */
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        
+        .card-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 28px;
+            padding: 0 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .card-btn-save {
+            background: none;
+            border: 1px solid #c1c1c1;
+            color: #5b5b5b;
+        }
+        
+        .card-btn-save:hover {
+            background: #f5f5f5;
+        }
+        
+        .card-btn-save.saved {
+            border-color: #2c9371;
+            color: #2c9371;
+        }
+        
+        .card-btn-save img {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .card-btn-detail {
+            background: #2c9371;
+            border: none;
+            color: #ffffff;
+        }
+        
+        .card-btn-detail:hover {
+            background: #248563;
+        }
+        
+        /* 그리드 페이지네이션 */
+        .grid-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 0;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+        
+        <!-- 메인 콘텐츠 -->
+        <main class="main">
+            <!-- 상단 헤더 -->
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <span>채용</span>
+                    <span class="separator">›</span>
+                    <span class="current">추천 인재</span>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="알림">
+                    </button>
+                    <button class="icon-btn">
+                        <img src="assets/에셋/Icons/Settings/Setting 1.svg" alt="설정">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <span class="user-name">김인사</span>
+                            <span class="user-role">HR 매니저</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 페이지 콘텐츠 -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="page-title-row">
+                        <h1 class="page-title">인재 추천</h1>
+                        <div class="ticket-info">
+                            <img src="assets/에셋/Icons/Pricetag.svg" alt="">
+                            <span>보유 티켓 12개</span>
+                        </div>
+                    </div>
+                    
+                    <div class="page-toolbar">
+                        <div class="tabs">
+                            <button class="tab active" data-filter="all">
+                                <span>전체</span>
+                                <span class="tab-count">43</span>
+                            </button>
+                            <button class="tab" data-filter="recommended">
+                                <span>기업 추천</span>
+                                <span class="tab-count">2</span>
+                            </button>
+                            <button class="tab" data-filter="saved">
+                                <span>저장됨</span>
+                                <span class="tab-count">3</span>
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-right">
+                            <button class="btn-filter">
+                                <span>필터</span>
+                                <img src="assets/에셋/Icons/Options/Options%202.svg" alt="">
+                            </button>
+                            <div class="view-toggle">
+                                <button class="view-btn">
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3332 15.4444V12.3333H15.4443L15.4451 15.4444H12.3332ZM15.4445 10.7778H12.3334C11.4755 10.7778 10.7779 11.4755 10.7779 12.3334V15.4445C10.7779 16.3024 11.4755 17 12.3334 17H15.4445C16.3024 17 17.0001 16.3024 17.0001 15.4445V12.3334C17.0001 11.4755 16.3024 10.7778 15.4445 10.7778ZM4.55529 15.4444V12.3333H7.6664L7.66718 15.4444H4.55529ZM7.66667 10.7778H4.55556C3.69767 10.7778 3 11.4755 3 12.3334V15.4445C3 16.3024 3.69767 17 4.55556 17H7.66667C8.52456 17 9.22222 16.3024 9.22222 15.4445V12.3334C9.22222 11.4755 8.52456 10.7778 7.66667 10.7778ZM12.3332 7.66667V4.55556H15.4443L15.4451 7.66667H12.3332ZM15.4445 3H12.3334C11.4755 3 10.7779 3.69767 10.7779 4.55556V7.66667C10.7779 8.52456 11.4755 9.22222 12.3334 9.22222H15.4445C16.3024 9.22222 17.0001 8.52456 17.0001 7.66667V4.55556C17.0001 3.69767 16.3024 3 15.4445 3ZM4.55529 7.66667V4.55556H7.6664L7.66718 7.66667H4.55529ZM7.66667 3H4.55556C3.69767 3 3 3.69767 3 4.55556V7.66667C3 8.52456 3.69767 9.22222 4.55556 9.22222H7.66667C8.52456 9.22222 9.22222 8.52456 9.22222 7.66667V4.55556C9.22222 3.69767 8.52456 3 7.66667 3Z" fill="#5C5C5C"/>
+                                    </svg>
+                                </button>
+                                <button class="view-btn active">
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.88867 14C3.37932 14 3.77734 14.448 3.77734 15C3.77734 15.552 3.37932 16 2.88867 16C2.39811 15.9999 2 15.5519 2 15C2 14.4481 2.39811 14.0001 2.88867 14ZM17.168 14C17.6256 14 17.9998 14.4208 18 14.9355V15.0645C17.9998 15.5792 17.6256 16 17.168 16H6.3877C5.93007 16 5.55686 15.5792 5.55664 15.0645V14.9355C5.55686 14.4208 5.93006 14 6.3877 14H17.168ZM2.88867 9C3.37932 9 3.77734 9.448 3.77734 10C3.77734 10.552 3.37932 11 2.88867 11C2.39811 10.9999 2 10.5519 2 10C2 9.44807 2.39811 9.00012 2.88867 9ZM17.168 9C17.6256 9 17.9998 9.42076 18 9.93555V10.0645C17.9998 10.5793 17.6256 11 17.168 11H6.3877C5.93006 11 5.55686 10.5793 5.55664 10.0645V9.93555C5.55686 9.42076 5.93007 9 6.3877 9H17.168ZM2.88867 4C3.37932 4 3.77734 4.448 3.77734 5C3.77734 5.552 3.37932 6 2.88867 6C2.39811 5.99988 2 5.55193 2 5C2 4.44807 2.39811 4.00012 2.88867 4ZM17.1689 4C17.6264 4.00029 17.9998 4.42093 18 4.93555V5.06445C17.9998 5.57907 17.6264 5.99971 17.1689 6H6.3877C5.93006 6 5.55686 5.57925 5.55664 5.06445V4.93555C5.55686 4.42075 5.93006 4 6.3877 4H17.1689Z" fill="#5C5C5C"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 테이블 -->
+                <div class="talent-table-wrapper">
+                    <div class="table-scroll-area">
+                        <table class="talent-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>인재</th>
+                                    <th>핏 점수</th>
+                                    <th>매칭률</th>
+                                    <th>전 회사</th>
+                                    <th>기술 스택</th>
+                                    <th>퇴사 사유</th>
+                                    <th>상태</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody id="talentTableBody">
+                                <!-- JavaScript로 렌더링 -->
+                            </tbody>
+                        </table>
+                        
+                        <div class="no-results" id="noResults">
+                            <img src="assets/에셋/Icons/Search.svg" alt="" style="width: 48px; opacity: 0.3;">
+                            <p>검색 결과가 없습니다.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <div class="search-box" style="width: 240px;">
+                            <img src="assets/에셋/Icons/Search.svg" alt="">
+                            <input type="text" id="searchInput" placeholder="이름, 기술, 회사로 검색" oninput="filterTalents()">
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="page-btn nav">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="">
+                            </button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn nav">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div><!-- /talent-table-wrapper -->
+                
+                <!-- 카드 그리드 뷰 -->
+                <div class="talent-grid-wrapper" id="talentGridWrapper">
+                    <div class="grid-header">
+                        <span class="grid-count"><strong id="gridCount">43</strong>명의 인재가 조건에 맞습니다</span>
+                    </div>
+                    <div class="grid-scroll-area">
+                        <div class="talent-grid" id="talentGrid">
+                            <!-- JavaScript로 렌더링 -->
+                        </div>
+                    </div>
+                    <div class="grid-pagination">
+                        <div class="search-box" style="width: 240px;">
+                            <img src="assets/에셋/Icons/Search.svg" alt="">
+                            <input type="text" id="searchInputGrid" placeholder="이름, 기술, 회사로 검색" oninput="filterTalents()">
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="page-btn nav">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="">
+                            </button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn nav">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div><!-- /talent-grid-wrapper -->
+            </div>
+        </main>
+    </div>
+    
+    <!-- 필터 오버레이 -->
+    <div class="filter-overlay" id="filterOverlay" onclick="closeFilter()"></div>
+    
+    <!-- 필터 패널 -->
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-header">
+            <span class="filter-title">필터</span>
+            <button class="filter-close-btn" onclick="closeFilter()">
+                <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+            </button>
+        </div>
+        
+        <div class="filter-content">
+            <!-- 적용된 필터 -->
+            <div class="applied-filters-section" id="appliedFiltersSection" style="display: none;">
+                <span class="applied-filters-label">적용된 필터</span>
+                <div class="applied-filters-list" id="appliedFiltersList">
+                    <!-- 동적 생성 -->
+                </div>
+            </div>
+            
+            <!-- 직군 -->
+            <div class="filter-group">
+                <span class="filter-group-title">직군</span>
+                <div class="filter-chips" data-filter="role">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="DevOps">DevOps</div>
+                    <div class="filter-chip" data-value="프론트엔드">프론트엔드</div>
+                    <div class="filter-chip" data-value="데이터">데이터</div>
+                    <div class="filter-chip" data-value="백엔드">백엔드</div>
+                    <div class="filter-chip" data-value="AI/ML">AI/ML</div>
+                    <div class="filter-chip" data-value="풀스택">풀스택</div>
+                    <div class="filter-chip" data-value="디자인">디자인</div>
+                    <div class="filter-chip" data-value="iOS">iOS</div>
+                    <div class="filter-chip" data-value="PM/PO">PM/PO</div>
+                    <div class="filter-chip" data-value="Android">Android</div>
+                </div>
+            </div>
+            
+            <!-- 경력 -->
+            <div class="filter-group">
+                <span class="filter-group-title">경력</span>
+                <div class="filter-chips" data-filter="experience">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="신입">신입</div>
+                    <div class="filter-chip" data-value="1-3년">1-3년</div>
+                    <div class="filter-chip" data-value="3-5년">3-5년</div>
+                    <div class="filter-chip" data-value="5-7년">5-7년</div>
+                    <div class="filter-chip" data-value="7-10년">7-10년</div>
+                    <div class="filter-chip" data-value="10년+">10년+</div>
+                </div>
+            </div>
+            
+            <!-- 핏 점수 -->
+            <div class="filter-group">
+                <span class="filter-group-title">핏 점수</span>
+                <div class="filter-chips" data-filter="score">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="3.0">3.0 이상</div>
+                    <div class="filter-chip" data-value="3.5">3.5 이상</div>
+                    <div class="filter-chip" data-value="4.0">4.0 이상</div>
+                    <div class="filter-chip" data-value="4.5">4.5 이상</div>
+                </div>
+            </div>
+            
+            <!-- 전 회사 근속 기간 -->
+            <div class="filter-group">
+                <span class="filter-group-title">전 회사 근속 기간</span>
+                <div class="filter-chips" data-filter="tenure">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="1년">1년 이상</div>
+                    <div class="filter-chip" data-value="2년">2년 이상</div>
+                    <div class="filter-chip" data-value="3년">3년 이상</div>
+                </div>
+            </div>
+            
+            <!-- 전 회사 산업군 -->
+            <div class="filter-group">
+                <span class="filter-group-title">전 회사 산업군</span>
+                <div class="filter-chips" data-filter="industry">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="콘텐츠/미디어">콘텐츠/미디어</div>
+                    <div class="filter-chip" data-value="IT/스타트업">IT/스타트업</div>
+                    <div class="filter-chip" data-value="헬스케어">헬스케어</div>
+                    <div class="filter-chip" data-value="금융/핀테크">금융/핀테크</div>
+                    <div class="filter-chip" data-value="제조/하드웨어">제조/하드웨어</div>
+                    <div class="filter-chip" data-value="커머스/리테일">커머스/리테일</div>
+                    <div class="filter-chip" data-value="교육">교육</div>
+                    <div class="filter-chip" data-value="게임">게임</div>
+                </div>
+            </div>
+            
+            <!-- 퇴사 사유 카테고리 -->
+            <div class="filter-group">
+                <span class="filter-group-title">퇴사 사유 카테고리</span>
+                <div class="filter-chips" data-filter="reason">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="커리어 전환">커리어 전환</div>
+                    <div class="filter-chip" data-value="조직 문화">조직 문화</div>
+                    <div class="filter-chip" data-value="개인 사유">개인 사유</div>
+                    <div class="filter-chip" data-value="성장 기회">성장 기회</div>
+                    <div class="filter-chip" data-value="업무 환경">업무 환경</div>
+                    <div class="filter-chip" data-value="보상/복지">보상/복지</div>
+                    <div class="filter-chip" data-value="워라밸">워라밸</div>
+                </div>
+            </div>
+            
+            <!-- 기술 스택 -->
+            <div class="filter-group">
+                <span class="filter-group-title">기술 스택</span>
+                <div class="filter-chips filter-chips-multi" data-filter="skills">
+                    <div class="filter-chip" data-value="React">React</div>
+                    <div class="filter-chip" data-value="Node.js">Node.js</div>
+                    <div class="filter-chip" data-value="Kotlin">Kotlin</div>
+                    <div class="filter-chip" data-value="Swift">Swift</div>
+                    <div class="filter-chip" data-value="Vue">Vue</div>
+                    <div class="filter-chip" data-value="Java">Java</div>
+                    <div class="filter-chip" data-value="Angular">Angular</div>
+                    <div class="filter-chip" data-value="AWS">AWS</div>
+                    <div class="filter-chip" data-value="Spring">Spring</div>
+                    <div class="filter-chip" data-value="GCP">GCP</div>
+                    <div class="filter-chip" data-value="Next.js">Next.js</div>
+                    <div class="filter-chip" data-value="Python">Python</div>
+                    <div class="filter-chip" data-value="Docker">Docker</div>
+                    <div class="filter-chip" data-value="TypeScript">TypeScript</div>
+                    <div class="filter-chip" data-value="Django">Django</div>
+                    <div class="filter-chip" data-value="Kubernetes">Kubernetes</div>
+                    <div class="filter-chip" data-value="FastAPI">FastAPI</div>
+                    <div class="filter-chip" data-value="JavaScript">JavaScript</div>
+                    <div class="filter-chip" data-value="Go">Go</div>
+                </div>
+            </div>
+            
+            <!-- 입사 가능 시기 -->
+            <div class="filter-group">
+                <span class="filter-group-title">입사 가능 시기</span>
+                <div class="filter-chips" data-filter="availability">
+                    <div class="filter-chip" data-value="전체">전체</div>
+                    <div class="filter-chip" data-value="즉시">즉시 가능</div>
+                    <div class="filter-chip" data-value="1개월">1개월 내</div>
+                    <div class="filter-chip" data-value="2개월">2개월 내</div>
+                    <div class="filter-chip" data-value="3개월">3개월 내</div>
+                </div>
+            </div>
+            
+            <!-- 추가 옵션 -->
+            <div class="filter-group">
+                <span class="filter-group-title">추가 옵션</span>
+                <div class="filter-checkbox-group">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filterNewOnly">
+                        <div class="filter-checkbox-box">
+                            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="filter-checkbox-label">신규 등록 인재만 (7일 이내)</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filterHighMatch">
+                        <div class="filter-checkbox-box">
+                            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="filter-checkbox-label">매칭률 85% 이상만</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filterExcludeViewed">
+                        <div class="filter-checkbox-box">
+                            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="filter-checkbox-label">이미 열람한 인재 제외</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-footer">
+            <div class="filter-count">
+                <strong id="filterResultCount">15</strong>명의 인재가 조건에 맞습니다
+            </div>
+            <div class="filter-actions">
+                <button class="btn-filter-reset" onclick="resetFilters()">초기화</button>
+                <button class="btn-filter-apply" onclick="applyFilters()">적용</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 더미 데이터
+        const talentData = [
+            { id: 1, name: '김○○', avatar: 'green', role: '프로덕트 디자이너', exp: 3, score: 4.2, match: 92, company: 'A사', industry: 'IT', skills: ['Figma', 'Sketch', 'Prototyping'], reason: '조직 문화', status: 'new', saved: false },
+            { id: 2, name: '이○○', avatar: 'blue', role: '백엔드', exp: 5, score: 4.5, match: 88, company: 'B사', industry: 'IT', skills: ['Java', 'Spring', 'AWS'], reason: '커리어 성장', status: 'new', saved: true },
+            { id: 3, name: '박○○', avatar: 'purple', role: 'UX 리서처', exp: 4, score: 3.8, match: 85, company: 'C사', industry: 'IT', skills: ['User Research', 'Usability Test', 'Data Analysis'], reason: '워라밸', status: 'new', saved: false },
+            { id: 4, name: '최○○', avatar: 'pink', role: 'iOS', exp: 6, score: 4.0, match: 78, company: 'D사', industry: '이커머스', skills: ['Swift', 'SwiftUI', 'Objective-C'], reason: '연봉', status: 'new', saved: false },
+            { id: 5, name: '정○○', avatar: 'orange', role: '데이터 엔지니어', exp: 4, score: 4.3, match: 90, company: 'E사', industry: '푸드테크', skills: ['Python', 'Spark', 'Airflow'], reason: '팀 해체', status: 'proposed', saved: true },
+            { id: 6, name: '강○○', avatar: 'teal', role: 'DevOps', exp: 7, score: 4.6, match: 95, company: 'F사', industry: 'IT', skills: ['Kubernetes', 'Docker', 'Terraform'], reason: '커리어 성장', status: 'new', saved: false },
+            { id: 7, name: '조○○', avatar: 'indigo', role: '풀스택', exp: 3, score: 3.9, match: 82, company: 'G사', industry: 'IT', skills: ['React', 'Node.js', 'PostgreSQL'], reason: '개인 사유', status: 'new', saved: false },
+            { id: 8, name: '윤○○', avatar: 'rose', role: 'PM', exp: 5, score: 4.1, match: 87, company: 'H사', industry: '제조', skills: ['Jira', 'Confluence', 'SQL'], reason: '조직 문화', status: 'new', saved: true },
+            { id: 9, name: '장○○', avatar: 'amber', role: 'Android', exp: 4, score: 4.4, match: 91, company: 'I사', industry: '통신', skills: ['Kotlin', 'Jetpack Compose', 'RxJava'], reason: '커리어 성장', status: 'new', saved: false },
+            { id: 10, name: '한○○', avatar: 'cyan', role: 'ML 엔지니어', exp: 6, score: 4.7, match: 94, company: 'J사', industry: 'IT', skills: ['Python', 'TensorFlow', 'PyTorch'], reason: '연봉', status: 'new', saved: false }
+        ];
+        
+        let filteredData = [...talentData];
+        
+        function renderTable() {
+            const tbody = document.getElementById('talentTableBody');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'flex';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            tbody.innerHTML = filteredData.map(talent => `
+                <tr onclick="location.href='talent-detail.html'">
+                    <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                    <td>
+                        <div class="talent-cell">
+                            <div class="talent-avatar ${talent.avatar}">${talent.name.charAt(0)}</div>
+                            <div class="talent-info">
+                                <div class="talent-name-row">
+                                    <span class="talent-name">${talent.name}</span>
+                                    ${talent.status === 'viewed' ? '<span class="badge-viewed"><img src="assets/에셋/Icons/Checkmark/Circle.svg" alt="">열람됨</span>' : ''}
+                                </div>
+                                <span class="talent-role">${talent.role} · ${talent.exp}년</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="score-cell">
+                            <span class="score-value">${talent.score}</span>
+                            <span class="score-total">/ 5.0</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="match-cell">
+                            <div class="match-bar"><div class="match-fill" style="width: ${talent.match}%"></div></div>
+                            <span class="match-value">${talent.match}%</span>
+                        </div>
+                    </td>
+                    <td>${talent.company} (${talent.industry})</td>
+                    <td>
+                        <div class="skill-tags">
+                            ${talent.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                        </div>
+                    </td>
+                    <td>${talent.reason}</td>
+                    <td><span class="status-badge ${talent.status}">${getStatusText(talent.status)}</span></td>
+                    <td>
+                        <button class="icon-btn" onclick="event.stopPropagation()">
+                            <img src="assets/에셋/Icons/More/Horizontal.svg" alt="">
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function getStatusText(status) {
+            const map = { new: 'NEW', viewed: '열람됨', proposed: '제안됨' };
+            return map[status] || '';
+        }
+        
+        function filterTalents() {
+            // 두 검색창 동기화
+            const listInput = document.getElementById('searchInput');
+            const gridInput = document.getElementById('searchInputGrid');
+            const term = (listInput.value || gridInput.value).toLowerCase();
+            
+            // 값 동기화
+            if (listInput.value !== gridInput.value) {
+                listInput.value = term;
+                gridInput.value = term;
+            }
+            
+            filteredData = talentData.filter(t => 
+                t.name.includes(term) || 
+                t.role.toLowerCase().includes(term) || 
+                t.company.toLowerCase().includes(term) ||
+                t.skills.some(s => s.toLowerCase().includes(term))
+            );
+            renderTable();
+            renderGrid();
+        }
+        
+        // 탭 클릭
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                if (filter === 'all') filteredData = [...talentData];
+                else if (filter === 'recommended') filteredData = talentData.filter(t => t.match > 90);
+                else if (filter === 'saved') filteredData = talentData.filter(t => t.saved);
+                
+                renderTable();
+                renderGrid();
+            });
+        });
+        
+        // 초기 렌더링
+        renderTable();
+        renderGrid();
+        
+        // ===== 뷰 토글 기능 =====
+        let currentView = 'list'; // 'list' or 'grid'
+        
+        document.querySelectorAll('.view-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (index === 0) {
+                    // 그리드 뷰
+                    currentView = 'grid';
+                    document.getElementById('talentTableBody').closest('.talent-table-wrapper').classList.add('hidden');
+                    document.getElementById('talentGridWrapper').classList.add('active');
+                } else {
+                    // 리스트 뷰
+                    currentView = 'list';
+                    document.getElementById('talentTableBody').closest('.talent-table-wrapper').classList.remove('hidden');
+                    document.getElementById('talentGridWrapper').classList.remove('active');
+                }
+            });
+        });
+        
+        // 카드 그리드 렌더링
+        function renderGrid() {
+            const grid = document.getElementById('talentGrid');
+            const gridCount = document.getElementById('gridCount');
+            
+            gridCount.textContent = filteredData.length;
+            
+            if (filteredData.length === 0) {
+                grid.innerHTML = '<div class="no-results" style="display: flex; grid-column: 1/-1;"><img src="assets/에셋/Icons/Search.svg" alt="" style="width: 48px; opacity: 0.3;"><p>검색 결과가 없습니다.</p></div>';
+                return;
+            }
+            
+            grid.innerHTML = filteredData.map(talent => `
+                <div class="talent-card ${talent.status === 'viewed' ? 'viewed' : ''}" onclick="location.href='talent-detail.html'">
+                    <div class="card-header">
+                        <div class="card-avatar ${talent.avatar}">${talent.name.charAt(0)}</div>
+                        <div class="card-header-info">
+                            <span class="card-name">${talent.name}</span>
+                            <span class="card-role">${talent.role} · ${talent.exp}년</span>
+                        </div>
+                        ${talent.status === 'viewed' ? `
+                        <div class="card-badge">
+                            <img src="assets/에셋/Icons/Checkmark/Circle.svg" alt="">
+                            <span>열람됨</span>
+                        </div>` : ''}
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="card-info-list">
+                            <div class="card-info-row">
+                                <span class="card-info-label">핏 점수</span>
+                                <span>
+                                    <span class="card-score-value">${talent.score}</span>
+                                    <span class="card-score-total">/ 5.0</span>
+                                </span>
+                            </div>
+                            <div class="card-info-row">
+                                <span class="card-info-label">전 회사</span>
+                                <span class="card-info-value">${talent.company} (${talent.industry})</span>
+                            </div>
+                            <div class="card-info-row">
+                                <span class="card-info-label">매칭률</span>
+                                <span class="card-match-value">${talent.match}%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-skills">
+                            ${talent.skills.map(s => `<span class="card-skill-tag">${s}</span>`).join('')}
+                        </div>
+                        
+                        <div class="card-reason-box">
+                            <img src="assets/에셋/Icons/Info.svg" alt="">
+                            <span class="card-reason-text">${talent.reason}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <button class="card-btn card-btn-save ${talent.saved ? 'saved' : ''}" onclick="event.stopPropagation(); toggleSave(${talent.id})">
+                            <img src="assets/에셋/Icons/${talent.saved ? 'Bookmark.svg' : 'Save.svg'}" alt="">
+                            <span>${talent.saved ? '저장됨' : '저장'}</span>
+                        </button>
+                        <button class="card-btn card-btn-detail" onclick="event.stopPropagation(); location.href='talent-detail.html'">
+                            <span>상세보기</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 저장 토글
+        function toggleSave(id) {
+            const talent = talentData.find(t => t.id === id);
+            if (talent) {
+                talent.saved = !talent.saved;
+                renderTable();
+                renderGrid();
+                
+                // 저장됨 탭 카운트 업데이트
+                const savedCount = talentData.filter(t => t.saved).length;
+                document.querySelector('.tab[data-filter="saved"] .tab-count').textContent = savedCount;
+                
+                // 토스트 표시
+                if (talent.saved) {
+                    showToast(talent.name + '님이 저장되었습니다.', 'success');
+                } else {
+                    showToast('저장이 취소되었습니다.', 'success');
+                }
+            }
+        }
+        
+        // ===== 필터 기능 =====
+        
+        // 현재 선택된 필터 상태 (모두 배열로 다중 선택 지원)
+        const activeFilters = {
+            role: [],
+            experience: [],
+            score: [],
+            tenure: [],
+            industry: [],
+            reason: [],
+            skills: [],
+            availability: [],
+            newOnly: false,
+            highMatch: false,
+            excludeViewed: false
+        };
+        
+        // 필터 패널 열기/닫기
+        function openFilter() {
+            document.getElementById('filterPanel').classList.add('active');
+            document.getElementById('filterOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeFilter() {
+            document.getElementById('filterPanel').classList.remove('active');
+            document.getElementById('filterOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // 필터 버튼 클릭 이벤트
+        document.querySelector('.btn-filter').addEventListener('click', openFilter);
+        
+        // 필터 칩 클릭 이벤트 (모든 섹션 다중 선택 지원)
+        document.querySelectorAll('.filter-chips').forEach(group => {
+            const filterType = group.dataset.filter;
+            
+            group.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    const allChip = group.querySelector('.filter-chip[data-value="전체"]');
+                    
+                    if (value === '전체') {
+                        // "전체" 클릭: 모든 선택 해제하고 "전체"만 선택
+                        group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        activeFilters[filterType] = [];
+                    } else {
+                        // 개별 옵션 클릭 (토글)
+                        if (this.classList.contains('selected')) {
+                            // 선택 해제
+                            this.classList.remove('selected');
+                            activeFilters[filterType] = activeFilters[filterType].filter(v => v !== value);
+                            
+                            // 선택된 칩이 하나도 없으면 "전체" 선택
+                            if (activeFilters[filterType].length === 0) {
+                                if (allChip) allChip.classList.add('selected');
+                            }
+                        } else {
+                            // 선택 추가
+                            if (allChip) allChip.classList.remove('selected');
+                            this.classList.add('selected');
+                            activeFilters[filterType].push(value);
+                        }
+                    }
+                    
+                    updateAppliedFilters();
+                    updateFilterCount();
+                });
+            });
+            
+            // 초기 상태: "전체" 선택
+            const allChip = group.querySelector('.filter-chip[data-value="전체"]');
+            if (allChip) {
+                allChip.classList.add('selected');
+            }
+        });
+        
+        // 체크박스 이벤트
+        document.getElementById('filterNewOnly').addEventListener('change', function() {
+            activeFilters.newOnly = this.checked;
+            updateAppliedFilters();
+            updateFilterCount();
+        });
+        
+        document.getElementById('filterHighMatch').addEventListener('change', function() {
+            activeFilters.highMatch = this.checked;
+            updateAppliedFilters();
+            updateFilterCount();
+        });
+        
+        document.getElementById('filterExcludeViewed').addEventListener('change', function() {
+            activeFilters.excludeViewed = this.checked;
+            updateAppliedFilters();
+            updateFilterCount();
+        });
+        
+        // 적용된 필터 UI 업데이트
+        function updateAppliedFilters() {
+            const list = document.getElementById('appliedFiltersList');
+            const section = document.getElementById('appliedFiltersSection');
+            let html = '';
+            
+            // 모든 필터 (배열)
+            const filterLabels = {
+                role: { suffix: '' },
+                experience: { suffix: '' },
+                score: { suffix: ' 이상' },
+                tenure: { suffix: ' 이상' },
+                industry: { suffix: '' },
+                reason: { suffix: '' },
+                skills: { suffix: '' },
+                availability: { suffix: '' }
+            };
+            
+            Object.keys(filterLabels).forEach(key => {
+                activeFilters[key].forEach(value => {
+                    let displayText = value;
+                    if (key === 'score') displayText = value + ' 이상';
+                    if (key === 'tenure') displayText = value + ' 이상';
+                    if (key === 'availability' && value !== '즉시') displayText = value + ' 내';
+                    if (key === 'availability' && value === '즉시') displayText = '즉시 가능';
+                    
+                    html += `
+                        <div class="applied-filter-chip">
+                            <span>${displayText}</span>
+                            <div class="applied-filter-remove" onclick="removeFilterValue('${key}', '${value}')">
+                                <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 2L2 8M2 2L8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+            
+            list.innerHTML = html;
+            section.style.display = html ? 'flex' : 'none';
+        }
+        
+        // 개별 필터 값 제거
+        function removeFilterValue(key, value) {
+            activeFilters[key] = activeFilters[key].filter(v => v !== value);
+            
+            // UI 업데이트
+            const group = document.querySelector(`[data-filter="${key}"]`);
+            if (group) {
+                group.querySelectorAll('.filter-chip').forEach(chip => {
+                    if (chip.dataset.value === value) chip.classList.remove('selected');
+                });
+                
+                // 선택된 칩이 없으면 "전체" 선택
+                if (activeFilters[key].length === 0) {
+                    const allChip = group.querySelector('.filter-chip[data-value="전체"]');
+                    if (allChip) allChip.classList.add('selected');
+                }
+            }
+            
+            updateAppliedFilters();
+            updateFilterCount();
+        }
+        
+        // 필터 결과 수 업데이트
+        function updateFilterCount() {
+            const count = getFilteredData().length;
+            document.getElementById('filterResultCount').textContent = count;
+        }
+        
+        // 필터링된 데이터 가져오기
+        function getFilteredData() {
+            return talentData.filter(talent => {
+                // 직군 필터 (다중 선택 - OR 조건)
+                if (activeFilters.role.length > 0) {
+                    const roleMap = {
+                        '프론트엔드': ['프론트엔드'],
+                        '백엔드': ['백엔드'],
+                        'DevOps': ['DevOps'],
+                        '데이터': ['데이터 엔지니어'],
+                        'AI/ML': ['ML 엔지니어'],
+                        '풀스택': ['풀스택'],
+                        '디자인': ['프로덕트 디자이너', 'UX 리서처'],
+                        'iOS': ['iOS'],
+                        'Android': ['Android'],
+                        'PM/PO': ['PM']
+                    };
+                    const matchesRole = activeFilters.role.some(filterRole => {
+                        const roles = roleMap[filterRole] || [];
+                        return roles.some(r => talent.role.includes(r));
+                    });
+                    if (!matchesRole) return false;
+                }
+                
+                // 경력 필터 (다중 선택 - OR 조건)
+                if (activeFilters.experience.length > 0) {
+                    const expRanges = {
+                        '신입': [0, 1],
+                        '1-3년': [1, 3],
+                        '3-5년': [3, 5],
+                        '5-7년': [5, 7],
+                        '7-10년': [7, 10],
+                        '10년+': [10, 100]
+                    };
+                    const matchesExp = activeFilters.experience.some(filterExp => {
+                        const range = expRanges[filterExp];
+                        return range && talent.exp >= range[0] && talent.exp < range[1];
+                    });
+                    if (!matchesExp) return false;
+                }
+                
+                // 핏 점수 필터 (다중 선택 - OR 조건, 최소값 적용)
+                if (activeFilters.score.length > 0) {
+                    const minScore = Math.min(...activeFilters.score.map(s => parseFloat(s)));
+                    if (talent.score < minScore) return false;
+                }
+                
+                // 산업군 필터 (다중 선택 - OR 조건)
+                if (activeFilters.industry.length > 0) {
+                    const matchesIndustry = activeFilters.industry.some(filterIndustry => 
+                        talent.industry.includes(filterIndustry.split('/')[0])
+                    );
+                    if (!matchesIndustry) return false;
+                }
+                
+                // 퇴사 사유 필터 (다중 선택 - OR 조건)
+                if (activeFilters.reason.length > 0) {
+                    const reasonMap = {
+                        '커리어 전환': ['커리어 성장', '커리어 전환'],
+                        '조직 문화': ['조직 문화'],
+                        '개인 사유': ['개인 사유'],
+                        '성장 기회': ['성장 기회', '커리어 성장'],
+                        '업무 환경': ['업무 환경', '팀 해체'],
+                        '보상/복지': ['연봉', '보상/복지'],
+                        '워라밸': ['워라밸']
+                    };
+                    const matchesReason = activeFilters.reason.some(filterReason => {
+                        const reasons = reasonMap[filterReason] || [];
+                        return reasons.some(r => talent.reason.includes(r));
+                    });
+                    if (!matchesReason) return false;
+                }
+                
+                // 기술 스택 필터 (다중 선택 - OR 조건)
+                if (activeFilters.skills.length > 0) {
+                    const hasAnySkill = activeFilters.skills.some(skill => 
+                        talent.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
+                    );
+                    if (!hasAnySkill) return false;
+                }
+                
+                // 매칭률 85% 이상
+                if (activeFilters.highMatch && talent.match < 85) return false;
+                
+                // 열람한 인재 제외
+                if (activeFilters.excludeViewed && talent.status === 'viewed') return false;
+                
+                return true;
+            });
+        }
+        
+        // 필터 초기화
+        function resetFilters() {
+            // 상태 초기화 (모든 배열 비우기)
+            Object.keys(activeFilters).forEach(key => {
+                if (typeof activeFilters[key] === 'boolean') {
+                    activeFilters[key] = false;
+                } else {
+                    activeFilters[key] = [];
+                }
+            });
+            
+            // UI 초기화
+            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('selected'));
+            document.querySelectorAll('.filter-chip[data-value="전체"]').forEach(chip => chip.classList.add('selected'));
+            document.getElementById('filterNewOnly').checked = false;
+            document.getElementById('filterHighMatch').checked = false;
+            document.getElementById('filterExcludeViewed').checked = false;
+            
+            updateAppliedFilters();
+            updateFilterCount();
+        }
+        
+        // 필터 적용
+        function applyFilters() {
+            filteredData = getFilteredData();
+            renderTable();
+            renderGrid();
+            closeFilter();
+            
+            // 탭 카운트 업데이트
+            document.querySelector('.tab[data-filter="all"] .tab-count').textContent = talentData.length;
+        }
+        
+        // 초기 필터 카운트 설정
+        updateFilterCount();
+    </script>
+</body>
+</html>

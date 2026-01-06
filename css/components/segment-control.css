@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Segment Control (Toggle / Segmented)
+   Figma: 559:39115
+   Variants:
+   - size: lg(32/15) | md(28/14) | sm(24/13)
+   - label: none | above | left
+   - segments: 2 | 3 (layout is flexible)
+   - selected: 1 | 2 | 3 (use aria-pressed="true" on the selected button)
+   ========================================================================== */
+
+.fi-seg {
+    --fi-seg-bg: #e0e0e0;     /* semantic/neutral/background/heavy/defualt */
+    --fi-seg-radius: 4px;     /* radius/sm */
+    --fi-seg-pad: 2px;        /* spacing/sp20 */
+    --fi-seg-gap: 8px;        /* fixed in Figma */
+
+    --fi-seg-item-h: 32px;    /* lg */
+    --fi-seg-item-px: 8px;    /* spacing/sp80 */
+    --fi-seg-item-radius: 4px;
+
+    --fi-seg-fg: #5c5c5c;     /* semantic/neutral/foreground/heavy/default */
+    --fi-seg-label-fg: #333333; /* semantic/neutral/foreground/normal/default */
+    --fi-seg-required: #cd3d36; /* semantic/error/global/global/default */
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font);
+}
+
+/* Layout: label none (default) */
+.fi-seg__control {
+    background: var(--fi-seg-bg);
+    padding: var(--fi-seg-pad);
+    border-radius: var(--fi-seg-radius);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fi-seg-gap);
+}
+
+/* Segment item */
+.fi-seg__item {
+    height: var(--fi-seg-item-h);
+    padding: 0 var(--fi-seg-item-px);
+    border-radius: var(--fi-seg-item-radius);
+    border: 0;
+    background: transparent;
+    color: var(--fi-seg-fg);
+    font-family: var(--font);
+    font-weight: 500;
+    cursor: pointer;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Selected segment (secondary filled look in Figma: white + shadow) */
+.fi-seg__item[aria-pressed="true"] {
+    background: #ffffff;
+    box-shadow:
+        0px 0px 1px 0px rgba(0,0,0,0.08),
+        0px 0px 1px 0px rgba(0,0,0,0.08),
+        0px 1px 2px 0px rgba(0,0,0,0.12);
+}
+
+.fi-seg__item:focus-visible {
+    outline: 2px solid #141414;
+    outline-offset: 0;
+}
+
+.fi-seg__item:disabled,
+.fi-seg.is-disabled .fi-seg__item {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sizes */
+.fi-seg--lg {
+    --fi-seg-item-h: 32px;
+    --fi-seg-font-size: 15px;
+    --fi-seg-line-height: 1.467;
+    --fi-seg-letter-spacing: 0.144px;
+    --fi-seg-label-size: 15px;
+    --fi-seg-label-lh: 1.467;
+    --fi-seg-label-ls: 0.144px;
+}
+
+.fi-seg--md {
+    --fi-seg-item-h: 28px;
+    --fi-seg-font-size: 14px;
+    --fi-seg-line-height: 1.429;
+    --fi-seg-letter-spacing: 0.203px;
+    --fi-seg-label-size: 14px;
+    --fi-seg-label-lh: 1.429;
+    --fi-seg-label-ls: 0.203px;
+}
+
+.fi-seg--sm {
+    --fi-seg-item-h: 24px;
+    --fi-seg-font-size: 13px;
+    --fi-seg-line-height: 1.385;
+    --fi-seg-letter-spacing: 0.2522px;
+    --fi-seg-label-size: 14px;  /* Figma uses 14 for label on sm */
+    --fi-seg-label-lh: 1.429;
+    --fi-seg-label-ls: 0.203px;
+}
+
+.fi-seg__item {
+    font-size: var(--fi-seg-font-size, 15px);
+    line-height: var(--fi-seg-line-height, 1.467);
+    letter-spacing: var(--fi-seg-letter-spacing, 0.144px);
+}
+
+/* Label */
+.fi-seg__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 4px;
+    color: var(--fi-seg-label-fg);
+    font-weight: 400;
+    font-size: var(--fi-seg-label-size, 15px);
+    line-height: var(--fi-seg-label-lh, 1.467);
+    letter-spacing: var(--fi-seg-label-ls, 0.144px);
+    white-space: nowrap;
+}
+
+.fi-seg__required {
+    color: var(--fi-seg-required);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-1px);
+}
+
+/* Layout: label above */
+.fi-seg--label-above {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Layout: label left */
+.fi-seg--label-left {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px; /* Figma */
+}
+
+

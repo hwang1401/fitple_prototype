@@ -1,0 +1,312 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+        "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+        "Source Han Sans CN", sans-serif;
+}
+
+.main-container {
+    overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+    box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+    outline: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 1920px;
+    min-width: 1920px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    overflow: hidden auto;
+}
+
+/* 사이드바 및 레이아웃 */
+.box {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    min-width: 0;
+    height: 1080px;
+}
+
+.box-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    width: 239px;
+    height: 1080px;
+    background: #ffffff;
+    z-index: 1;
+}
+
+/* 헤더 영역 */
+.wrapper-e {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    height: 73px;
+    padding: 16px 16px 16px 16px;
+    background: #ffffff;
+}
+
+/* 인재 정보 - 열람됨 상태 */
+.wrapper-15 {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    width: 70px;
+    padding: 4px 10px 4px 10px;
+    background: #dceee8;
+    border-radius: 12px;
+}
+
+.text-1b {
+    color: #0d7a5f;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+/* 연락처 정보 (열람 후) */
+.group-19, .group-1a {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+}
+
+.text-1f, .text-20 {
+    color: #333333;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+/* 탭 (지원서/핏플 분석) */
+.section-f, .section-10 {
+    flex-shrink: 0;
+    position: relative;
+    height: 43px;
+}
+
+.text-21 {
+    color: #2c9371;
+    font-family: Arial, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+}
+
+.text-22 {
+    color: #999999;
+    font-family: Arial, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+}
+
+/* 이력서 파일 다운로드/열기 버튼 */
+.section-15 {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+}
+
+.group-1f, .section-16 {
+    background: #ffffff;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+
+.text-27, .text-28 {
+    color: #333333;
+    font-family: Arial, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+/* 이력서 내용 영역 */
+.box-1b {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    position: relative;
+    min-height: 0;
+    background: rgba(247, 247, 250, 0.2);
+    overflow: hidden auto;
+}
+
+/* 경력사항 카드 */
+.group-4e {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 16px;
+    position: relative;
+    min-width: 0;
+    padding: 16px 16px 16px 16px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* 매칭 분석 카드 */
+.box-5f {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 16px;
+    position: relative;
+    min-width: 0;
+    padding: 20px 20px 20px 20px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.text-f5 {
+    color: #2c9371;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 72px;
+}
+
+/* 핏 체크 점수 */
+.text-100 {
+    color: #6277ff;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+/* 메모 섹션 */
+.section-6e {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 16px;
+    position: relative;
+    min-width: 0;
+    padding: 21px 21px 21px 21px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+/* 하단 고정 바 */
+.wrapper-67 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    padding: 16px 24px 16px 24px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* 저장됨 버튼 */
+.group-74 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    width: 86px;
+    height: 40px;
+    padding: 0 8px 0 8px;
+    border: 1px solid #2c9371;
+    border-radius: 4px;
+}
+
+.text-113 {
+    color: #2c9371;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+/* 채용 제안하기 버튼 */
+.group-75 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    width: 132px;
+    height: 40px;
+    padding: 0 8px 0 8px;
+    background: #6277ff;
+    border-radius: 4px;
+}
+
+.text-114 {
+    color: #ffffff;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}

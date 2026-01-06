@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1680">
+    <title>핏플 - 인재 상세 (열람됨)</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 스니펫 디자인 값 정확히 적용 */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            width: 1681px;
+            padding: 24px;
+            padding-bottom: 100px;
+            overflow: hidden;
+        }
+        
+        /* 인재 프로필 영역 */
+        .talent-profile-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .talent-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .talent-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            line-height: 30px;
+            letter-spacing: -0.43px;
+        }
+        
+        .badge-read {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: #dceee8;
+            border-radius: 12px;
+        }
+        
+        .badge-read img {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .badge-read span {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 18px;
+            color: #0d7a5f;
+        }
+        
+        .talent-role {
+            font-size: 16px;
+            font-weight: 400;
+            color: #525252;
+            line-height: 24px;
+        }
+        
+        .talent-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .talent-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .talent-meta-item img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .talent-meta-item span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #525252;
+        }
+        
+        .talent-contact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .talent-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .talent-contact-item img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .talent-contact-item span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        /* 탭 영역 */
+        .tabs-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px 14px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        
+        .tab-item span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 16px;
+            text-align: center;
+        }
+        
+        .tab-item.active {
+            border-bottom: 2px solid #2c9371;
+        }
+        
+        .tab-item.active span {
+            color: #2c9371;
+            font-weight: 500;
+        }
+        
+        .tab-item:not(.active) span {
+            color: #999999;
+        }
+        
+        .tab-item:not(.active):hover span {
+            color: #666666;
+        }
+        
+        /* 메인 콘텐츠 2컬럼 */
+        .content-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 24px;
+            width: 1632px;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 1248px;
+        }
+        
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 360px;
+        }
+        
+        /* 카드 공통 */
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            color: #333333;
+        }
+        
+        /* 이력서/포트폴리오 카드 */
+        .resume-card {
+            height: auto;
+            max-height: none;
+        }
+        
+        .resume-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        /* 세그먼트 컨트롤 */
+        .segment-control {
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            gap: 0;
+        }
+        
+        .segment-btn {
+            padding: 6px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 18px;
+            color: #666666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .segment-btn.active {
+            background: #ffffff;
+            color: #333333;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .segment-btn:not(.active):hover {
+            color: #333333;
+        }
+        
+        .file-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .file-info img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .file-info span {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        .file-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .file-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 36px;
+            padding: 0 16px;
+            background: #ffffff;
+            border: 1px solid #d6d6d6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #333333;
+        }
+        
+        .file-btn img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* 이력서 프리뷰 영역 */
+        .resume-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f7f7fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            height: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        .resume-preview-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 48px 60px;
+            width: 100%;
+        }
+        
+        /* 이력서 헤더 */
+        .resume-header {
+            display: flex;
+            gap: 32px;
+            padding-bottom: 40px;
+        }
+        
+        .resume-header-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .resume-name {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 61.2px;
+            color: #1b1b22;
+        }
+        
+        .resume-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 27.2px;
+            color: #667eea;
+        }
+        
+        .resume-info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .resume-info-row {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .resume-info-label {
+            min-width: 48px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 23.8px;
+            color: #76767f;
+        }
+        
+        .resume-info-value {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 23.8px;
+            color: #46464e;
+        }
+        
+        /* 이력서 섹션 */
+        .resume-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .resume-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+        }
+        
+        .resume-section-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #eef0ff;
+            border-radius: 8px;
+        }
+        
+        .resume-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 34px;
+            color: #1b1b22;
+        }
+        
+        .resume-section-content {
+            padding: 27px 28px 28px;
+            background: #ffffff;
+            border: 1px solid #e2e2eb;
+            border-radius: 12px;
+        }
+        
+        .resume-section-text {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 25.5px;
+            color: #46464e;
+        }
+        
+        /* 경력 카드 */
+        .career-card {
+            background: #ffffff;
+            border: 1px solid #e2e2eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .career-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 19px 24px 20px;
+        }
+        
+        .career-company {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 30.6px;
+            color: #1b1b22;
+        }
+        
+        .career-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .career-period {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 22.1px;
+            color: #76767f;
+        }
+        
+        .career-role-badge {
+            padding: 3.5px 12px;
+            background: #eef0ff;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 20.4px;
+            color: #667eea;
+        }
+        
+        .career-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 24px;
+        }
+        
+        .career-project {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .career-project-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .career-project-bar {
+            width: 3px;
+            height: 14px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+        
+        .career-project-name {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 25.5px;
+            color: #1b1b22;
+        }
+        
+        .career-project-tag {
+            padding: 2px 8px;
+            background: #f7f7fa;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 18.7px;
+            color: #76767f;
+        }
+        
+        .career-bullets {
+            display: flex;
+            flex-direction: column;
+            padding-left: 12px;
+        }
+        
+        .career-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+        }
+        
+        .career-bullet::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 14px;
+            line-height: 23.8px;
+        }
+        
+        .career-bullet span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 23.8px;
+            color: #46464e;
+        }
+        
+        /* 경력사항 카드 (리스트 뷰) */
+        .career-list-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+        }
+        
+        .career-list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .career-list-total {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #999999;
+        }
+        
+        .career-list-item {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .career-list-item-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        
+        .career-list-company-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .career-list-company {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            color: #333333;
+        }
+        
+        .career-list-role {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #666666;
+        }
+        
+        .career-list-duration {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #999999;
+            padding-top: 4px;
+        }
+        
+        .career-list-period {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #999999;
+        }
+        
+        .career-list-projects {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .career-list-project-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        .career-list-project {
+            padding: 12px 16px;
+            background: #ffffff;
+            border-left: 3px solid #2c9371;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .career-list-project-name {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        .career-list-project-period {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #999999;
+            margin-top: 8px;
+        }
+        
+        .career-list-project-desc {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 23.8px;
+            color: #666666;
+            margin-top: 7px;
+        }
+        
+        .career-list-project-results {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5px;
+            margin-top: 12px;
+        }
+        
+        .career-list-project-result {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .career-list-project-result-bullet {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 20px;
+            color: #2c9371;
+        }
+        
+        .career-list-project-result-text {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #666666;
+        }
+        
+        .career-list-project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 7.5px;
+        }
+        
+        .career-list-project-tag {
+            padding: 1px 8px 2.5px;
+            background: #dceee8;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 16.5px;
+            color: #0d7a5f;
+        }
+        
+        /* 학력 카드 */
+        .education-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .education-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .education-school {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        .education-major {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #666666;
+        }
+        
+        .education-period {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #999999;
+        }
+        
+        /* 보유 기술 카드 */
+        .skills-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .skills-label {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 19.5px;
+            color: #999999;
+        }
+        
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag-matched {
+            padding: 6px 12px;
+            background: #dceee8;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #0d7a5f;
+        }
+        
+        .skill-tag-normal {
+            padding: 6px 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #333333;
+        }
+        
+        /* 추가 질문 카드 */
+        .question-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            color: #333333;
+            padding-left: 12px;
+        }
+        
+        .question-answer {
+            display: flex;
+            flex-direction: column;
+            gap: 24.5px;
+            padding: 15px 16px 16.19px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .question-answer-text {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 25.2px;
+            color: #666666;
+        }
+        
+        /* 자격증/수상 카드 */
+        .cert-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .cert-name {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 21px;
+            color: #333333;
+        }
+        
+        .cert-org {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #999999;
+        }
+        
+        /* 오른쪽 컬럼 - 매칭 분석 카드 */
+        .matching-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .fitple-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0 8px;
+            height: 24.5px;
+            background: linear-gradient(157.9deg, #dceee8, #a7f3d0);
+            border-radius: 4px;
+        }
+        
+        .fitple-badge img {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .fitple-badge span {
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 16.5px;
+            color: #0d7a5f;
+        }
+        
+        .matching-info-box {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #e0f2fe;
+            border-radius: 4px;
+        }
+        
+        .matching-info-text {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #075985;
+        }
+        
+        .matching-score-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .matching-score-big {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 72px;
+            color: #2c9371;
+        }
+        
+        .matching-score-label {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #666666;
+        }
+        
+        .matching-progress {
+            width: 100%;
+            height: 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .matching-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2c9371, #10b981);
+            border-radius: 8px;
+        }
+        
+        .matching-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .matching-metric {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .matching-metric-label {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #999999;
+            text-align: center;
+        }
+        
+        .matching-metric-value {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            color: #2c9371;
+            text-align: center;
+        }
+        
+        /* 핏 체크 요약 카드 */
+        .fitcheck-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .pro-badge {
+            padding: 4px 8px;
+            background: #e9e8f3;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 18px;
+            color: #6277ff;
+        }
+        
+        .fitcheck-score-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .fitcheck-score-label {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            color: #666666;
+        }
+        
+        .fitcheck-score-value {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 36px;
+            color: #6277ff;
+        }
+        
+        .fitcheck-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .fitcheck-detail-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .fitcheck-detail-label {
+            width: 80px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #666666;
+        }
+        
+        .fitcheck-detail-bar {
+            flex: 1;
+            height: 6px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .fitcheck-detail-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .fitcheck-detail-value {
+            width: 36px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 19.5px;
+            color: #333333;
+            text-align: right;
+        }
+        
+        /* 메모 카드 */
+        .memo-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .memo-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .memo-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #dceee8;
+            border-radius: 14px;
+        }
+        
+        .memo-avatar img {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .memo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+        
+        .memo-title {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 19.5px;
+            color: #333333;
+        }
+        
+        .memo-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .memo-author {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #666666;
+        }
+        
+        .memo-dot {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #999999;
+        }
+        
+        .memo-date {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #999999;
+        }
+        
+        .memo-content {
+            padding: 8px 12px;
+            background: #ffffff;
+            border-left: 3px solid #2c9371;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .memo-text {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+            color: #666666;
+        }
+        
+        /* 하단 액션바 */
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 200px;
+            right: 0;
+            padding: 16px 24px;
+            background: #ffffff;
+            border-top: 1px solid #e5e5e5;
+            box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 50;
+        }
+        
+        .action-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .action-bar-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .action-bar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #2c9371, #a8ddcb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .action-bar-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+        }
+        
+        .action-bar-role {
+            font-size: 12px;
+            color: #737373;
+        }
+        
+        .action-bar-divider {
+            width: 1px;
+            height: 40px;
+            background: #e5e5e5;
+        }
+        
+        .action-bar-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-saved {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 86px;
+            height: 40px;
+            padding: 0 8px;
+            background: none;
+            border: 1px solid #2c9371;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-saved img {
+            width: 16px;
+            height: 16px;
+            filter: invert(48%) sepia(79%) saturate(383%) hue-rotate(108deg) brightness(92%) contrast(87%);
+        }
+        
+        .btn-saved span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c9371;
+        }
+        
+        .btn-proposal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 132px;
+            height: 40px;
+            padding: 0 8px;
+            background: #6277ff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-proposal img {
+            width: 16px;
+            height: 16px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .btn-proposal span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .btn-proposal:hover {
+            background: #4f61e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <a href="index.html" style="display: flex; align-items: center; gap: 6px; text-decoration: none; color: inherit;">
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="" style="width: 16px; height: 16px;">
+                        목록으로
+                    </a>
+                    <span class="separator" style="margin: 0 8px;">|</span>
+                    <span>인재 관리</span>
+                    <span class="separator">›</span>
+                    <span>인재 추천</span>
+                    <span class="separator">›</span>
+                    <span class="current">김서연</span>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Bell/On.svg" alt="알림"></button>
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Settings/Setting 1.svg" alt="설정"></button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <span class="user-name">김인사</span>
+                            <span class="user-role">HR 매니저</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Page Content -->
+            <div class="main-container">
+                <!-- 인재 프로필 -->
+                <div class="talent-profile-section">
+                    <div class="talent-name-row">
+                        <span class="talent-name">김서연</span>
+                        <div class="badge-read">
+                            <img src="assets/에셋/Icons/Check/Circle.svg" alt="" onerror="this.style.display='none'">
+                            <span>열람됨</span>
+                        </div>
+                    </div>
+                    <div class="talent-role">프로덕트 디자이너 · 경력 3년</div>
+                    <div class="talent-meta-row">
+                        <div class="talent-meta-item">
+                            <img src="assets/에셋/Flat icons/building.svg" alt="">
+                            <span>전 회사: A사 (IT/스타트업)</span>
+                        </div>
+                        <div class="talent-meta-item">
+                            <img src="assets/에셋/Flat icons/calendar.svg" alt="">
+                            <span>근속기간: 2년 8개월</span>
+                        </div>
+                    </div>
+                    <div class="talent-contact-row">
+                        <div class="talent-contact-item">
+                            <img src="assets/에셋/Flat icons/email.svg" alt="">
+                            <span>seoyeon.kim@email.com</span>
+                        </div>
+                        <div class="talent-contact-item">
+                            <img src="assets/에셋/Flat icons/phone.svg" alt="">
+                            <span>010-1234-5672</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 탭 -->
+                <div class="tabs-row">
+                    <a href="talent-detail-read.html" class="tab-item active"><span>지원서</span></a>
+                    <a href="talent-detail-read-fitple.html" class="tab-item"><span>핏플 분석</span></a>
+                </div>
+                
+                <!-- 2컬럼 레이아웃 -->
+                <div class="content-row">
+                    <!-- 왼쪽 컬럼 -->
+                    <div class="left-column">
+                        <!-- 이력서/포트폴리오 카드 -->
+                        <div class="card resume-card">
+                            <div class="resume-card-header">
+                                <span class="card-title">이력서 / 포트폴리오</span>
+                                <div class="segment-control">
+                                    <button class="segment-btn active">이력서</button>
+                                    <button class="segment-btn">포트폴리오</button>
+                                </div>
+                            </div>
+                            
+                            <div class="file-row">
+                                <div class="file-info">
+                                    <img src="assets/에셋/Flat icons/file.svg" alt="">
+                                    <span>김서연_이력서_2024.pdf</span>
+                                </div>
+                                <div class="file-buttons">
+                                    <button class="file-btn">
+                                        <span>다운로드</span>
+                                        <img src="assets/에셋/Icons/Download.svg" alt="" onerror="this.style.display='none'">
+                                    </button>
+                                    <button class="file-btn">
+                                        <span>새 탭에서 열기</span>
+                                        <img src="assets/에셋/Icons/External Link.svg" alt="" onerror="this.style.display='none'">
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- 이력서 프리뷰 -->
+                            <div class="resume-preview">
+                                <div class="resume-preview-content">
+                                    <!-- 이력서 헤더 -->
+                                    <div class="resume-header">
+                                        <div class="resume-header-info">
+                                            <div class="resume-name">김서연</div>
+                                            <div class="resume-title">Product Designer</div>
+                                            <div class="resume-info-grid">
+                                                <div class="resume-info-row">
+                                                    <span class="resume-info-label">생년월일</span>
+                                                    <span class="resume-info-value">2001.04.30</span>
+                                                    <span class="resume-info-label" style="margin-left: 24px;">연락처</span>
+                                                    <span class="resume-info-value">010-1234-5672</span>
+                                                </div>
+                                                <div class="resume-info-row">
+                                                    <span class="resume-info-label">이메일</span>
+                                                    <span class="resume-info-value">Seo.Yeon@gmail.com</span>
+                                                    <span class="resume-info-label" style="margin-left: 24px;">주소</span>
+                                                    <span class="resume-info-value">경기도 용인시 기흥구 신갈동</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 자기소개 섹션 -->
+                                    <div class="resume-section">
+                                        <div class="resume-section-header">
+                                            <div class="resume-section-icon">📝</div>
+                                            <span class="resume-section-title">자기소개</span>
+                                        </div>
+                                        <div class="resume-section-content">
+                                            <p class="resume-section-text">업무용 시스템과 공공 SaaS 플랫폼 등 복잡한 환경에서 업무 프로세스 기획과 UX/UI 디자인을 맡아왔습니다. 웹기획 인턴으로 커리어를 시작하며 프로젝트 흐름을 이해했고, 이후 직접 창업을 경험하며 서비스 기획부터 사업 검증까지 전 과정을 겪었습니다. 이를 바탕으로 사용자 경험 설계와 시스템 구조화에 집중해왔습니다.</p>
+                                            <p class="resume-section-text" style="margin-top: 15px;">채용관리시스템에서는 지원자 관리, 전형 평가, 면접 일정 조율 등 흩어져 있던 채용 업무를 하나의 시스템으로 통합하는 작업을 기획부터 QA까지 주도했습니다. 에너지 관리 플랫폼에서는 담당 공무원 인터뷰를 통해 실제 업무 환경을 파악하고, 이를 바탕으로 여러 지자체에 적용 가능한 구조를 설계했습니다.</p>
+                                            <p class="resume-section-text" style="margin-top: 15px;">두 회사에서 디자인시스템을 처음부터 구축한 경험이 있습니다. Figma 컴포넌트 설계에서 끝내지 않고 코드로 구현하여 개발팀이 바로 사용할 수 있는 환경을 만드는 것까지 담당했습니다. 디자인과 개발 사이의 간극을 줄이는 일에 관심이 많고, 앞으로도 이 접점에서 역할을 확장해나가고 싶습니다.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 경력 섹션 -->
+                                    <div class="resume-section">
+                                        <div class="resume-section-header">
+                                            <div class="resume-section-icon">💼</div>
+                                            <span class="resume-section-title">경력</span>
+                                        </div>
+                                        
+                                        <!-- 루미르 주식회사 -->
+                                        <div class="career-card">
+                                            <div class="career-header">
+                                                <span class="career-company">루미르 주식회사</span>
+                                                <div class="career-meta">
+                                                    <span class="career-period">2025.12 ~ 2025.06 · 7개월</span>
+                                                    <span class="career-role-badge">Product Designer</span>
+                                                </div>
+                                            </div>
+                                            <div class="career-content">
+                                                <div class="career-project">
+                                                    <div class="career-project-title">
+                                                        <div class="career-project-bar"></div>
+                                                        <span class="career-project-name">채용관리시스템(ATS) 구축</span>
+                                                        <span class="career-project-tag">기획, 디자인, QA 전담</span>
+                                                    </div>
+                                                    <div class="career-bullets">
+                                                        <div class="career-bullet"><span>스프레드시트와 이메일에 분산되어 있던 채용 업무를 하나의 시스템으로 통합</span></div>
+                                                        <div class="career-bullet"><span>채용담당자, 면접관, 지원자 세 사용자군의 업무 흐름 설계</span></div>
+                                                        <div class="career-bullet"><span>칸반 보드 및 대시보드 인터페이스 설계로 채용 현황 가시성 개선</span></div>
+                                                        <div class="career-bullet"><span>웹 출시 후 2주 내 앱 버전 병렬 출시</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="career-project">
+                                                    <div class="career-project-title">
+                                                        <div class="career-project-bar"></div>
+                                                        <span class="career-project-name">자원관리시스템(RMS) 구축</span>
+                                                    </div>
+                                                    <div class="career-bullets">
+                                                        <div class="career-bullet"><span>자원 예약, 소모품 관리, 자원 그룹화 등 복잡한 업무 프로세스의 직관적 인터페이스 설계</span></div>
+                                                        <div class="career-bullet"><span>채용시스템과 연동하여 면접 일정 조율에 활용</span></div>
+                                                        <div class="career-bullet"><span>사용성 테스트 및 사내 검증을 통한 반복적 디자인 개선</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="career-project">
+                                                    <div class="career-project-title">
+                                                        <div class="career-project-bar"></div>
+                                                        <span class="career-project-name">디자인시스템 구축</span>
+                                                    </div>
+                                                    <div class="career-bullets">
+                                                        <div class="career-bullet"><span>프리미티브 컴포넌트 기반 확장 가능한 디자인시스템 설계</span></div>
+                                                        <div class="career-bullet"><span>Figma 토큰 설계부터 코드 구현, NPM 배포까지 전 과정 수행</span></div>
+                                                        <div class="career-bullet"><span>Storybook 문서화로 개발팀 협업 환경 구축</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 주식회사 헤리트 -->
+                                        <div class="career-card" style="margin-top: 24px;">
+                                            <div class="career-header">
+                                                <span class="career-company">주식회사 헤리트</span>
+                                                <div class="career-meta">
+                                                    <span class="career-period">2023.06 ~ 2025.08 · 1년 3개월</span>
+                                                    <span class="career-role-badge">Product Designer</span>
+                                                </div>
+                                            </div>
+                                            <div class="career-content">
+                                                <div class="career-project">
+                                                    <div class="career-project-title">
+                                                        <div class="career-project-bar"></div>
+                                                        <span class="career-project-name">제주 VPP 관리시스템</span>
+                                                    </div>
+                                                    <div class="career-bullets">
+                                                        <div class="career-bullet"><span>공공기관 대상 사용자 인터뷰를 통한 도메인 전문 요구사항 분석</span></div>
+                                                        <div class="career-bullet"><span>복잡한 에너지 데이터의 직관적 시각화 및 대시보드 설계</span></div>
+                                                        <div class="career-bullet"><span>지도 기반 인터페이스로 분산 자원 통합 관리 경험 설계</span></div>
+                                                        <div class="career-bullet"><span>타 지역 에너지 플랫폼 구축 시 참조 모델로 활용</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 학력 섹션 -->
+                                    <div class="resume-section">
+                                        <div class="resume-section-header">
+                                            <div class="resume-section-icon">🎓</div>
+                                            <span class="resume-section-title">학력</span>
+                                        </div>
+                                        <div class="resume-section-content" style="display: flex; align-items: center; justify-content: space-between;">
+                                            <div>
+                                                <div style="font-size: 16px; font-weight: 600; line-height: 27.2px; color: #1b1b22;">한국외국어대학교 (글로벌)</div>
+                                                <div style="font-size: 14px; font-weight: 400; line-height: 23.8px; color: #46464e;">전공: 사학과 · 부전공: TESOL영어학</div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <span style="padding: 3.5px 12px; background: #e8f5e9; border-radius: 20px; font-size: 12px; font-weight: 600; line-height: 20.4px; color: #2e7d32;">졸업</span>
+                                                <span style="font-size: 13px; font-weight: 400; line-height: 22.1px; color: #76767f;">2016.03 ~ 2023.08</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Skills 섹션 -->
+                                    <div class="resume-section">
+                                        <div class="resume-section-header">
+                                            <div class="resume-section-icon">🛠️</div>
+                                            <span class="resume-section-title">Skills</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; gap: 16px;">
+                                            <div class="resume-section-content" style="flex: 1; padding: 19px 20px 20px;">
+                                                <div style="font-size: 13px; font-weight: 600; line-height: 22.1px; color: #667eea; margin-bottom: 12px;">Design</div>
+                                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Figma</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Adobe XD</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Adobe Photoshop</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Design System</span>
+                                                </div>
+                                            </div>
+                                            <div class="resume-section-content" style="flex: 1; padding: 19px 20px 56px;">
+                                                <div style="font-size: 13px; font-weight: 600; line-height: 22.1px; color: #667eea; margin-bottom: 12px;">Development</div>
+                                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">HTML</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">CSS</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">React</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Storybook</span>
+                                                </div>
+                                            </div>
+                                            <div class="resume-section-content" style="flex: 1; padding: 19px 20px 56px;">
+                                                <div style="font-size: 13px; font-weight: 600; line-height: 22.1px; color: #667eea; margin-bottom: 12px;">Collaboration</div>
+                                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">JIRA</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Confluence</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Notion</span>
+                                                    <span style="padding: 3px 10px 4px; background: #f7f7fa; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 22.1px; color: #46464e;">Slack</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 경력사항 카드 -->
+                        <div class="career-list-card">
+                            <div class="career-list-header">
+                                <span class="card-title">경력사항</span>
+                                <span class="career-list-total">총 경력 7년 2개월</span>
+                            </div>
+                            
+                            <!-- 토스페이먼츠 -->
+                            <div class="career-list-item">
+                                <div class="career-list-item-header">
+                                    <div class="career-list-company-info">
+                                        <span class="career-list-company">토스페이먼츠</span>
+                                        <span class="career-list-role">시니어 프로덕트 디자이너</span>
+                                        <span class="career-list-duration">3년 2개월</span>
+                                    </div>
+                                    <span class="career-list-period">2021.10 - 2025.12</span>
+                                </div>
+                                <div class="career-list-projects">
+                                    <span class="career-list-project-title">주요 프로젝트</span>
+                                    <div class="career-list-project">
+                                        <div class="career-list-project-name">결제 대시보드 리뉴얼</div>
+                                        <div class="career-list-project-period">2023.06 - 2025.02</div>
+                                        <div class="career-list-project-desc">가맹점 관리자가 사용하는 결제 대시보드의 전면 리뉴얼 프로젝트를 리드했습니다. 사용자 인터뷰와 데이터 분석을 통해 핵심 개선 포인트를 도출하고, 디자인 시스템을 구축했습니다.</div>
+                                        <div class="career-list-project-results">
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">MAU 30% 증가, 이탈률 15% 감소</span>
+                                            </div>
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">디자인 시스템 컴포넌트 120개 구축</span>
+                                            </div>
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">개발 생산성 40% 향상</span>
+                                            </div>
+                                        </div>
+                                        <div class="career-list-project-tags">
+                                            <span class="career-list-project-tag">Figma</span>
+                                            <span class="career-list-project-tag">Storybook</span>
+                                            <span class="career-list-project-tag">ProtoPie</span>
+                                        </div>
+                                    </div>
+                                    <div class="career-list-project">
+                                        <div class="career-list-project-name">모바일 POS 앱 신규 개발</div>
+                                        <div class="career-list-project-period">2022.03 - 2023.05</div>
+                                        <div class="career-list-project-desc">소상공인을 위한 모바일 POS 앱의 UX/UI 디자인을 담당했습니다. 현장 리서치를 통해 실제 사용 환경을 파악하고, 한 손 조작이 가능한 인터페이스를 설계했습니다.</div>
+                                        <div class="career-list-project-results">
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">앱스토어 4.8점 달성</span>
+                                            </div>
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">결제 완료 시간 평균 3초 단축</span>
+                                            </div>
+                                        </div>
+                                        <div class="career-list-project-tags">
+                                            <span class="career-list-project-tag">Figma</span>
+                                            <span class="career-list-project-tag">Principle</span>
+                                            <span class="career-list-project-tag">Maze</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 카카오페이 -->
+                            <div class="career-list-item">
+                                <div class="career-list-item-header">
+                                    <div class="career-list-company-info">
+                                        <span class="career-list-company">카카오페이</span>
+                                        <span class="career-list-role">프로덕트 디자이너</span>
+                                        <span class="career-list-duration">2년 6개월</span>
+                                    </div>
+                                    <span class="career-list-period">2019.04 - 2021.09</span>
+                                </div>
+                                <div class="career-list-projects">
+                                    <span class="career-list-project-title">주요 프로젝트</span>
+                                    <div class="career-list-project">
+                                        <div class="career-list-project-name">송금 플로우 개선</div>
+                                        <div class="career-list-project-period">2020.06 - 2021.02</div>
+                                        <div class="career-list-project-desc">카카오페이 송금 기능의 사용성 개선 프로젝트에 참여했습니다. A/B 테스트를 통해 최적의 UI를 도출하고, 접근성 가이드라인을 적용했습니다.</div>
+                                        <div class="career-list-project-results">
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">송금 완료율 12% 증가</span>
+                                            </div>
+                                            <div class="career-list-project-result">
+                                                <span class="career-list-project-result-bullet">•</span>
+                                                <span class="career-list-project-result-text">에러 발생률 8% 감소</span>
+                                            </div>
+                                        </div>
+                                        <div class="career-list-project-tags">
+                                            <span class="career-list-project-tag">Sketch</span>
+                                            <span class="career-list-project-tag">Zeplin</span>
+                                            <span class="career-list-project-tag">Amplitude</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 스타트업 A -->
+                            <div class="career-list-item">
+                                <div class="career-list-item-header">
+                                    <div class="career-list-company-info">
+                                        <span class="career-list-company">스타트업 A</span>
+                                        <span class="career-list-role">주니어 디자이너</span>
+                                        <span class="career-list-duration">1년 6개월</span>
+                                    </div>
+                                    <span class="career-list-period">2017.10 - 2019.03</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 학력 카드 -->
+                        <div class="card">
+                            <span class="card-title">학력</span>
+                            <div class="education-item">
+                                <div class="education-info">
+                                    <span class="education-school">홍익대학교</span>
+                                    <span class="education-major">시각디자인학과 (학사)</span>
+                                </div>
+                                <span class="education-period">2013.03 - 2017.08 졸업</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 보유 기술 카드 -->
+                        <div class="card">
+                            <span class="card-title">보유 기술</span>
+                            <div class="skills-section">
+                                <span class="skills-label">디자인 툴</span>
+                                <div class="skills-tags">
+                                    <span class="skill-tag-matched">Figma</span>
+                                    <span class="skill-tag-matched">Sketch</span>
+                                    <span class="skill-tag-matched">Adobe XD</span>
+                                    <span class="skill-tag-matched">Photoshop</span>
+                                    <span class="skill-tag-matched">Illustrator</span>
+                                </div>
+                            </div>
+                            <div class="skills-section">
+                                <span class="skills-label">프로토타이핑</span>
+                                <div class="skills-tags">
+                                    <span class="skill-tag-matched">ProtoPie</span>
+                                    <span class="skill-tag-matched">Principle</span>
+                                    <span class="skill-tag-matched">Framer</span>
+                                </div>
+                            </div>
+                            <div class="skills-section">
+                                <span class="skills-label">협업/분석</span>
+                                <div class="skills-tags">
+                                    <span class="skill-tag-normal">Notion</span>
+                                    <span class="skill-tag-normal">Jira</span>
+                                    <span class="skill-tag-normal">Amplitude</span>
+                                    <span class="skill-tag-normal">Mixpanel</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 자격증/수상 카드 -->
+                        <div class="card">
+                            <span class="card-title">자격증 / 수상</span>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <div class="cert-item">
+                                    <span class="cert-name">컬러리스트기사</span>
+                                    <span class="cert-org">한국산업인력공단 · 2016.08</span>
+                                </div>
+                                <div class="cert-item">
+                                    <span class="cert-name">GTQ 1급</span>
+                                    <span class="cert-org">한국생산성본부 · 2015.12</span>
+                                </div>
+                                <div class="cert-item">
+                                    <span class="cert-name">홍익대학교 졸업전시 우수상</span>
+                                    <span class="cert-org">홍익대학교 · 2017.06</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 오른쪽 컬럼 -->
+                    <div class="right-column">
+                        <!-- 매칭 분석 카드 -->
+                        <div class="card">
+                            <div class="matching-header">
+                                <span class="card-title">매칭 분석</span>
+                                <div class="fitple-badge">
+                                    <img src="assets/에셋/dialog/fitple_logo.svg" alt="" onerror="this.style.display='none'">
+                                    <span>Fitple</span>
+                                </div>
+                            </div>
+                            <div class="matching-info-box">
+                                <span class="matching-info-text">핏플 인재 풀에서 매칭된 정보입니다. 전 직장에서의 핏 체크 데이터를 기반으로 분석합니다.</span>
+                            </div>
+                            <div class="matching-score-row">
+                                <span class="matching-score-big">85%</span>
+                                <span class="matching-score-label">매칭률</span>
+                            </div>
+                            <div class="matching-progress">
+                                <div class="matching-progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="matching-metrics">
+                                <div class="matching-metric">
+                                    <span class="matching-metric-label">기술 적합</span>
+                                    <span class="matching-metric-value">높음</span>
+                                </div>
+                                <div class="matching-metric">
+                                    <span class="matching-metric-label">문화 적합</span>
+                                    <span class="matching-metric-value">높음</span>
+                                </div>
+                                <div class="matching-metric">
+                                    <span class="matching-metric-label">경력 요건</span>
+                                    <span class="matching-metric-value">충족</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 핏 체크 요약 카드 -->
+                        <div class="card">
+                            <div class="fitcheck-header">
+                                <span class="card-title">핏 체크 요약</span>
+                                <span class="pro-badge">Pro</span>
+                            </div>
+                            <div class="fitcheck-score-box">
+                                <span class="fitcheck-score-label">전 직장 핏 점수</span>
+                                <span class="fitcheck-score-value">3.8</span>
+                            </div>
+                            <div class="fitcheck-details">
+                                <div class="fitcheck-detail-row">
+                                    <span class="fitcheck-detail-label">업무 성과</span>
+                                    <div class="fitcheck-detail-bar">
+                                        <div class="fitcheck-detail-fill" style="width: 84%; background: linear-gradient(90deg, #2c9371, #10b981);"></div>
+                                    </div>
+                                    <span class="fitcheck-detail-value">4.2</span>
+                                </div>
+                                <div class="fitcheck-detail-row">
+                                    <span class="fitcheck-detail-label">협업</span>
+                                    <div class="fitcheck-detail-bar">
+                                        <div class="fitcheck-detail-fill" style="width: 80%; background: linear-gradient(90deg, #2c9371, #10b981);"></div>
+                                    </div>
+                                    <span class="fitcheck-detail-value">4.0</span>
+                                </div>
+                                <div class="fitcheck-detail-row">
+                                    <span class="fitcheck-detail-label">문화 적응</span>
+                                    <div class="fitcheck-detail-bar">
+                                        <div class="fitcheck-detail-fill" style="width: 70%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+                                    </div>
+                                    <span class="fitcheck-detail-value">3.5</span>
+                                </div>
+                                <div class="fitcheck-detail-row">
+                                    <span class="fitcheck-detail-label">성장 가능성</span>
+                                    <div class="fitcheck-detail-bar">
+                                        <div class="fitcheck-detail-fill" style="width: 76%; background: linear-gradient(90deg, #2c9371, #10b981);"></div>
+                                    </div>
+                                    <span class="fitcheck-detail-value">3.8</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 메모 카드 -->
+                        <div class="card">
+                            <span class="card-title">메모</span>
+                            <div class="memo-item">
+                                <div class="memo-header">
+                                    <div class="memo-avatar">
+                                        <img src="assets/에셋/Icons/User.svg" alt="" onerror="this.textContent='📝'">
+                                    </div>
+                                    <div class="memo-info">
+                                        <span class="memo-title">포폴 체크 완료</span>
+                                        <div class="memo-meta">
+                                            <span class="memo-author">김대리</span>
+                                            <span class="memo-dot">·</span>
+                                            <span class="memo-date">2025.12.20 14:30</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="memo-content">
+                                    <span class="memo-text">포트폴리오 퀄리티 높음. 토스페이먼츠 결제 대시보드<br>프로젝트 경험이 우리 제품과 잘 맞을 것 같음.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Action Bar -->
+            <div class="bottom-action-bar">
+                <div class="action-bar-left">
+                    <div class="action-bar-profile">
+                        <div class="action-bar-avatar">김</div>
+                        <div>
+                            <div class="action-bar-name">김서연</div>
+                            <div class="action-bar-role">프로덕트 디자이너 · 3년</div>
+                        </div>
+                    </div>
+                    <div class="action-bar-divider"></div>
+                    <div class="badge-read">
+                        <img src="assets/에셋/Icons/Check/Circle.svg" alt="" onerror="this.style.display='none'">
+                        <span>열람됨</span>
+                    </div>
+                </div>
+                <div class="action-bar-right">
+                    <button class="btn-saved" id="btnSaved" onclick="toggleSaveTalent()">
+                        <img src="assets/에셋/Icons/Bookmark.svg" alt="" id="saveIcon">
+                        <span id="saveText">저장됨</span>
+                    </button>
+                    <button class="btn-proposal" onclick="openModal('modal-proposal')">
+                        <img src="assets/에셋/Icons/Paper Plane.svg" alt="">
+                        <span>채용 제안하기</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 채용 제안 모달 -->
+    <div class="modal-overlay" id="modal-proposal">
+        <div style="display: flex; flex-direction: column; width: 520px; background: #ffffff; border-radius: 4px 8px 8px 4px; box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.2); overflow: hidden;">
+            <!-- 헤더 -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff;">
+                <span style="font-family: Pretendard, sans-serif; font-size: 18px; font-weight: 700; line-height: 27px; color: #0a0a0a;">채용 제안</span>
+                <button onclick="closeModal('modal-proposal')" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0 6px; background: none; border: none; border-radius: 4px; cursor: pointer;">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+            <!-- 본문 -->
+            <div style="display: flex; flex-direction: column; gap: 16px; padding: 16px; flex: 1; overflow: auto;">
+                <!-- 설명 텍스트 -->
+                <div style="font-family: Pretendard, sans-serif; font-size: 15px; line-height: 22.5px;">
+                    <span style="font-weight: 700; color: #333333;">김서연 </span>
+                    <span style="font-weight: 400; color: #333333;">님에게 채용 제안을 보냅니다.</span>
+                </div>
+                
+                <!-- 채용 공고 선택 -->
+                <div style="display: flex; flex-direction: column; min-width: 60px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 4px; height: 28px; padding-right: 4px;">
+                        <div style="display: flex; align-items: flex-start; gap: 8px; padding-bottom: 4px;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0.14px; color: #333333;">채용 공고 선택</span>
+                        </div>
+                    </div>
+                    <div id="jobSelectContainer" style="position: relative;">
+                        <div id="jobSelectBox" onclick="toggleJobDropdown()" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border: 1px solid #d6d6d6; border-radius: 4px; cursor: pointer; background: #ffffff;">
+                            <span id="selectedJobText" style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.2px; color: #333333;">프로덕트 디자이너 (경력 3년 이상)</span>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" style="width: 20px; height: 20px; transition: transform 0.2s;" id="jobDropdownArrow">
+                        </div>
+                        <!-- 드롭다운 목록 -->
+                        <div id="jobDropdownList" style="display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px; background: #ffffff; border: 1px solid #d6d6d6; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; max-height: 200px; overflow-y: auto;">
+                            <div class="job-option" onclick="selectJob('프로덕트 디자이너 (경력 3년 이상)')" style="padding: 10px 16px; cursor: pointer; font-family: Pretendard, sans-serif; font-size: 14px; color: #333333; transition: background 0.2s;">프로덕트 디자이너 (경력 3년 이상)</div>
+                            <div class="job-option" onclick="selectJob('UX 디자이너 (신입/경력)')" style="padding: 10px 16px; cursor: pointer; font-family: Pretendard, sans-serif; font-size: 14px; color: #333333; transition: background 0.2s;">UX 디자이너 (신입/경력)</div>
+                            <div class="job-option" onclick="selectJob('UI 디자이너 (경력 2년 이상)')" style="padding: 10px 16px; cursor: pointer; font-family: Pretendard, sans-serif; font-size: 14px; color: #333333; transition: background 0.2s;">UI 디자이너 (경력 2년 이상)</div>
+                            <div class="job-option" onclick="selectJob('직접 제안')" style="padding: 10px 16px; cursor: pointer; font-family: Pretendard, sans-serif; font-size: 14px; color: #999999; transition: background 0.2s;">직접 제안</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding-top: 4px;">
+                        <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.2px; color: #999999;">진행 중인 공고가 없으면 '직접 제안'으로 발송됩니다.</span>
+                    </div>
+                </div>
+                
+                <!-- 면담 내용 -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; flex-direction: column; min-width: 60px; border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 4px; height: 28px; padding-right: 4px;">
+                            <div style="display: flex; align-items: flex-start; gap: 8px; padding-bottom: 4px;">
+                                <span style="font-family: Pretendard, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; letter-spacing: 0.14px; color: #333333;">면담 내용</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px; padding: 16px; border: 1px solid #d6d6d6; border-radius: 4px; overflow: hidden;">
+                            <textarea id="proposalMessage" oninput="updateCharCount()" style="flex: 1; min-height: 100px; border: none; outline: none; resize: none; font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.2px; color: #333333;">안녕하세요, 저희 회사에서 프론트엔드 개발자를 찾고 있습니다.
+
+프로필을 검토한 결과 저희 팀에 잘 맞을 것 같아 연락드립니다.
+저희는 유연한 근무 환경과 충분한 설계 시간을 제공합니다. 
+관심 있으시면 연락 부탁드립니다.</textarea>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding-top: 4px;">
+                            <span id="charCount" style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.2px; color: #999999;">156 / 500자</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 안내 박스 -->
+                <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; background: #fff3e0; border-radius: 4px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-family: Pretendard, sans-serif; font-size: 13px; font-weight: 400; line-height: 20.8px; color: #333333;">• 김서연님에게 알림이 발송됩니다<br>• 7일 내 응답이 없으면 자동 만료됩니다<br>• 수락 시 지원자 관리에 자동 등록됩니다</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 푸터 -->
+            <div style="display: flex; align-items: flex-start; justify-content: flex-end; gap: 12px; padding: 16px; background: #ffffff; border-bottom: 1px solid #f5f5f5;">
+                <button onclick="closeModal('modal-proposal')" style="display: flex; align-items: center; justify-content: center; width: 60px; padding: 10px 16px 12px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 4px; cursor: pointer;">
+                    <span style="font-family: Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 16px; text-align: center; color: #333333;">취소</span>
+                </button>
+                <button onclick="submitProposal()" style="display: flex; align-items: center; justify-content: center; gap: 4px; width: 132px; height: 40px; padding: 0 8px; background: #6277ff; border: none; border-radius: 4px; cursor: pointer;">
+                    <img src="assets/에셋/Icons/Paper Plane.svg" alt="" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: 0.09px; color: #ffffff;">채용 제안하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <script src="js/app.js?v=4"></script>
+    <script>
+        // 채용 공고 드롭다운 토글
+        function toggleJobDropdown() {
+            const dropdown = document.getElementById('jobDropdownList');
+            const arrow = document.getElementById('jobDropdownArrow');
+            if (dropdown.style.display === 'none') {
+                dropdown.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                dropdown.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        // 채용 공고 선택
+        function selectJob(jobTitle) {
+            document.getElementById('selectedJobText').textContent = jobTitle;
+            document.getElementById('jobDropdownList').style.display = 'none';
+            document.getElementById('jobDropdownArrow').style.transform = 'rotate(0deg)';
+        }
+        
+        // 드롭다운 외부 클릭 시 닫기
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('jobSelectContainer');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('jobDropdownList').style.display = 'none';
+                document.getElementById('jobDropdownArrow').style.transform = 'rotate(0deg)';
+            }
+        });
+        
+        // 글자수 업데이트
+        function updateCharCount() {
+            const textarea = document.getElementById('proposalMessage');
+            const charCount = document.getElementById('charCount');
+            const length = textarea.value.length;
+            charCount.textContent = length + ' / 500자';
+            
+            if (length > 500) {
+                charCount.style.color = '#cd3d36';
+            } else {
+                charCount.style.color = '#999999';
+            }
+        }
+        
+        // 채용 제안 제출
+        function submitProposal() {
+            closeModal('modal-proposal');
+            showToast('김서연님에게 채용 제안이 발송되었습니다.', 'success');
+        }
+        
+        // 저장 토글
+        let isSaved = true; // 열람 후 화면에서는 기본적으로 저장됨 상태
+        function toggleSaveTalent() {
+            isSaved = !isSaved;
+            const btn = document.getElementById('btnSaved');
+            const text = document.getElementById('saveText');
+            
+            if (isSaved) {
+                text.textContent = '저장됨';
+                btn.style.borderColor = '#2c9371';
+                btn.querySelector('span').style.color = '#2c9371';
+                showToast('인재가 저장되었습니다.', 'success');
+            } else {
+                text.textContent = '저장';
+                btn.style.borderColor = '#c1c1c1';
+                btn.querySelector('span').style.color = '#5b5b5b';
+                showToast('저장이 취소되었습니다.', 'success');
+            }
+        }
+        
+        // 드롭다운 호버 효과
+        document.querySelectorAll('.job-option').forEach(option => {
+            option.addEventListener('mouseenter', function() {
+                this.style.background = '#f5f5f5';
+            });
+            option.addEventListener('mouseleave', function() {
+                this.style.background = '#ffffff';
+            });
+        });
+    </script>
+</body>
+</html>

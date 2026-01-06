@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Checkbox / Check (Figma selection: 559:38561)
+   Includes:
+   - square checkbox (radius 2px) + label
+   - circle check (radius 999px) + label (looks like "radio-style check" in Figma)
+   Variants:
+   - type: selected / indetermined / unselected
+   - state: default / hovered(hover) / pressed / focused(focus) / disabled
+   - option: true(label) / false(check only)
+   ========================================================================== */
+
+.fi-check {
+    /* wrapper (Figma uses 4px padding and radius/md=8) */
+    --fi-check-wrap-pad: 4px;
+    --fi-check-wrap-radius: 8px;
+
+    /* box */
+    --fi-check-size: 16px;
+    --fi-check-radius: 2px; /* square default */
+
+    /* colors */
+    --fi-check-fg: #333333;
+    --fi-check-fg-hover: #474747;
+    --fi-check-fg-pressed: #5c5c5c;
+    --fi-check-fg-disabled: #c2c2c2;
+
+    --fi-check-border: #d6d6d6;
+    --fi-check-border-hover: #c2c2c2;
+    --fi-check-border-pressed: #a3a3a3;
+
+    --fi-check-primary: #2c9371;
+    --fi-check-primary-hover: #63c7a6;
+    --fi-check-primary-pressed: #34ad85;
+
+    --fi-check-disabled-bg: #e0e0e0;
+    --fi-check-focus: #141414;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    user-select: none;
+    position: relative; /* for absolutely positioned .fi-check__input */
+}
+
+/* Layout: option text */
+.fi-check__wrap {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--fi-check-wrap-pad);
+    border-radius: var(--fi-check-wrap-radius);
+}
+
+.fi-check__label {
+    margin-left: 0;
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: var(--fi-check-fg);
+    white-space: nowrap;
+}
+
+/* Visually hidden input */
+.fi-check__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* Box */
+.fi-check__box {
+    width: var(--fi-check-size);
+    height: var(--fi-check-size);
+    border-radius: var(--fi-check-radius);
+    border: var(--fi-check-border-w, 1px) solid var(--fi-check-border);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Square vs Circle */
+.fi-check--circle { --fi-check-radius: 999px; }
+
+/* Unselected icon is just border; box handles it */
+.fi-check--unselected .fi-check__box {
+    background: transparent;
+}
+
+/* Selected */
+.fi-check--selected .fi-check__box {
+    background: var(--fi-check-primary);
+    border-color: transparent;
+}
+
+/* Checkmark (white) */
+.fi-check--selected .fi-check__box::after {
+    content: "";
+    width: var(--fi-check-mark-w, 6px);
+    height: var(--fi-check-mark-h, 10px);
+    border-right: var(--fi-check-mark-stroke, 2px) solid #ffffff;
+    border-bottom: var(--fi-check-mark-stroke, 2px) solid #ffffff;
+    transform: rotate(45deg);
+    margin-top: -1px;
+}
+
+/* Indeterminate */
+.fi-check--indeterminate .fi-check__box {
+    background: var(--fi-check-primary);
+    border-color: transparent;
+}
+
+.fi-check--indeterminate .fi-check__box::after {
+    content: "";
+    width: 10px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+/* Hover / Pressed */
+.fi-check:hover .fi-check__label { color: var(--fi-check-fg-hover); }
+.fi-check:active .fi-check__label { color: var(--fi-check-fg-pressed); }
+
+.fi-check:hover .fi-check__box { border-color: var(--fi-check-border-hover); }
+.fi-check:active .fi-check__box { border-color: var(--fi-check-border-pressed); }
+
+.fi-check--selected:hover .fi-check__box,
+.fi-check--indeterminate:hover .fi-check__box {
+    background: var(--fi-check-primary-hover);
+}
+
+.fi-check--selected:active .fi-check__box,
+.fi-check--indeterminate:active .fi-check__box {
+    background: var(--fi-check-primary-pressed);
+}
+
+/* Focus ring (Tab keyboard only) */
+.fi-check:has(input:focus-visible),
+.fi-check.is-focused {
+    outline: 2px solid var(--fi-check-focus);
+    outline-offset: 0;
+    border-radius: var(--fi-check-wrap-radius);
+}
+
+/* Disabled */
+.fi-check.is-disabled,
+.fi-check__input:disabled ~ .fi-check__wrap {
+    cursor: not-allowed;
+}
+
+.fi-check.is-disabled .fi-check__label,
+.fi-check__input:disabled ~ .fi-check__label {
+    color: var(--fi-check-fg-disabled);
+}
+
+.fi-check.is-disabled .fi-check__box,
+.fi-check__input:disabled ~ .fi-check__wrap .fi-check__box {
+    border-color: var(--fi-check-disabled-bg);
+}
+
+.fi-check.is-disabled.fi-check--selected .fi-check__box,
+.fi-check__input:disabled ~ .fi-check__wrap .fi-check__box {
+    background: var(--fi-check-disabled-bg);
+}
+
+.fi-check.is-disabled.fi-check--selected .fi-check__box::after,
+.fi-check.is-disabled.fi-check--indeterminate .fi-check__box::after,
+.fi-check__input:disabled ~ .fi-check__wrap .fi-check__box::after {
+    border-color: var(--fi-check-fg-disabled);
+    background: var(--fi-check-fg-disabled);
+}
+
+/* Manual state classes (for static demos / parity with Figma state variants) */
+.fi-check.is-hovered .fi-check__label { color: var(--fi-check-fg-hover); }
+.fi-check.is-pressed .fi-check__label { color: var(--fi-check-fg-pressed); }
+.fi-check.is-hovered .fi-check__box { border-color: var(--fi-check-border-hover); }
+.fi-check.is-pressed .fi-check__box { border-color: var(--fi-check-border-pressed); }
+.fi-check.is-hovered.fi-check--selected .fi-check__box,
+.fi-check.is-hovered.fi-check--indeterminate .fi-check__box { background: var(--fi-check-primary-hover); }
+.fi-check.is-pressed.fi-check--selected .fi-check__box,
+.fi-check.is-pressed.fi-check--indeterminate .fi-check__box { background: var(--fi-check-primary-pressed); }
+
+

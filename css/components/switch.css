@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Switch (Figma: 559:38330)
+   Props:
+   - propSwitch: off/on
+   - layout: only switch | switch+label(left/right/above)
+   - state: default | hover | pressed | focus | disabled
+   Notes:
+   - Figma renders a 40x20 track with a thumb, wrapped by 4px padding.
+   - Focus is shown as a 2px ring on the wrapper.
+   ========================================================================== */
+
+.fi-switch {
+    --sw-wrap-radius: 8px; /* radius/md */
+    --sw-pad: 4px; /* spacing/sp40 */
+
+    --sw-track-w: 40px;
+    --sw-track-h: 20px;
+    --sw-track-radius: 16px; /* radius/xlg */
+
+    --sw-thumb: 16px;
+    --sw-thumb-gap: 2px; /* visual inset inside track */
+
+    /* Off colors */
+    --sw-off-border: #999999; /* semantic/neutral/stroke/heavy/default */
+    --sw-off-border-hover: #858585; /* hovered */
+    --sw-off-border-pressed: #707070; /* pressed */
+    --sw-off-bg: #fafafa; /* semantic/neutral/background/normal/default */
+    --sw-off-thumb: #999999; /* semantic/neutral/foreground/inverse/default */
+
+    /* On colors */
+    --sw-on-bg: #2c9371; /* semantic/primary/background/normal/default */
+    --sw-on-bg-hover: #63c7a6;
+    --sw-on-bg-pressed: #34ad85;
+    --sw-on-thumb: #ffffff; /* semantic/static/global/global/white */
+
+    /* Disabled */
+    --sw-disabled-bg: #e0e0e0;
+    --sw-disabled-fg: #c2c2c2;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--sw-pad);
+    border-radius: var(--sw-wrap-radius);
+    user-select: none;
+}
+
+/* Layout modifiers */
+.fi-switch--only { width: 56px; } /* matches Figma wrapper width */
+.fi-switch--label-left { flex-direction: row; }
+.fi-switch--label-right { flex-direction: row; }
+.fi-switch--label-above {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Label */
+.fi-switch__label {
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 13px; /* Label 2 Regular */
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #333333; /* semantic/neutral/foreground/normal/default */
+    padding-right: 4px;
+    white-space: nowrap;
+}
+
+.fi-switch.is-disabled .fi-switch__label,
+.fi-switch__input:disabled ~ .fi-switch__label {
+    color: var(--sw-disabled-fg);
+}
+
+/* Input (visually hidden but focusable) */
+.fi-switch__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.fi-switch__switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: var(--sw-track-w);
+    height: var(--sw-track-h);
+}
+
+.fi-switch__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--sw-track-radius);
+    background: var(--sw-off-bg);
+    border: 1px solid var(--sw-off-border);
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.fi-switch__thumb {
+    position: absolute;
+    top: 50%;
+    left: var(--sw-thumb-gap);
+    width: var(--sw-thumb);
+    height: var(--sw-thumb);
+    border-radius: 999px;
+    background: var(--sw-off-thumb);
+    transform: translateY(-50%);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+/* ON state (checked or .is-on) */
+.fi-switch__input:checked ~ .fi-switch__switch .fi-switch__track,
+.fi-switch.is-on .fi-switch__track {
+    background: var(--sw-on-bg);
+    border-color: transparent;
+}
+
+.fi-switch__input:checked ~ .fi-switch__switch .fi-switch__thumb,
+.fi-switch.is-on .fi-switch__thumb {
+    background: var(--sw-on-thumb);
+    transform: translate(calc(var(--sw-track-w) - var(--sw-thumb) - (var(--sw-thumb-gap) * 2)), -50%);
+}
+
+/* Hover / Pressed (pseudo) */
+.fi-switch:not(.is-disabled):hover .fi-switch__track {
+    border-color: var(--sw-off-border-hover);
+}
+
+.fi-switch:not(.is-disabled):active .fi-switch__track {
+    border-color: var(--sw-off-border-pressed);
+}
+
+.fi-switch:not(.is-disabled):hover.is-on .fi-switch__track,
+.fi-switch__input:checked:not(:disabled) ~ .fi-switch__switch:hover .fi-switch__track {
+    background: var(--sw-on-bg-hover);
+}
+
+.fi-switch:not(.is-disabled):active.is-on .fi-switch__track,
+.fi-switch__input:checked:not(:disabled) ~ .fi-switch__switch:active .fi-switch__track {
+    background: var(--sw-on-bg-pressed);
+}
+
+.fi-switch:not(.is-disabled):hover .fi-switch__track,
+.fi-switch:not(.is-disabled):active .fi-switch__track {
+    /* keep bg for off */
+}
+
+/* Focus ring on wrapper (Figma shows border-2 on wrapper) */
+.fi-switch:focus-within,
+.fi-switch.is-focused {
+    outline: 2px solid #141414;
+    outline-offset: 0;
+}
+
+/* Disabled */
+.fi-switch.is-disabled,
+.fi-switch__input:disabled ~ .fi-switch__switch {
+    cursor: not-allowed;
+}
+
+.fi-switch.is-disabled .fi-switch__track,
+.fi-switch__input:disabled ~ .fi-switch__switch .fi-switch__track {
+    background: var(--sw-disabled-bg);
+    border-color: var(--sw-disabled-bg);
+}
+
+.fi-switch.is-disabled .fi-switch__thumb,
+.fi-switch__input:disabled ~ .fi-switch__switch .fi-switch__thumb {
+    background: var(--sw-disabled-fg);
+}
+
+/* Manual state parity (useful for static demos) */
+.fi-switch.is-hovered .fi-switch__track { border-color: var(--sw-off-border-hover); }
+.fi-switch.is-pressed .fi-switch__track { border-color: var(--sw-off-border-pressed); }
+.fi-switch.is-hovered.is-on .fi-switch__track { background: var(--sw-on-bg-hover); border-color: transparent; }
+.fi-switch.is-pressed.is-on .fi-switch__track { background: var(--sw-on-bg-pressed); border-color: transparent; }
+
+

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 오프보딩 관리</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 화면 높이 고정 - index.html과 동일 */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .app {
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .main {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 16px 24px;
+            gap: 12px;
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin: 0;
+        }
+        
+        /* 툴바 - index.html과 동일 */
+        .page-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        /* 탭 - index.html과 동일 */
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 2px;
+            background: #e0e0e0;
+            border-radius: 4px;
+        }
+        
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 32px;
+            padding: 0 12px;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5b5b5b;
+        }
+        
+        .tab.active {
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        
+        .tab-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 18px;
+            padding: 0 6px;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .tab.active .tab-count {
+            background: #2c9371;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* 검색 박스 - index.html과 동일 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 240px;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #d6d6d6;
+            border-radius: 4px;
+            background: #fff;
+        }
+        
+        .search-box img {
+            width: 18px;
+            height: 18px;
+            opacity: 0.5;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+        
+        .search-box input::placeholder {
+            color: #999;
+        }
+        
+        /* 부서 필터 버튼 */
+        .dept-filter {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 36px;
+            padding: 0 12px;
+            background: none;
+            border: 1px solid #d6d6d6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+        }
+        
+        .dept-filter img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* 테이블 - index.html과 동일 */
+        .table-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .table-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        
+        .offboarding-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .offboarding-table th {
+            padding: 12px 16px;
+            background: #fafafa;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666666;
+            text-transform: uppercase;
+            text-align: left;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .offboarding-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        
+        .offboarding-table tbody tr {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .offboarding-table tbody tr:hover {
+            background: #f9fafb;
+        }
+        
+        /* 직원 셀 - index.html talent-cell과 동일 */
+        .employee-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .employee-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        
+        /* 아바타 그라데이션 - index.html과 동일 */
+        .employee-avatar.green { background: linear-gradient(135deg, #2c9371, #a8ddcb); }
+        .employee-avatar.blue { background: linear-gradient(135deg, #3b82f6, #93c5fd); }
+        .employee-avatar.purple { background: linear-gradient(135deg, #8b5cf6, #c4b5fd); }
+        .employee-avatar.pink { background: linear-gradient(135deg, #ec4899, #f9a8d4); }
+        .employee-avatar.orange { background: linear-gradient(135deg, #f97316, #fdba74); }
+        .employee-avatar.teal { background: linear-gradient(135deg, #14b8a6, #5eead4); }
+        .employee-avatar.indigo { background: linear-gradient(135deg, #6366f1, #a5b4fc); }
+        .employee-avatar.rose { background: linear-gradient(135deg, #f43f5e, #fda4af); }
+        .employee-avatar.amber { background: linear-gradient(135deg, #f59e0b, #fcd34d); }
+        .employee-avatar.cyan { background: linear-gradient(135deg, #06b6d4, #67e8f9); }
+        
+        .employee-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .employee-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .employee-dept {
+            font-size: 13px;
+            color: #666666;
+        }
+        
+        /* 퇴사 사유 태그 - index.html skill-tag와 유사 */
+        .reason-tag {
+            display: inline-flex;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .reason-tag.culture {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .reason-tag.voluntary {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .reason-tag.contract {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        /* 퇴사일 */
+        .date-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .date-dday {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .date-actual {
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .date-completed {
+            font-size: 12px;
+            color: #2c9371;
+            font-weight: 500;
+        }
+        
+        /* 진행도 - index.html match-cell과 유사 */
+        .progress-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .progress-bar {
+            width: 80px;
+            height: 6px;
+            background: #e5e5e5;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        
+        .progress-fill.low { background: #ef4444; }
+        .progress-fill.mid { background: #f59e0b; }
+        .progress-fill.high { background: #10b981; }
+        .progress-fill.complete { background: #2c9371; }
+        
+        .progress-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666666;
+            min-width: 36px;
+        }
+        
+        /* 인재풀/상태 뱃지 - index.html badge와 유사 */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .badge.registered {
+            background: #dceee8;
+            color: #0d7a5f;
+        }
+        
+        .badge.unregistered {
+            background: #f5f5f5;
+            color: #999999;
+        }
+        
+        .badge.in-progress {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .badge.completed {
+            background: #dceee8;
+            color: #0d7a5f;
+        }
+        
+        .badge img {
+            width: 12px;
+            height: 12px;
+        }
+        
+        /* 액션 버튼 */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .action-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* 페이지네이션 - index.html과 동일 */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #525252;
+        }
+        
+        .page-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .page-btn.active {
+            background: #2c9371;
+            border-color: #2c9371;
+            color: #ffffff;
+        }
+        
+        .page-btn.nav {
+            border: none;
+        }
+        
+        .page-btn img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <span>직원</span>
+                    <span class="separator">›</span>
+                    <span class="current">오프보딩 관리</span>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Bell/On.svg" alt="알림"></button>
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Settings/Setting 1.svg" alt="설정"></button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <span class="user-name">김인사</span>
+                            <span class="user-role">HR 매니저</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">오프보딩 관리</h1>
+                </div>
+                
+                <!-- 툴바 -->
+                <div class="page-toolbar">
+                    <div class="tabs">
+                        <button class="tab active" data-filter="all">
+                            <span>전체</span>
+                            <span class="tab-count">10</span>
+                        </button>
+                        <button class="tab" data-filter="in-progress">
+                            <span>진행 중</span>
+                            <span class="tab-count">4</span>
+                        </button>
+                        <button class="tab" data-filter="completed">
+                            <span>완료</span>
+                            <span class="tab-count">6</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="dept-filter">
+                            <span>전체 부서</span>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 테이블 -->
+                <div class="table-wrapper">
+                    <div class="table-scroll-area">
+                        <table class="offboarding-table">
+                            <thead>
+                                <tr>
+                                    <th>직원</th>
+                                    <th>퇴사 사유</th>
+                                    <th>퇴사 예정일</th>
+                                    <th>오프보딩 진행도</th>
+                                    <th>인재풀</th>
+                                    <th>상태</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="offboardingTableBody">
+                                <!-- JavaScript로 렌더링 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 페이지네이션 -->
+                    <div class="pagination">
+                        <div class="search-box" style="width: 240px;">
+                            <img src="assets/에셋/Icons/Search.svg" alt="">
+                            <input type="text" id="searchInput" placeholder="이름, 부서로 검색" oninput="filterOffboarding()">
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="page-btn nav"><img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt=""></button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn nav"><img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <script src="js/app.js"></script>
+    <script>
+        // 오프보딩 더미 데이터
+        const offboardingData = [
+            {
+                id: 1,
+                name: '김민수',
+                dept: '개발팀 · 프론트엔드',
+                avatar: '김',
+                avatarClass: 'indigo',
+                reason: '컬처 갭',
+                reasonType: 'culture',
+                dday: 'D-3',
+                date: '2025.12.24',
+                progress: 2,
+                progressTotal: 4,
+                poolRegistered: false,
+                status: 'in-progress'
+            },
+            {
+                id: 2,
+                name: '이서연',
+                dept: '마케팅팀 · 콘텐츠',
+                avatar: '이',
+                avatarClass: 'amber',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: 'D-7',
+                date: '2025.12.28',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'in-progress'
+            },
+            {
+                id: 3,
+                name: '박지훈',
+                dept: '개발팀 · 백엔드',
+                avatar: '박',
+                avatarClass: 'green',
+                reason: '컬처 갭',
+                reasonType: 'culture',
+                dday: 'D-14',
+                date: '2025.01.04',
+                progress: 3,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'in-progress'
+            },
+            {
+                id: 4,
+                name: '최예진',
+                dept: '디자인팀 · UXUI',
+                avatar: '최',
+                avatarClass: 'purple',
+                reason: '계약 종료',
+                reasonType: 'contract',
+                dday: 'D-21',
+                date: '2025.01.11',
+                progress: 1,
+                progressTotal: 4,
+                poolRegistered: false,
+                status: 'in-progress'
+            },
+            {
+                id: 5,
+                name: '이서준',
+                dept: '영업팀 · 기업영업',
+                avatar: '이',
+                avatarClass: 'rose',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            },
+            {
+                id: 6,
+                name: '신예은',
+                dept: '영업팀 · 기업영업',
+                avatar: '신',
+                avatarClass: 'cyan',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            },
+            {
+                id: 7,
+                name: '이서진',
+                dept: '영업팀 · 기업영업',
+                avatar: '이',
+                avatarClass: 'pink',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            },
+            {
+                id: 8,
+                name: '이수현',
+                dept: '영업팀 · 기업영업',
+                avatar: '이',
+                avatarClass: 'teal',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            },
+            {
+                id: 9,
+                name: '오수아',
+                dept: '영업팀 · 기업영업',
+                avatar: '오',
+                avatarClass: 'orange',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            },
+            {
+                id: 10,
+                name: '최성훈',
+                dept: '영업팀 · 기업영업',
+                avatar: '최',
+                avatarClass: 'blue',
+                reason: '자발적 퇴사',
+                reasonType: 'voluntary',
+                dday: null,
+                date: '2025.12.15',
+                progress: 4,
+                progressTotal: 4,
+                poolRegistered: true,
+                status: 'completed'
+            }
+        ];
+        
+        let filteredData = [...offboardingData];
+        let currentFilter = 'all';
+        
+        // 테이블 렌더링
+        function renderTable() {
+            const tbody = document.getElementById('offboardingTableBody');
+            
+            tbody.innerHTML = filteredData.map(emp => {
+                const progressPercent = (emp.progress / emp.progressTotal) * 100;
+                let progressClass = 'low';
+                if (progressPercent >= 100) progressClass = 'complete';
+                else if (progressPercent >= 75) progressClass = 'high';
+                else if (progressPercent >= 50) progressClass = 'mid';
+                
+                return `
+                    <tr onclick="viewDetail(${emp.id})">
+                        <td>
+                            <div class="employee-cell">
+                                <div class="employee-avatar ${emp.avatarClass}">${emp.avatar}</div>
+                                <div class="employee-info">
+                                    <span class="employee-name">${emp.name}</span>
+                                    <span class="employee-dept">${emp.dept}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="reason-tag ${emp.reasonType}">${emp.reason}</span>
+                        </td>
+                        <td>
+                            <div class="date-cell">
+                                ${emp.dday ? `<span class="date-dday">${emp.dday}</span>` : ''}
+                                <span class="date-actual">${emp.date}</span>
+                                ${!emp.dday ? '<span class="date-completed">완료</span>' : ''}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-cell">
+                                <div class="progress-bar">
+                                    <div class="progress-fill ${progressClass}" style="width: ${progressPercent}%"></div>
+                                </div>
+                                <span class="progress-text">${emp.progress}/${emp.progressTotal}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge ${emp.poolRegistered ? 'registered' : 'unregistered'}">
+                                ${emp.poolRegistered ? '<img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="">' : ''}
+                                ${emp.poolRegistered ? '등록됨' : '미등록'}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge ${emp.status}">
+                                ${emp.status === 'in-progress' ? '진행중' : '완료'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-btn" onclick="event.stopPropagation(); openMenu(${emp.id})">
+                                <img src="assets/에셋/Icons/More/Vertical.svg" alt="">
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // 검색 필터
+        function filterOffboarding() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            filteredData = offboardingData.filter(emp => {
+                const matchesSearch = emp.name.includes(term) || emp.dept.toLowerCase().includes(term);
+                const matchesStatus = currentFilter === 'all' || emp.status === currentFilter;
+                return matchesSearch && matchesStatus;
+            });
+            renderTable();
+        }
+        
+        // 탭 클릭
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilter = this.dataset.filter;
+                if (currentFilter === 'all') {
+                    filteredData = [...offboardingData];
+                } else {
+                    filteredData = offboardingData.filter(emp => emp.status === currentFilter);
+                }
+                
+                // 검색어도 적용
+                const term = document.getElementById('searchInput').value.toLowerCase();
+                if (term) {
+                    filteredData = filteredData.filter(emp => 
+                        emp.name.includes(term) || emp.dept.toLowerCase().includes(term)
+                    );
+                }
+                
+                renderTable();
+            });
+        });
+        
+        // 상세 페이지로 이동
+        function viewDetail(id) {
+            if (id === 1) {
+                window.location.href = 'offboarding-detail.html';
+            } else {
+                showToast('김민수님의 상세 페이지만 열람 가능합니다.');
+            }
+        }
+        
+        // 메뉴 열기
+        function openMenu(id) {
+            showToast('메뉴 기능은 프로토타입에서 지원하지 않습니다.');
+        }
+        
+        // 초기 렌더링
+        renderTable();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1990 @@
+/* Fitple Design System - Buttons (MCP / Figma) */
+
+/* ========================================================================== */
+/* Component: Primary Filled Button (Text + Icon) - Figma node 559:55341        */
+/* Props: iconLeft, iconRight, size(xsm/sm/md/lg/xlg), state                   */
+/* ========================================================================== */
+
+.btn-pfti {
+    /* Base layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* spacing/sp40 */
+    padding: 0 8px; /* spacing/sp80 */
+    border-radius: 4px; /* xxsm */
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    /* Visual */
+    background: var(--primary);
+    color: #ffffff;
+
+    /* Typography defaults (xlg, state=default) */
+    height: 40px; /* xxxlg */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-pfti:disabled,
+.btn-pfti[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-pfti__icon {
+    width: var(--btn-pfti-icon, 24px);
+    height: var(--btn-pfti-icon, 24px);
+    flex: 0 0 auto;
+    display: block;
+}
+
+.btn-pfti__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Sizes */
+.btn-pfti--xlg {
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+    --btn-pfti-icon: 24px;
+}
+
+.btn-pfti--lg {
+    height: 36px; /* height/lg */
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px; /* 1.467 */
+    letter-spacing: 0.144px;
+    --btn-pfti-icon: 20px;
+}
+
+.btn-pfti--md {
+    height: 32px; /* xxlg */
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px; /* 1.467 */
+    letter-spacing: 0.144px;
+    --btn-pfti-icon: 16px;
+}
+
+.btn-pfti--sm {
+    height: 28px; /* height/sm */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px; /* 1.429 */
+    letter-spacing: 0.203px;
+    --btn-pfti-icon: 16px;
+}
+
+.btn-pfti--xsm {
+    height: 24px; /* height/xsm */
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px; /* 1.385 */
+    letter-spacing: 0.2522px;
+    --btn-pfti-icon: 12px;
+}
+
+/* Interactive states (real) */
+.btn-pfti:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #63c7a6; /* semantic/primary/background/normal/hovered */
+}
+
+.btn-pfti:not(:disabled):not([aria-disabled="true"]):active {
+    background: #34ad85; /* semantic/primary/background/normal/pressed */
+}
+
+.btn-pfti--xsm:not(:disabled):not([aria-disabled="true"]):hover,
+.btn-pfti--xsm:not(:disabled):not([aria-disabled="true"]):active {
+    /* Figma: xsm icons are 14px in hovered/pressed/selected/focused states */
+    --btn-pfti-icon: 14px;
+}
+
+.btn-pfti:focus-visible {
+    border: 2px solid #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+.btn-pfti--xsm:focus-visible {
+    --btn-pfti-icon: 14px;
+}
+
+/* Selected state (use aria-pressed for toggle buttons) */
+.btn-pfti[aria-pressed="true"] {
+    background: #63c7a6; /* semantic/primary/background/normal/selected */
+}
+
+.btn-pfti--xsm[aria-pressed="true"] {
+    --btn-pfti-icon: 14px;
+}
+
+/* Disabled state */
+.btn-pfti:disabled,
+.btn-pfti[aria-disabled="true"] {
+    background: #e0e0e0; /* semantic/disabled/background/global/default */
+    color: #c2c2c2; /* semantic/disabled/foreground/global/default */
+}
+
+.btn-pfti--xsm:disabled,
+.btn-pfti--xsm[aria-disabled="true"] {
+    --btn-pfti-icon: 14px; /* Figma: xsm disabled uses 14px icons */
+}
+
+.btn-pfti--sm:disabled .btn-pfti__label,
+.btn-pfti--sm[aria-disabled="true"] .btn-pfti__label {
+    font-weight: 700; /* Figma: sm disabled label uses Pretendard Bold */
+}
+
+.btn-pfti:disabled .btn-pfti__icon,
+.btn-pfti[aria-disabled="true"] .btn-pfti__icon {
+    opacity: 0.65;
+    filter: grayscale(1) brightness(1.15);
+}
+
+/* Manual state classes (for docs/demo parity with Figma state variants) */
+.btn-pfti.is-hovered {
+    background: #63c7a6;
+}
+
+.btn-pfti.is-pressed {
+    background: #34ad85;
+}
+
+.btn-pfti.is-focused {
+    border: 2px solid #141414;
+}
+
+.btn-pfti.is-selected {
+    background: #63c7a6;
+}
+
+/* ========================================================================== */
+/* Component: Primary Filled Button (Text Only) - Figma node 559:55462          */
+/* Props: label, size(xsm/sm/md/lg/xlg), state                                  */
+/* ========================================================================== */
+
+.btn-pfto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0; /* spacing/sp40=0px in Figma for this component */
+    padding: 0 8px; /* spacing/sp80 */
+    border-radius: 4px; /* xxsm */
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    /* Typography defaults (xlg, state=default) */
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-pfto:disabled,
+.btn-pfto[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-pfto__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Sizes */
+.btn-pfto--xlg {
+    height: 40px; /* xxxlg */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+}
+
+.btn-pfto--lg {
+    height: 36px; /* height/lg */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+}
+
+.btn-pfto--md {
+    height: 32px; /* xxlg */
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px; /* 1.467 */
+    letter-spacing: 0.144px;
+}
+
+.btn-pfto--sm {
+    height: 28px; /* height/sm */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px; /* 1.429 */
+    letter-spacing: 0.203px;
+}
+
+.btn-pfto--xsm {
+    height: 24px; /* height/xsm */
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px; /* 1.385 */
+    letter-spacing: 0.2522px;
+}
+
+/* Interactive states (real) */
+.btn-pfto:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #63c7a6; /* semantic/primary/background/normal/hovered */
+}
+
+.btn-pfto:not(:disabled):not([aria-disabled="true"]):active {
+    background: #34ad85; /* semantic/primary/background/normal/pressed */
+}
+
+.btn-pfto:focus-visible {
+    border: 2px solid #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+.btn-pfto[aria-pressed="true"] {
+    background: #63c7a6; /* semantic/primary/background/normal/selected */
+}
+
+.btn-pfto:disabled,
+.btn-pfto[aria-disabled="true"] {
+    background: #e0e0e0; /* semantic/disabled/background/global/default */
+    color: #c2c2c2; /* semantic/disabled/foreground/global/default */
+}
+
+/* Manual state classes (for docs/demo parity with Figma state variants) */
+.btn-pfto.is-hovered {
+    background: #63c7a6;
+}
+
+.btn-pfto.is-pressed {
+    background: #34ad85;
+}
+
+.btn-pfto.is-focused {
+    border: 2px solid #141414;
+}
+
+.btn-pfto.is-selected {
+    background: #63c7a6;
+}
+
+/* ========================================================================== */
+/* Component: Primary Filled Button (Icon Only) - Figma node 559:55523          */
+/* Props: icon, size(xsm/sm/md/lg/xlg), state                                   */
+/* ========================================================================== */
+
+.btn-pfio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px; /* spacing/sp80 */
+    border-radius: 4px; /* xxsm */
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    height: 40px; /* xxxlg */
+    --btn-pfio-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-pfio:disabled,
+.btn-pfio[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-pfio__icon {
+    width: var(--btn-pfio-icon);
+    height: var(--btn-pfio-icon);
+    flex: 0 0 auto;
+    display: block;
+}
+
+/* Sizes */
+.btn-pfio--xlg {
+    height: 40px;
+    padding: 0 8px; /* sp80 */
+    --btn-pfio-icon: 24px;
+}
+
+.btn-pfio--lg {
+    height: 36px; /* height/lg */
+    padding: 0 8px; /* sp80 */
+    --btn-pfio-icon: 20px;
+}
+
+.btn-pfio--md {
+    height: 32px; /* xxlg */
+    padding: 0 8px; /* sp80 */
+    --btn-pfio-icon: 16px;
+}
+
+.btn-pfio--sm {
+    height: 28px; /* height/sm */
+    padding: 0 6px; /* spacing/sp60 */
+    --btn-pfio-icon: 16px;
+}
+
+.btn-pfio--xsm {
+    height: 24px; /* height/xsm */
+    padding: 0 6px; /* spacing/sp60 */
+    --btn-pfio-icon: 12px;
+}
+
+/* States */
+.btn-pfio:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #63c7a6; /* semantic/primary/background/normal/hovered */
+}
+
+.btn-pfio:not(:disabled):not([aria-disabled="true"]):active {
+    background: #34ad85; /* semantic/primary/background/normal/pressed */
+}
+
+.btn-pfio:focus-visible {
+    border: 2px solid #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+.btn-pfio[aria-pressed="true"] {
+    background: #63c7a6; /* semantic/primary/background/normal/selected */
+}
+
+.btn-pfio:disabled,
+.btn-pfio[aria-disabled="true"] {
+    background: #e0e0e0; /* semantic/disabled/background/global/default */
+    color: #c2c2c2;
+}
+
+.btn-pfio:disabled .btn-pfio__icon,
+.btn-pfio[aria-disabled="true"] .btn-pfio__icon {
+    opacity: 0.65;
+    filter: grayscale(1) brightness(1.15);
+}
+
+/* Manual state classes (for docs/demo parity with Figma state variants) */
+.btn-pfio.is-hovered {
+    background: #63c7a6;
+}
+
+.btn-pfio.is-pressed {
+    background: #34ad85;
+}
+
+.btn-pfio.is-focused {
+    border: 2px solid #141414;
+}
+
+.btn-pfio.is-selected {
+    background: #63c7a6;
+}
+
+/* ========================================================================== */
+/* Component: Primary Outlined Button (Text + Icon) - Figma node 559:55584      */
+/* Props: iconLeft, iconRight, size(xsm/sm/md/lg/xlg), state                   */
+/* ========================================================================== */
+
+.btn-poti {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* spacing/sp40 */
+    padding: 0 8px; /* sp80 */
+    border-radius: 4px; /* xxsm */
+    border: 1px solid #2c9371; /* semantic/primary/stroke/global/default */
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: #2c9371; /* semantic/primary/foreground/global/default */
+
+    height: 40px; /* xxxlg */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+
+    --btn-poti-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-poti:disabled,
+.btn-poti[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-poti__icon {
+    width: var(--btn-poti-icon);
+    height: var(--btn-poti-icon);
+    flex: 0 0 auto;
+    display: block;
+}
+
+.btn-poti__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Sizes */
+.btn-poti--xlg {
+    height: 40px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+    --btn-poti-icon: 24px;
+}
+
+.btn-poti--lg {
+    height: 36px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+    --btn-poti-icon: 20px;
+}
+
+.btn-poti--md {
+    height: 32px;
+    font-size: 15px;
+    line-height: 22px; /* 1.467 */
+    letter-spacing: 0.144px;
+    --btn-poti-icon: 16px;
+}
+
+.btn-poti--sm {
+    height: 28px;
+    font-size: 14px;
+    line-height: 20px; /* 1.429 */
+    letter-spacing: 0.203px;
+    --btn-poti-icon: 16px;
+}
+
+.btn-poti--xsm {
+    height: 24px;
+    font-size: 13px;
+    line-height: 18px; /* 1.385 */
+    letter-spacing: 0.2522px;
+    --btn-poti-icon: 14px;
+}
+
+/* Hover/Pressed/Selected backgrounds (strong) */
+.btn-poti:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #dff7ed; /* semantic/primary/background/strong/hovered */
+}
+
+.btn-poti:not(:disabled):not([aria-disabled="true"]):active {
+    background: #c9eee1; /* semantic/primary/background/strong/pressed */
+}
+
+.btn-poti[aria-pressed="true"] {
+    background: #dff7ed; /* semantic/primary/background/strong/selected */
+}
+
+/* Focused state: border becomes 2px focused black, background stays transparent */
+.btn-poti:focus-visible {
+    border: 2px solid #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+/* Disabled */
+.btn-poti:disabled,
+.btn-poti[aria-disabled="true"] {
+    background: transparent;
+    border-color: #e0e0e0; /* semantic/disabled/stroke/global/default */
+    color: #c2c2c2; /* semantic/disabled/foreground/global/default */
+}
+
+.btn-poti:disabled .btn-poti__icon,
+.btn-poti[aria-disabled="true"] .btn-poti__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Manual state classes */
+.btn-poti.is-hovered {
+    background: #dff7ed;
+}
+
+.btn-poti.is-pressed {
+    background: #c9eee1;
+}
+
+.btn-poti.is-selected {
+    background: #dff7ed;
+}
+
+.btn-poti.is-focused {
+    border: 2px solid #141414;
+}
+
+/* ========================================================================== */
+/* Component: Primary Transparent Button (Text + Icon) - Figma node 559:55827   */
+/* Props: iconLeft, iconRight, size(xsm/sm/md/lg/xlg), state                   */
+/* ========================================================================== */
+
+.btn-ptri {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* spacing/sp40 */
+    padding: 0 8px; /* sp80 */
+    border-radius: 4px; /* xxsm */
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: #2c9371;
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+    --btn-ptri-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ptri:disabled,
+.btn-ptri[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-ptri__icon {
+    width: var(--btn-ptri-icon);
+    height: var(--btn-ptri-icon);
+    flex: 0 0 auto;
+    display: block;
+}
+
+.btn-ptri__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Sizes */
+.btn-ptri--xlg { height: 40px; --btn-ptri-icon: 24px; }
+.btn-ptri--lg { height: 36px; --btn-ptri-icon: 20px; }
+.btn-ptri--md { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; --btn-ptri-icon: 16px; }
+.btn-ptri--sm { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; --btn-ptri-icon: 16px; }
+.btn-ptri--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; --btn-ptri-icon: 14px; }
+
+/* Hover/Pressed backgrounds (strong) */
+.btn-ptri:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #dff7ed; /* semantic/primary/background/strong/hovered */
+}
+
+.btn-ptri:not(:disabled):not([aria-disabled="true"]):active {
+    background: #c9eee1; /* semantic/primary/background/strong/pressed */
+}
+
+/* Selected uses normal selected (not strong) in this component */
+.btn-ptri[aria-pressed="true"] {
+    background: #63c7a6; /* semantic/primary/background/normal/selected */
+}
+
+/* Focus uses 1px focused border */
+.btn-ptri:focus-visible {
+    border-color: #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+/* Disabled */
+.btn-ptri:disabled,
+.btn-ptri[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+    color: #c2c2c2;
+}
+
+.btn-ptri:disabled .btn-ptri__icon,
+.btn-ptri[aria-disabled="true"] .btn-ptri__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Manual state classes */
+.btn-ptri.is-hovered { background: #dff7ed; }
+.btn-ptri.is-pressed { background: #c9eee1; }
+.btn-ptri.is-selected { background: #63c7a6; }
+.btn-ptri.is-focused { border-color: #141414; }
+
+/* ========================================================================== */
+/* Component: Primary Outlined Button (Text Only) - Figma node 559:55705       */
+/* Props: label, size(xsm/sm/md/lg/xlg), state                                  */
+/* ========================================================================== */
+
+.btn-poto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid #2c9371; /* semantic/primary/foreground/global/default */
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: #2c9371;
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-poto:disabled,
+.btn-poto[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-poto__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-poto--xlg { height: 40px; }
+.btn-poto--lg { height: 36px; }
+.btn-poto--md { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; }
+.btn-poto--sm { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; }
+.btn-poto--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; }
+
+.btn-poto:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #dff7ed; /* semantic/primary/background/strong/hovered */
+}
+
+.btn-poto:not(:disabled):not([aria-disabled="true"]):active {
+    background: #c9eee1; /* semantic/primary/background/strong/pressed */
+}
+
+.btn-poto[aria-pressed="true"] {
+    background: #dff7ed; /* semantic/primary/background/strong/selected */
+}
+
+.btn-poto:focus-visible {
+    border: 2px solid #141414;
+    outline: none;
+}
+
+.btn-poto:disabled,
+.btn-poto[aria-disabled="true"] {
+    background: transparent;
+    border-color: #e0e0e0; /* semantic/disabled/stroke/global/default */
+    color: #c2c2c2;
+}
+
+.btn-poto.is-hovered { background: #dff7ed; }
+.btn-poto.is-pressed { background: #c9eee1; }
+.btn-poto.is-selected { background: #dff7ed; }
+.btn-poto.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* Component: Primary Outlined Button (Icon Only) - Figma node 559:55766       */
+/* Props: size(xsm/sm/md/lg/xlg), state                                         */
+/* ========================================================================== */
+
+.btn-poio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px; /* sp80 */
+    border-radius: 4px;
+    border: 1px solid #2c9371; /* semantic/primary/stroke/global/default */
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+
+    height: 40px;
+    --btn-poio-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-poio:disabled,
+.btn-poio[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-poio__icon {
+    width: var(--btn-poio-icon);
+    height: var(--btn-poio-icon);
+    display: block;
+    flex: 0 0 auto;
+}
+
+.btn-poio--xlg { height: 40px; padding: 0 8px; --btn-poio-icon: 24px; }
+.btn-poio--lg { height: 36px; padding: 0 8px; --btn-poio-icon: 20px; }
+.btn-poio--md { height: 32px; padding: 0 8px; --btn-poio-icon: 16px; }
+.btn-poio--sm { height: 28px; padding: 0 6px; --btn-poio-icon: 16px; }
+.btn-poio--xsm { height: 24px; padding: 0 6px; --btn-poio-icon: 12px; }
+
+.btn-poio:not(:disabled):not([aria-disabled="true"]):hover { background: #dff7ed; }
+.btn-poio:not(:disabled):not([aria-disabled="true"]):active { background: #c9eee1; }
+.btn-poio[aria-pressed="true"] { background: #dff7ed; }
+
+.btn-poio:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-poio:disabled,
+.btn-poio[aria-disabled="true"] {
+    background: transparent;
+    border-color: #e0e0e0;
+}
+
+.btn-poio:disabled .btn-poio__icon,
+.btn-poio[aria-disabled="true"] .btn-poio__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-poio.is-hovered { background: #dff7ed; }
+.btn-poio.is-pressed { background: #c9eee1; }
+.btn-poio.is-selected { background: #dff7ed; }
+.btn-poio.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* Component: Primary Transparent Button (Text Only) - Figma node 559:55948    */
+/* Props: label, size(xsm/sm/md/lg/xlg), state                                  */
+/* ========================================================================== */
+
+.btn-prto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: #2c9371;
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-prto:disabled,
+.btn-prto[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-prto__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-prto--xlg { height: 40px; }
+.btn-prto--lg { height: 36px; }
+.btn-prto--md { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; }
+.btn-prto--sm { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; }
+.btn-prto--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; }
+
+.btn-prto:not(:disabled):not([aria-disabled="true"]):hover { background: #dff7ed; }
+.btn-prto:not(:disabled):not([aria-disabled="true"]):active { background: #c9eee1; }
+.btn-prto[aria-pressed="true"] { background: #63c7a6; }
+
+.btn-prto:focus-visible { border-color: #141414; outline: none; }
+
+.btn-prto:disabled,
+.btn-prto[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+    color: #c2c2c2;
+}
+
+.btn-prto.is-hovered { background: #dff7ed; }
+.btn-prto.is-pressed { background: #c9eee1; }
+.btn-prto.is-selected { background: #63c7a6; }
+.btn-prto.is-focused { border-color: #141414; }
+
+/* ========================================================================== */
+/* Component: Primary Transparent Button (Icon Only) - Figma node 559:56009    */
+/* Props: size(xsm/sm/md/lg/xlg), state                                         */
+/* ========================================================================== */
+
+.btn-prio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 6px; /* default sp60 */
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+
+    height: 40px;
+    --btn-prio-icon: 28px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-prio:disabled,
+.btn-prio[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.btn-prio__icon {
+    width: var(--btn-prio-icon);
+    height: var(--btn-prio-icon);
+    display: block;
+    flex: 0 0 auto;
+}
+
+.btn-prio--xlg { height: 40px; padding: 0 6px; --btn-prio-icon: 28px; }
+.btn-prio--lg { height: 36px; padding: 0 6px; --btn-prio-icon: 24px; }
+.btn-prio--md { height: 32px; padding: 0 6px; --btn-prio-icon: 20px; }
+.btn-prio--sm { height: 28px; padding: 0 8px; --btn-prio-icon: 16px; } /* sm uses sp80 */
+.btn-prio--xsm { height: 24px; padding: 0 6px; --btn-prio-icon: 12px; }
+
+.btn-prio:not(:disabled):not([aria-disabled="true"]):hover { background: #dff7ed; }
+.btn-prio:not(:disabled):not([aria-disabled="true"]):active { background: #c9eee1; }
+.btn-prio[aria-pressed="true"] { background: #63c7a6; }
+
+.btn-prio:focus-visible { border-color: #141414; outline: none; }
+
+.btn-prio:disabled,
+.btn-prio[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+}
+
+.btn-prio:disabled .btn-prio__icon,
+.btn-prio[aria-disabled="true"] .btn-prio__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-prio.is-hovered { background: #dff7ed; }
+.btn-prio.is-pressed { background: #c9eee1; }
+.btn-prio.is-selected { background: #63c7a6; }
+.btn-prio.is-focused { border-color: #141414; }
+
+/* ========================================================================== */
+/* CTA Buttons (Figma section 559:54610)                                       */
+/* naming: cta + (filled/outlined/transparent) + (ti/to/io)                    */
+/* state mapping: defualt -> default                                           */
+/* ========================================================================== */
+
+/* Tokens (CTA) */
+:root {
+    --cta-bg: #6277ff;         /* semantic/secondary/background/normal/default */
+    --cta-bg-hover: #abb6ff;   /* semantic/secondary/background/normal/hovered */
+    --cta-bg-pressed: #8898ff; /* semantic/secondary/background/normal/pressed */
+    --cta-bg-selected: #10b981;/* semantic/secondary/background/normal/selected */
+
+    --cta-fg: #6277ff;         /* semantic/secondary/foreground/normal/default */
+    --cta-stroke: #4358e7;     /* semantic/secondary/stroke/normal/default */
+
+    --cta-bg-strong-hover: #c4ccff;   /* semantic/secondary/background/strong/hovered */
+    --cta-bg-strong-pressed: #abb6ff; /* semantic/secondary/background/strong/pressed */
+    --cta-bg-strong-selected: #dceee8;/* semantic/secondary/background/strong/selected */
+}
+
+/* Shared */
+.btn-cta__label {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-cta__icon {
+    display: block;
+    flex: 0 0 auto;
+    width: var(--btn-cta-icon);
+    height: var(--btn-cta-icon);
+}
+
+/* ==========================================================================
+   Icon recoloring (MCP appearance 그대로)
+   - Use SVG as mask so icon color follows currentColor (works for <span>, <i>, etc.)
+   ========================================================================== */
+.icon-mask {
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.icon-mask--close-circle {
+    -webkit-mask-image: url("../../assets/에셋/Icons/Close/Circle.svg");
+    mask-image: url("../../assets/에셋/Icons/Close/Circle.svg");
+}
+
+.icon-mask--check-circle {
+    -webkit-mask-image: url("../../assets/에셋/Icons/Checkmark/Circle.svg");
+    mask-image: url("../../assets/에셋/Icons/Checkmark/Circle.svg");
+}
+
+/* ========================================================================== */
+/* CTA Filled: Text+Icon (CtaButtonFilledTextIcon)                             */
+/* Props: iconLeft, iconRight, label                                           */
+/* ========================================================================== */
+
+.btn-ctfti {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--cta-bg);
+    color: #ffffff;
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+    --btn-cta-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ctfti:disabled,
+.btn-ctfti[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctfti--xlg { height: 40px; --btn-cta-icon: 24px; }
+.btn-ctfti--lg  { height: 36px; --btn-cta-icon: 20px; }
+.btn-ctfti--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; --btn-cta-icon: 16px; }
+.btn-ctfti--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; --btn-cta-icon: 16px; }
+.btn-ctfti--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; --btn-cta-icon: 14px; }
+
+.btn-ctfti:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-hover); }
+.btn-ctfti:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-pressed); }
+.btn-ctfti[aria-pressed="true"] { background: var(--cta-bg-selected); }
+
+.btn-ctfti:focus-visible {
+    border: 2px solid #141414;
+    outline: none;
+}
+
+.btn-ctfti:disabled,
+.btn-ctfti[aria-disabled="true"] {
+    background: #e0e0e0;
+    color: #c2c2c2;
+}
+
+.btn-ctfti:disabled .btn-cta__icon,
+.btn-ctfti[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-ctfti.is-hovered { background: var(--cta-bg-hover); }
+.btn-ctfti.is-pressed { background: var(--cta-bg-pressed); }
+.btn-ctfti.is-selected { background: var(--cta-bg-selected); }
+.btn-ctfti.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Filled: Text Only (CtaButtonFilledTextOnly)                             */
+/* ========================================================================== */
+
+.btn-ctfto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: var(--cta-bg);
+    color: #ffffff;
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ctfto:disabled,
+.btn-ctfto[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctfto--xlg { height: 40px; }
+.btn-ctfto--lg  { height: 36px; }
+.btn-ctfto--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; }
+.btn-ctfto--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; }
+.btn-ctfto--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; }
+
+.btn-ctfto:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-hover); }
+.btn-ctfto:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-pressed); }
+.btn-ctfto[aria-pressed="true"] { background: var(--cta-bg-selected); }
+
+.btn-ctfto:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctfto:disabled,
+.btn-ctfto[aria-disabled="true"] {
+    background: #e0e0e0;
+    color: #c2c2c2;
+}
+
+.btn-ctfto.is-hovered { background: var(--cta-bg-hover); }
+.btn-ctfto.is-pressed { background: var(--cta-bg-pressed); }
+.btn-ctfto.is-selected { background: var(--cta-bg-selected); }
+.btn-ctfto.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Filled: Icon Only (CtaButtonFilledIconOnly)                             */
+/* ========================================================================== */
+
+.btn-ctfio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--cta-bg);
+    color: #ffffff;
+
+    height: 40px;
+    --btn-cta-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ctfio:disabled,
+.btn-ctfio[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctfio--xlg { height: 40px; padding: 0 8px; --btn-cta-icon: 24px; }
+.btn-ctfio--lg  { height: 36px; padding: 0 8px; --btn-cta-icon: 20px; }
+.btn-ctfio--md  { height: 32px; padding: 0 8px; --btn-cta-icon: 16px; }
+.btn-ctfio--sm  { height: 28px; padding: 0 6px; --btn-cta-icon: 16px; }
+.btn-ctfio--xsm { height: 24px; padding: 0 6px; --btn-cta-icon: 12px; }
+
+.btn-ctfio:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-hover); }
+.btn-ctfio:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-pressed); }
+.btn-ctfio[aria-pressed="true"] { background: var(--cta-bg-selected); }
+.btn-ctfio:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctfio:disabled,
+.btn-ctfio[aria-disabled="true"] {
+    background: #e0e0e0;
+    color: #c2c2c2;
+}
+
+.btn-ctfio:disabled .btn-cta__icon,
+.btn-ctfio[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-ctfio.is-hovered { background: var(--cta-bg-hover); }
+.btn-ctfio.is-pressed { background: var(--cta-bg-pressed); }
+.btn-ctfio.is-selected { background: var(--cta-bg-selected); }
+.btn-ctfio.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Outlined: Text+Icon (CtaButtonOutlinedTextIcon)                         */
+/* ========================================================================== */
+
+.btn-ctoti {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid var(--cta-stroke);
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: var(--cta-fg);
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+    --btn-cta-icon: 24px;
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Danger variant (offboarding cancel) */
+.btn-ctoti--danger {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.btn-ctoti:disabled,
+.btn-ctoti[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctoti--xlg { height: 40px; --btn-cta-icon: 24px; }
+.btn-ctoti--lg  { height: 36px; --btn-cta-icon: 20px; }
+.btn-ctoti--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; --btn-cta-icon: 16px; }
+.btn-ctoti--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; --btn-cta-icon: 16px; }
+.btn-ctoti--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; --btn-cta-icon: 14px; }
+
+.btn-ctoti:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-strong-hover); }
+.btn-ctoti:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-strong-pressed); }
+.btn-ctoti[aria-pressed="true"] { background: var(--cta-bg-strong-selected); }
+.btn-ctoti:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctoti--danger:not(:disabled):not([aria-disabled="true"]):hover { background: var(--danger-light); }
+.btn-ctoti--danger:not(:disabled):not([aria-disabled="true"]):active { background: var(--danger-light); }
+.btn-ctoti--danger[aria-pressed="true"] { background: var(--danger-light); }
+
+.btn-ctoti:disabled,
+.btn-ctoti[aria-disabled="true"] {
+    background: transparent;
+    border-color: #c2c2c2;
+    color: #c2c2c2;
+}
+
+.btn-ctoti:disabled .btn-cta__icon,
+.btn-ctoti[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-ctoti.is-hovered { background: var(--cta-bg-strong-hover); }
+.btn-ctoti.is-pressed { background: var(--cta-bg-strong-pressed); }
+.btn-ctoti.is-selected { background: var(--cta-bg-strong-selected); }
+.btn-ctoti.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Outlined: Text Only (CtaButtonOutlinedTextOnly)                         */
+/* NOTE: hover/pressed border follows normal hovered/pressed colors            */
+/* ========================================================================== */
+
+.btn-ctoto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid var(--cta-bg);
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    color: var(--cta-fg);
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ctoto:disabled,
+.btn-ctoto[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctoto--xlg { height: 40px; }
+.btn-ctoto--lg  { height: 36px; }
+.btn-ctoto--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; }
+.btn-ctoto--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; }
+.btn-ctoto--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; }
+
+.btn-ctoto:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--cta-bg-strong-hover);
+    border-color: var(--cta-bg-hover);
+}
+
+.btn-ctoto:not(:disabled):not([aria-disabled="true"]):active {
+    background: var(--cta-bg-strong-pressed);
+    border-color: var(--cta-bg-pressed);
+}
+
+.btn-ctoto[aria-pressed="true"] {
+    background: var(--cta-bg-strong-selected);
+    border-color: var(--cta-bg);
+}
+
+.btn-ctoto:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctoto:disabled,
+.btn-ctoto[aria-disabled="true"] {
+    background: transparent;
+    border-color: #c2c2c2;
+    color: #c2c2c2;
+}
+
+.btn-ctoto.is-hovered { background: var(--cta-bg-strong-hover); border-color: var(--cta-bg-hover); }
+.btn-ctoto.is-pressed { background: var(--cta-bg-strong-pressed); border-color: var(--cta-bg-pressed); }
+.btn-ctoto.is-selected { background: var(--cta-bg-strong-selected); border-color: var(--cta-bg); }
+.btn-ctoto.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Outlined: Icon Only (CtaButtonOutlinedIconOnly)                         */
+/* NOTE: state names include hover/focus in Figma; we map to hover/focus        */
+/* ========================================================================== */
+
+.btn-ctoio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid var(--cta-bg);
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+
+    height: 40px;
+    --btn-cta-icon: 24px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-ctoio:disabled,
+.btn-ctoio[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctoio--xlg { height: 40px; padding: 0 8px; --btn-cta-icon: 24px; }
+.btn-ctoio--lg  { height: 36px; padding: 0 8px; --btn-cta-icon: 20px; }
+.btn-ctoio--md  { height: 32px; padding: 0 8px; --btn-cta-icon: 16px; }
+.btn-ctoio--sm  { height: 28px; padding: 0 6px; --btn-cta-icon: 16px; }
+.btn-ctoio--xsm { height: 24px; padding: 0 6px; --btn-cta-icon: 12px; }
+
+.btn-ctoio:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--cta-bg-strong-hover);
+    border-color: var(--cta-bg-hover);
+}
+
+.btn-ctoio:not(:disabled):not([aria-disabled="true"]):active {
+    background: var(--cta-bg-strong-pressed);
+    border-color: var(--cta-bg-pressed);
+}
+
+.btn-ctoio[aria-pressed="true"] {
+    background: var(--cta-bg-strong-selected);
+    border-color: var(--cta-bg-selected);
+}
+
+.btn-ctoio:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctoio:disabled,
+.btn-ctoio[aria-disabled="true"] {
+    background: transparent;
+    border-color: #c2c2c2;
+}
+
+.btn-ctoio:disabled .btn-cta__icon,
+.btn-ctoio[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-ctoio.is-hovered { background: var(--cta-bg-strong-hover); border-color: var(--cta-bg-hover); }
+.btn-ctoio.is-pressed { background: var(--cta-bg-strong-pressed); border-color: var(--cta-bg-pressed); }
+.btn-ctoio.is-selected { background: var(--cta-bg-strong-selected); border-color: var(--cta-bg-selected); }
+.btn-ctoio.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Transparent: Text+Icon (CtaButtonTransparentTextIcon)                   */
+/* ========================================================================== */
+
+.btn-cttri {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+
+    background: transparent;
+    color: var(--cta-fg);
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+    --btn-cta-icon: 24px;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-cttri:disabled,
+.btn-cttri[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-cttri--xlg { height: 40px; --btn-cta-icon: 24px; }
+.btn-cttri--lg  { height: 36px; --btn-cta-icon: 20px; }
+.btn-cttri--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; --btn-cta-icon: 16px; }
+.btn-cttri--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; --btn-cta-icon: 16px; }
+.btn-cttri--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; --btn-cta-icon: 14px; }
+
+.btn-cttri:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-strong-hover); }
+.btn-cttri:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-strong-pressed); }
+.btn-cttri[aria-pressed="true"] { background: var(--cta-bg-strong-selected); }
+.btn-cttri:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-cttri:disabled,
+.btn-cttri[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+    color: #c2c2c2;
+}
+
+.btn-cttri:disabled .btn-cta__icon,
+.btn-cttri[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-cttri.is-hovered { background: var(--cta-bg-strong-hover); }
+.btn-cttri.is-pressed { background: var(--cta-bg-strong-pressed); }
+.btn-cttri.is-selected { background: var(--cta-bg-strong-selected); }
+.btn-cttri.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Transparent: Text Only (CtaButtonTransparentTextOnly)                   */
+/* ========================================================================== */
+
+.btn-cttro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    color: var(--cta-fg);
+
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.0912px;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-cttro:disabled,
+.btn-cttro[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-cttro--xlg { height: 40px; }
+.btn-cttro--lg  { height: 36px; }
+.btn-cttro--md  { height: 32px; font-size: 15px; line-height: 22px; letter-spacing: 0.144px; }
+.btn-cttro--sm  { height: 28px; font-size: 14px; line-height: 20px; letter-spacing: 0.203px; }
+.btn-cttro--xsm { height: 24px; font-size: 13px; line-height: 18px; letter-spacing: 0.2522px; }
+
+.btn-cttro:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-strong-hover); }
+.btn-cttro:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-strong-pressed); }
+.btn-cttro[aria-pressed="true"] { background: var(--cta-bg-strong-selected); }
+.btn-cttro:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-cttro:disabled,
+.btn-cttro[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+    color: #c2c2c2;
+}
+
+.btn-cttro.is-hovered { background: var(--cta-bg-strong-hover); }
+.btn-cttro.is-pressed { background: var(--cta-bg-strong-pressed); }
+.btn-cttro.is-selected { background: var(--cta-bg-strong-selected); }
+.btn-cttro.is-focused { border: 2px solid #141414; }
+
+/* ========================================================================== */
+/* CTA Transparent: Icon Only (CtaButtonTransparentIconOnly)                   */
+/* NOTE: xsm focus uses 14px icon in Figma                                     */
+/* ========================================================================== */
+
+.btn-ctrio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 6px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+
+    height: 40px;
+    --btn-cta-icon: 28px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-ctrio:disabled,
+.btn-ctrio[aria-disabled="true"] { cursor: not-allowed; }
+
+.btn-ctrio--xlg { height: 40px; padding: 0 6px; --btn-cta-icon: 28px; }
+.btn-ctrio--lg  { height: 36px; padding: 0 6px; --btn-cta-icon: 24px; }
+.btn-ctrio--md  { height: 32px; padding: 0 6px; --btn-cta-icon: 20px; }
+.btn-ctrio--sm  { height: 28px; padding: 0 6px; --btn-cta-icon: 16px; }
+.btn-ctrio--xsm { height: 24px; padding: 0 6px; --btn-cta-icon: 12px; }
+
+.btn-ctrio:not(:disabled):not([aria-disabled="true"]):hover { background: var(--cta-bg-strong-hover); }
+.btn-ctrio:not(:disabled):not([aria-disabled="true"]):active { background: var(--cta-bg-strong-pressed); }
+.btn-ctrio[aria-pressed="true"] { background: var(--cta-bg-strong-selected); }
+.btn-ctrio:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-ctrio--xsm:focus-visible { --btn-cta-icon: 14px; }
+
+.btn-ctrio:disabled,
+.btn-ctrio[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+}
+
+.btn-ctrio:disabled .btn-cta__icon,
+.btn-ctrio[aria-disabled="true"] .btn-cta__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+.btn-ctrio.is-hovered { background: var(--cta-bg-strong-hover); }
+.btn-ctrio.is-pressed { background: var(--cta-bg-strong-pressed); }
+.btn-ctrio.is-selected { background: var(--cta-bg-strong-selected); }
+.btn-ctrio.is-focused { border: 2px solid #141414; }
+
+
+
+/* ========================================================================== */
+/* Secondary (Neutral) Buttons (Figma: 559:53878)                              */
+/* filled / outlined / transparent × (text+icon / text-only / icon-only)       */
+/* sizes: xlg/lg/md/sm/xsm, states: default/hovered/pressed/disabled/focused/selected */
+/* ========================================================================== */
+
+/* Shared helpers */
+.btn-s__label {
+    max-width: 300px; /* Figma value */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-s__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--btn-s-icon, 24px);
+    height: var(--btn-s-icon, 24px);
+    flex-shrink: 0;
+}
+
+.btn-s__icon img,
+.btn-s__icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Filled (secondary button/filled/...)                                       */
+/* -------------------------------------------------------------------------- */
+
+.btn-sfti,
+.btn-sfto,
+.btn-sfio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* xxsm */
+    font-family: var(--font);
+    font-weight: 500; /* Pretendard Medium */
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    color: #5c5c5c; /* semantic/neutral/foreground/heavy/default */
+    background: #f0f0f0; /* semantic/neutral/background/strong/default */
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-sfti { gap: 4px; padding: 0 8px; }
+.btn-sfto { gap: 0; padding: 0 8px; }
+.btn-sfio { gap: 0; padding: 0 8px; }
+
+.btn-sfti:disabled,
+.btn-sfto:disabled,
+.btn-sfio:disabled,
+.btn-sfti[aria-disabled="true"],
+.btn-sfto[aria-disabled="true"],
+.btn-sfio[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+/* Filled sizes */
+.btn-sfti--xlg,
+.btn-sfto--xlg,
+.btn-sfio--xlg { height: 40px; }
+.btn-sfti--lg,
+.btn-sfto--lg,
+.btn-sfio--lg { height: 36px; }
+.btn-sfti--md,
+.btn-sfto--md,
+.btn-sfio--md { height: 32px; }
+.btn-sfti--sm,
+.btn-sfto--sm,
+.btn-sfio--sm { height: 28px; }
+.btn-sfti--xsm,
+.btn-sfto--xsm,
+.btn-sfio--xsm { height: 24px; }
+
+/* Filled text typography */
+.btn-sfti--xlg,
+.btn-sfto--xlg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-sfti--lg,
+.btn-sfto--lg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-sfti--md,
+.btn-sfto--md { font-size: 15px; line-height: 1.467; letter-spacing: 0.144px; }
+.btn-sfti--sm,
+.btn-sfto--sm { font-size: 14px; line-height: 1.429; letter-spacing: 0.203px; }
+.btn-sfti--xsm,
+.btn-sfto--xsm { font-size: 13px; line-height: 1.385; letter-spacing: 0.2522px; }
+
+/* Filled icon sizes */
+.btn-sfti--xlg { --btn-s-icon: 24px; }
+.btn-sfti--lg  { --btn-s-icon: 20px; }
+.btn-sfti--md  { --btn-s-icon: 16px; }
+.btn-sfti--sm  { --btn-s-icon: 16px; }
+.btn-sfti--xsm { --btn-s-icon: 14px; } /* Figma uses 14px in xsm text+icon */
+
+.btn-sfio--xlg { --btn-s-icon: 24px; }
+.btn-sfio--lg  { --btn-s-icon: 20px; }
+.btn-sfio--md  { --btn-s-icon: 16px; }
+.btn-sfio--sm  { --btn-s-icon: 16px; }
+.btn-sfio--xsm { --btn-s-icon: 12px; }
+
+.btn-sfio--sm,
+.btn-sfio--xsm { padding: 0 6px; } /* spacing/sp60 */
+
+/* Filled states */
+.btn-sfti:not(:disabled):not([aria-disabled="true"]):hover,
+.btn-sfto:not(:disabled):not([aria-disabled="true"]):hover,
+.btn-sfio:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #e0e0e0; /* semantic/neutral/background/strong/hovered */
+}
+
+.btn-sfti:not(:disabled):not([aria-disabled="true"]):active,
+.btn-sfto:not(:disabled):not([aria-disabled="true"]):active,
+.btn-sfio:not(:disabled):not([aria-disabled="true"]):active {
+    background: #d6d6d6; /* semantic/neutral/background/normal/pressed */
+}
+
+.btn-sfti[aria-pressed="true"],
+.btn-sfto[aria-pressed="true"],
+.btn-sfio[aria-pressed="true"] {
+    background: #e0e0e0; /* semantic/neutral/background/normal/selected */
+}
+
+.btn-sfti:focus-visible,
+.btn-sfto:focus-visible,
+.btn-sfio:focus-visible {
+    border: 2px solid #141414; /* semantic/focused/global/global/default */
+    outline: none;
+}
+
+.btn-sfti:disabled,
+.btn-sfto:disabled,
+.btn-sfio:disabled,
+.btn-sfti[aria-disabled="true"],
+.btn-sfto[aria-disabled="true"],
+.btn-sfio[aria-disabled="true"] {
+    background: #e0e0e0; /* semantic/disabled/background/global/default */
+    color: #c2c2c2; /* semantic/disabled/foreground/global/default */
+}
+
+.btn-sfti:disabled .btn-s__icon,
+.btn-sfto:disabled .btn-s__icon,
+.btn-sfio:disabled .btn-s__icon,
+.btn-sfti[aria-disabled="true"] .btn-s__icon,
+.btn-sfto[aria-disabled="true"] .btn-s__icon,
+.btn-sfio[aria-disabled="true"] .btn-s__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Filled manual state classes */
+.btn-sfti.is-hovered,
+.btn-sfto.is-hovered,
+.btn-sfio.is-hovered { background: #e0e0e0; }
+
+.btn-sfti.is-pressed,
+.btn-sfto.is-pressed,
+.btn-sfio.is-pressed { background: #d6d6d6; }
+
+.btn-sfti.is-selected,
+.btn-sfto.is-selected,
+.btn-sfio.is-selected { background: #e0e0e0; }
+
+.btn-sfti.is-focused,
+.btn-sfto.is-focused,
+.btn-sfio.is-focused { border: 2px solid #141414; }
+
+/* -------------------------------------------------------------------------- */
+/* Outlined (secondary button/outlined/...)                                   */
+/* -------------------------------------------------------------------------- */
+
+.btn-soti,
+.btn-soto,
+.btn-soio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* xxsm */
+    font-family: var(--font);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    color: #5c5c5c; /* semantic/neutral/foreground/heavy/default */
+    background: transparent;
+    border: 1px solid #c2c2c2; /* semantic/neutral/stroke/strong/default */
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-soti { gap: 4px; padding: 0 8px; }
+.btn-soto { gap: 0; padding: 0 8px; }
+.btn-soio { gap: 0; padding: 0 8px; }
+.btn-soio--sm,
+.btn-soio--xsm { padding: 0 6px; } /* spacing/sp60 */
+
+.btn-soti:disabled,
+.btn-soto:disabled,
+.btn-soio:disabled,
+.btn-soti[aria-disabled="true"],
+.btn-soto[aria-disabled="true"],
+.btn-soio[aria-disabled="true"] { cursor: not-allowed; }
+
+/* Outlined sizes */
+.btn-soti--xlg,
+.btn-soto--xlg,
+.btn-soio--xlg { height: 40px; }
+.btn-soti--lg,
+.btn-soto--lg,
+.btn-soio--lg { height: 36px; }
+.btn-soti--md,
+.btn-soto--md,
+.btn-soio--md { height: 32px; }
+.btn-soti--sm,
+.btn-soto--sm,
+.btn-soio--sm { height: 28px; }
+.btn-soti--xsm,
+.btn-soto--xsm,
+.btn-soio--xsm { height: 24px; }
+
+/* Outlined text typography */
+.btn-soti--xlg,
+.btn-soto--xlg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-soti--lg,
+.btn-soto--lg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-soti--md,
+.btn-soto--md { font-size: 15px; line-height: 1.467; letter-spacing: 0.144px; }
+.btn-soti--sm,
+.btn-soto--sm { font-size: 14px; line-height: 1.429; letter-spacing: 0.203px; }
+.btn-soti--xsm,
+.btn-soto--xsm { font-size: 13px; line-height: 1.385; letter-spacing: 0.2522px; }
+
+/* Outlined icon sizes */
+.btn-soti--xlg { --btn-s-icon: 24px; }
+.btn-soti--lg  { --btn-s-icon: 20px; }
+.btn-soti--md  { --btn-s-icon: 16px; }
+.btn-soti--sm  { --btn-s-icon: 16px; }
+.btn-soti--xsm { --btn-s-icon: 14px; }
+
+.btn-soio--xlg { --btn-s-icon: 24px; }
+.btn-soio--lg  { --btn-s-icon: 20px; }
+.btn-soio--md  { --btn-s-icon: 16px; }
+.btn-soio--sm  { --btn-s-icon: 16px; }
+.btn-soio--xsm { --btn-s-icon: 12px; }
+
+/* Outlined states (text+icon has different hover/pressed rules) */
+.btn-soti:not(:disabled):not([aria-disabled="true"]):hover { background: #e0e0e0; } /* strong/hovered */
+.btn-soti:not(:disabled):not([aria-disabled="true"]):active { background: #d6d6d6; border-color: #a3a3a3; } /* normal/pressed + stroke/normal/pressed */
+.btn-soti[aria-pressed="true"] { background: #e0e0e0; }
+.btn-soti:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-soto:not(:disabled):not([aria-disabled="true"]):hover { background: #e5e5e5; } /* normal/hovered */
+.btn-soto:not(:disabled):not([aria-disabled="true"]):active { background: #d6d6d6; }
+.btn-soto[aria-pressed="true"] { background: #e0e0e0; }
+.btn-soto:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-soio:not(:disabled):not([aria-disabled="true"]):hover { background: #e5e5e5; }
+.btn-soio:not(:disabled):not([aria-disabled="true"]):active { background: #d6d6d6; }
+.btn-soio[aria-pressed="true"] { background: #e0e0e0; }
+.btn-soio:focus-visible { border: 2px solid #141414; outline: none; }
+
+.btn-soti:disabled,
+.btn-soto:disabled,
+.btn-soio:disabled,
+.btn-soti[aria-disabled="true"],
+.btn-soto[aria-disabled="true"],
+.btn-soio[aria-disabled="true"] {
+    background: transparent;
+    border-color: #c2c2c2;
+    color: #c2c2c2;
+}
+
+.btn-soti:disabled .btn-s__icon,
+.btn-soto:disabled .btn-s__icon,
+.btn-soio:disabled .btn-s__icon,
+.btn-soti[aria-disabled="true"] .btn-s__icon,
+.btn-soto[aria-disabled="true"] .btn-s__icon,
+.btn-soio[aria-disabled="true"] .btn-s__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Outlined manual state classes */
+.btn-soti.is-hovered { background: #e0e0e0; }
+.btn-soti.is-pressed { background: #d6d6d6; border-color: #a3a3a3; }
+.btn-soti.is-selected { background: #e0e0e0; }
+.btn-soti.is-focused { border: 2px solid #141414; }
+
+.btn-soto.is-hovered { background: #e5e5e5; }
+.btn-soto.is-pressed { background: #d6d6d6; }
+.btn-soto.is-selected { background: #e0e0e0; }
+.btn-soto.is-focused { border: 2px solid #141414; }
+
+.btn-soio.is-hovered { background: #e5e5e5; }
+.btn-soio.is-pressed { background: #d6d6d6; }
+.btn-soio.is-selected { background: #e0e0e0; }
+.btn-soio.is-focused { border: 2px solid #141414; }
+
+/* -------------------------------------------------------------------------- */
+/* Transparent (secondary button/transparent/...)                             */
+/* -------------------------------------------------------------------------- */
+
+.btn-stri,
+.btn-stro,
+.btn-srio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* xxsm */
+    font-family: var(--font);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    color: #5c5c5c;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-stri { gap: 4px; padding: 0 8px; }
+.btn-stro { gap: 0; padding: 0 8px; }
+.btn-srio { gap: 0; padding: 0 6px; } /* spacing/sp60 */
+
+.btn-stri:disabled,
+.btn-stro:disabled,
+.btn-srio:disabled,
+.btn-stri[aria-disabled="true"],
+.btn-stro[aria-disabled="true"],
+.btn-srio[aria-disabled="true"] { cursor: not-allowed; }
+
+/* Transparent sizes */
+.btn-stri--xlg,
+.btn-stro--xlg,
+.btn-srio--xlg { height: 40px; }
+.btn-stri--lg,
+.btn-stro--lg,
+.btn-srio--lg { height: 36px; }
+.btn-stri--md,
+.btn-stro--md,
+.btn-srio--md { height: 32px; }
+.btn-stri--sm,
+.btn-stro--sm,
+.btn-srio--sm { height: 28px; }
+.btn-stri--xsm,
+.btn-stro--xsm,
+.btn-srio--xsm { height: 24px; }
+
+/* Transparent text typography */
+.btn-stri--xlg,
+.btn-stro--xlg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-stri--lg,
+.btn-stro--lg { font-size: 16px; line-height: 1.5; letter-spacing: 0.0912px; }
+.btn-stri--md,
+.btn-stro--md { font-size: 15px; line-height: 1.467; letter-spacing: 0.144px; }
+.btn-stri--sm,
+.btn-stro--sm { font-size: 14px; line-height: 1.429; letter-spacing: 0.203px; }
+.btn-stri--xsm,
+.btn-stro--xsm { font-size: 13px; line-height: 1.385; letter-spacing: 0.2522px; }
+
+/* Transparent icon sizes */
+.btn-stri--xlg { --btn-s-icon: 24px; }
+.btn-stri--lg  { --btn-s-icon: 20px; }
+.btn-stri--md  { --btn-s-icon: 16px; }
+.btn-stri--sm  { --btn-s-icon: 16px; }
+.btn-stri--xsm { --btn-s-icon: 14px; }
+
+/* Icon-only transparent uses larger icons in xlg/lg/md */
+.btn-srio--xlg { --btn-s-icon: 28px; }
+.btn-srio--lg  { --btn-s-icon: 24px; }
+.btn-srio--md  { --btn-s-icon: 20px; }
+.btn-srio--sm  { --btn-s-icon: 16px; }
+.btn-srio--xsm { --btn-s-icon: 12px; }
+
+/* Transparent states */
+.btn-stri:not(:disabled):not([aria-disabled="true"]):hover,
+.btn-stro:not(:disabled):not([aria-disabled="true"]):hover,
+.btn-srio:not(:disabled):not([aria-disabled="true"]):hover {
+    background: #e5e5e5; /* semantic/neutral/background/normal/hovered */
+}
+
+.btn-stri:not(:disabled):not([aria-disabled="true"]):active,
+.btn-stro:not(:disabled):not([aria-disabled="true"]):active,
+.btn-srio:not(:disabled):not([aria-disabled="true"]):active {
+    background: #d6d6d6; /* semantic/neutral/background/normal/pressed */
+}
+
+.btn-stri[aria-pressed="true"],
+.btn-stro[aria-pressed="true"],
+.btn-srio[aria-pressed="true"] {
+    background: #e0e0e0; /* semantic/neutral/background/normal/selected */
+}
+
+.btn-stri:focus-visible,
+.btn-stro:focus-visible,
+.btn-srio:focus-visible {
+    border: 2px solid #141414;
+    outline: none;
+    background: transparent; /* Figma focused variants show ring only */
+}
+
+.btn-stri:disabled,
+.btn-stro:disabled,
+.btn-srio:disabled,
+.btn-stri[aria-disabled="true"],
+.btn-stro[aria-disabled="true"],
+.btn-srio[aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
+    color: #c2c2c2;
+}
+
+.btn-stri:disabled .btn-s__icon,
+.btn-stro:disabled .btn-s__icon,
+.btn-srio:disabled .btn-s__icon,
+.btn-stri[aria-disabled="true"] .btn-s__icon,
+.btn-stro[aria-disabled="true"] .btn-s__icon,
+.btn-srio[aria-disabled="true"] .btn-s__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Transparent manual state classes */
+.btn-stri.is-hovered,
+.btn-stro.is-hovered,
+.btn-srio.is-hovered { background: #e5e5e5; }
+
+.btn-stri.is-pressed,
+.btn-stro.is-pressed,
+.btn-srio.is-pressed { background: #d6d6d6; }
+
+.btn-stri.is-selected,
+.btn-stro.is-selected,
+.btn-srio.is-selected { background: #e0e0e0; }
+
+.btn-stri.is-focused,
+.btn-stro.is-focused,
+.btn-srio.is-focused { border: 2px solid #141414; background: transparent; }
+
+
+/* ========================================
+   Secondary Outlined - xxsm (12px font, for compact UI like modal action buttons)
+   Based on Figma MCP: gap 4px for text+icon, padding 8px 13px 9px
+   ======================================== */
+.btn-soti--xxsm,
+.btn-soto--xxsm {
+    height: auto;
+    padding: 8px 13px 9px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.23px;
+    border-color: #d6d6d6;
+}
+
+.btn-soti--xxsm {
+    gap: 4px;
+}
+
+.btn-soti--xxsm .btn-s__icon {
+    --btn-s-icon: 12px;
+}

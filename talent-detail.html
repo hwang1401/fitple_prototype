@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>핏플 - 인재 상세</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 스니펫 디자인 값 정확히 적용 */
+        /* page-content에서 padding, gap 적용 (스니펫 section-c처럼) */
+        .page-content.with-action-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 24px;
+            padding-bottom: 100px;
+        }
+        
+        .talent-detail-content {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .talent-left-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .talent-right-col {
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        /* 인재 프로필 영역 - 별도 패딩/배경 없음 */
+        .talent-profile {
+        }
+        
+        .talent-profile-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            line-height: 30px;
+            letter-spacing: -0.43px;
+            margin-bottom: 8px;
+        }
+        
+        .talent-profile-role {
+            font-size: 16px;
+            font-weight: 400;
+            color: #525252;
+            line-height: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .talent-profile-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .talent-profile-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #525252;
+        }
+        
+        .talent-profile-meta-item img {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+        
+        /* 연락처 미공개 박스 */
+        .contact-locked {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #737373;
+        }
+        
+        .contact-locked img {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+        
+        /* 카드 공통 스타일 */
+        .detail-card {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 24px;
+        }
+        
+        .detail-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 24px;
+            margin-bottom: 20px;
+        }
+        
+        /* 매칭 분석 카드 */
+        .matching-score-big {
+            font-size: 48px;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 72px;
+        }
+        
+        .matching-score-label {
+            font-size: 14px;
+            color: #525252;
+            margin-left: 12px;
+        }
+        
+        .matching-progress-bar {
+            height: 12px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .matching-progress-fill {
+            height: 100%;
+            background: #10b981;
+            border-radius: 6px;
+        }
+        
+        .matching-metrics {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .matching-metric {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+        
+        .matching-metric-label {
+            font-size: 12px;
+            color: #737373;
+            margin-bottom: 8px;
+        }
+        
+        .matching-metric-value {
+            font-size: 22px;
+            font-weight: 600;
+            color: #10b981;
+            line-height: 21px;
+        }
+        
+        /* 이 인재가 적합할 수 있는 이유 박스 */
+        .reason-box {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: linear-gradient(177.18deg, #f0f9ff, #e0f2fe);
+            border: 1px solid #bae6fd;
+            border-radius: 4px;
+        }
+        
+        .reason-box-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .reason-box-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0284c7;
+            line-height: 19.5px;
+            margin-bottom: 4px;
+        }
+        
+        .reason-box-text {
+            font-size: 13px;
+            color: #0369a1;
+            line-height: 19.5px;
+        }
+        
+        /* 핏 체크 점수 카드 */
+        .fit-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .fit-score-label {
+            font-size: 13px;
+            color: #525252;
+        }
+        
+        .fit-score-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c9371;
+            line-height: 36px;
+        }
+        
+        /* 잠금 상태 박스 */
+        .locked-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+        
+        .locked-box img {
+            width: 32px;
+            height: 32px;
+            opacity: 0.4;
+            margin-bottom: 12px;
+        }
+        
+        .locked-box span {
+            font-size: 13px;
+            color: #737373;
+        }
+        
+        /* 이력서/포트폴리오 탭 */
+        .resume-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 16px;
+        }
+        
+        .resume-tab {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #666666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .resume-tab.active {
+            color: #2c9371;
+            border-bottom-color: #2c9371;
+        }
+        
+        /* 기술 스택 태그 */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag-matched {
+            padding: 6px 12px;
+            background: #dceee8;
+            color: #0d7a5f;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+        }
+        
+        .skill-tag-normal {
+            padding: 6px 12px;
+            background: #f5f5f5;
+            color: #333333;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19.5px;
+        }
+        
+        /* 퇴사 사유 태그 */
+        .resignation-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #fff3e0;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .resignation-tag img {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .resignation-tag span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #b45309;
+            line-height: 21px;
+        }
+        
+        /* 하단 액션바 */
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 200px;
+            right: 0;
+            padding: 16px 24px;
+            background: #ffffff;
+            border-top: 1px solid #e5e5e5;
+            box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 50;
+        }
+        
+        .action-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .action-bar-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .action-bar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #2c9371, #a8ddcb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .action-bar-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+        }
+        
+        .action-bar-role {
+            font-size: 12px;
+            color: #737373;
+        }
+        
+        .action-bar-divider {
+            width: 1px;
+            height: 40px;
+            background: #e5e5e5;
+        }
+        
+        .action-bar-ticket {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #e9e8f3;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #404040;
+        }
+        
+        .action-bar-ticket strong {
+            color: #2c9371;
+            font-weight: 700;
+        }
+        
+        .action-bar-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        /* 저장 버튼 */
+        .btn-save {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 72px;
+            height: 40px;
+            padding: 0 8px;
+            border: 1px solid #c1c1c1;
+            border-radius: 4px;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #5b5b5b;
+            cursor: pointer;
+        }
+        
+        .btn-save:hover {
+            background: #f5f5f5;
+        }
+        
+        /* 열람하기 버튼 */
+        .btn-view {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 40px;
+            padding: 0 16px;
+            background: #6277ff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        
+        .btn-view:hover {
+            background: #4f61e6;
+        }
+        
+        .btn-view img {
+            width: 20px;
+            height: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <a href="index.html" style="display: flex; align-items: center; gap: 6px; text-decoration: none; color: inherit;">
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="" style="width: 16px; height: 16px;">
+                        목록으로
+                    </a>
+                    <span class="separator" style="margin: 0 8px;">|</span>
+                    <span>인재 관리</span>
+                    <span class="separator">›</span>
+                    <span>인재 추천</span>
+                    <span class="separator">›</span>
+                    <span class="current">김○○</span>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Bell/On.svg" alt="알림"></button>
+                    <button class="icon-btn"><img src="assets/에셋/Icons/Settings/Setting 1.svg" alt="설정"></button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <span class="user-name">김인사</span>
+                            <span class="user-role">HR 매니저</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Page Content -->
+            <div class="page-content with-action-bar">
+                <!-- 인재 프로필 -->
+                <div class="talent-profile">
+                    <div class="talent-profile-name">김○○</div>
+                    <div class="talent-profile-role">프로덕트 디자이너 · 경력 3년</div>
+                    <div class="talent-profile-meta">
+                        <div class="talent-profile-meta-item">
+                            <img src="assets/에셋/Flat icons/building.svg" alt="">
+                            <span>전 회사: A사 (IT/스타트업)</span>
+                        </div>
+                        <div class="talent-profile-meta-item">
+                            <img src="assets/에셋/Flat icons/calendar.svg" alt="">
+                            <span>근속기간: 2년 8개월</span>
+                        </div>
+                    </div>
+                    <div class="contact-locked">
+                        <img src="assets/에셋/Flat icons/security-locked.svg" alt="">
+                        연락처는 열람 후 확인할 수 있습니다
+                    </div>
+                </div>
+                
+                <!-- 2컬럼 레이아웃 -->
+                <div class="talent-detail-content">
+                    <!-- 왼쪽 컬럼 -->
+                    <div class="talent-left-col">
+                        <!-- 매칭 분석 -->
+                        <div class="detail-card">
+                            <div class="detail-card-title">매칭 분석</div>
+                            
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="matching-score-big">92%</span>
+                                <span class="matching-score-label">우리 회사와의 매칭률</span>
+                            </div>
+                            
+                            <div class="matching-progress-bar">
+                                <div class="matching-progress-fill" style="width: 92%;"></div>
+                            </div>
+                            
+                            <div class="matching-metrics">
+                                <div class="matching-metric">
+                                    <div class="matching-metric-label">기술 스택</div>
+                                    <div class="matching-metric-value">높음</div>
+                                </div>
+                                <div class="matching-metric">
+                                    <div class="matching-metric-label">문화 적합도</div>
+                                    <div class="matching-metric-value">높음</div>
+                                </div>
+                                <div class="matching-metric">
+                                    <div class="matching-metric-label">경력 요건</div>
+                                    <div class="matching-metric-value">충족</div>
+                                </div>
+                            </div>
+                            
+                            <div class="reason-box">
+                                <div class="reason-box-icon">💡</div>
+                                <div>
+                                    <div class="reason-box-title">이 인재가 적합할 수 있는 이유</div>
+                                    <div class="reason-box-text">전 회사에서 '독립적인 업무 스타일'로 인한 컬처 갭이 있었습니다. 우리 회사는 자율적인 업무 문화를 강조하기 때문에 높은 적합도가 예상됩니다.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 이력서 / 포트폴리오 -->
+                        <div class="detail-card">
+                            <div class="detail-card-title">이력서 / 포트폴리오</div>
+                            
+                            <div class="resume-tabs">
+                                <button class="resume-tab active">이력서</button>
+                                <button class="resume-tab">포트폴리오</button>
+                            </div>
+                            
+                            <div class="locked-box">
+                                <img src="assets/에셋/Flat icons/security-locked.svg" alt="">
+                                <span>상세 항목별 점수는 열람 후 확인할 수 있습니다</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 기술 스택 -->
+                        <div class="detail-card">
+                            <div class="detail-card-title">기술 스택</div>
+                            
+                            <div class="skill-tags">
+                                <span class="skill-tag-matched">Figma</span>
+                                <span class="skill-tag-matched">Sketch</span>
+                                <span class="skill-tag-matched">Prototyping</span>
+                                <span class="skill-tag-normal">User Research</span>
+                                <span class="skill-tag-normal">Design System</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 퇴사 사유 -->
+                        <div class="detail-card">
+                            <div class="detail-card-title">퇴사 사유</div>
+                            
+                            <div class="resignation-tag">
+                                <img src="assets/에셋/Flat icons/warning-circle.svg" alt="" onerror="this.style.display='none'">
+                                <span>조직 문화 컬쳐 갭</span>
+                            </div>
+                            
+                            <div class="locked-box">
+                                <img src="assets/에셋/Flat icons/security-locked.svg" alt="">
+                                <span>상세 퇴사 사유는 열람 후 확인할 수 있습니다</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 오른쪽 컬럼 -->
+                    <div class="talent-right-col">
+                        <!-- 핏 체크 점수 -->
+                        <div class="detail-card">
+                            <div class="detail-card-title">핏 체크 점수</div>
+                            
+                            <div class="fit-score-header">
+                                <span class="fit-score-label">전 회사 핏 점수</span>
+                                <span class="fit-score-value">3.2 / 5.0</span>
+                            </div>
+                            
+                            <div class="locked-box">
+                                <img src="assets/에셋/Flat icons/security-locked.svg" alt="">
+                                <span>상세 항목별 점수는 열람 후 확인할 수 있습니다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Action Bar -->
+            <div class="bottom-action-bar">
+                <div class="action-bar-left">
+                    <div class="action-bar-profile">
+                        <div class="action-bar-avatar">김</div>
+                        <div>
+                            <div class="action-bar-name">김○○</div>
+                            <div class="action-bar-role">프론트엔드 · 3년</div>
+                        </div>
+                    </div>
+                    <div class="action-bar-divider"></div>
+                    <div class="action-bar-ticket">
+                        <img src="assets/에셋/Icons/Pricetag.svg" alt="" style="width: 16px; height: 16px;">
+                        현재 보유 티켓: <strong>0개</strong>
+                    </div>
+                </div>
+                <div class="action-bar-right">
+                    <button class="btn-save" onclick="toggleSaveTalent(this)">
+                        <span class="save-icon">☆</span>
+                        <span class="save-text">저장</span>
+                    </button>
+                    <button class="btn-view" onclick="openModal('modal-no-ticket')">
+                        <img src="assets/에셋/Icons/Pricetag.svg" alt="" style="filter: brightness(0) invert(1);">
+                        상세 정보 열람하기 (티켓 1개)
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 열람 확인 모달 (티켓 있음) -->
+    <div class="modal-overlay" id="modal-view-info">
+        <!-- 스니펫 값 정확히 적용 -->
+        <div style="display: flex; flex-direction: column; width: 480px; background: #ffffff; border-radius: 4px 8px 8px 4px; box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.15); overflow: hidden;">
+            <!-- 헤더 -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff;">
+                <span style="font-family: Pretendard, sans-serif; font-size: 18px; font-weight: 700; line-height: 27px; color: #0a0a0a;">인재 정보 열람</span>
+                <!-- 닫기 버튼: 트랜스페런트 아이콘 온리 32x32, 아이콘 20x20 -->
+                <button onclick="closeModal('modal-view-info')" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0 6px; background: none; border: none; border-radius: 4px; cursor: pointer;">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+            <!-- 본문 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px;">
+                <!-- 아이콘: 60x56, background #e9e8f3, border-radius 8px -->
+                <div style="display: flex; align-items: center; justify-content: center; width: 60px; height: 56px; padding: 4px 16px; background: #e9e8f3; border-radius: 8px;">
+                    <img src="assets/에셋/Icons/Pricetag.svg" alt="" style="width: 28px; height: 28px;">
+                </div>
+                <!-- 설명 -->
+                <div style="font-family: Pretendard, sans-serif; font-size: 15px; line-height: 22.5px; text-align: center;">
+                    <span style="font-weight: 700; color: #333333;">김○○</span><span style="font-weight: 400; color: #333333;">님의 상세 정보를 열람하시겠습니까?</span>
+                </div>
+                <!-- 차감 티켓: padding 8px 16px, background #efefef -->
+                <div style="display: flex; align-items: center; justify-content: space-between; align-self: stretch; padding: 8px 16px; background: #efefef; border-radius: 4px;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #525252;">차감 티켓</span>
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 700; line-height: 21px; color: #2c9371;">1개</span>
+                </div>
+                <!-- 열람 후 보유 티켓 -->
+                <div style="display: flex; align-items: center; justify-content: space-between; align-self: stretch; padding: 8px 16px; background: #efefef; border-radius: 4px;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #525252;">열람 후 보유 티켓</span>
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 700; line-height: 21px; color: #2c9371;">9개</span>
+                </div>
+            </div>
+            <!-- 푸터: gap 12px -->
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 16px; background: #ffffff; border-bottom: 1px solid #f5f5f5;">
+                <!-- 취소 버튼 -->
+                <button onclick="closeModal('modal-view-info')" style="display: flex; align-items: center; justify-content: center; min-width: 60px; height: 40px; padding: 0 16px; background: none; border: 1px solid #c1c1c1; border-radius: 4px; cursor: pointer;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #5b5b5b; white-space: nowrap;">취소</span>
+                </button>
+                <!-- 열람하기 버튼: width 72px, Primary #2c9371 -->
+                <button onclick="viewTalentDetail()" style="display: flex; align-items: center; justify-content: center; width: 72px; height: 40px; padding: 0 8px; background: #2c9371; border: none; border-radius: 4px; cursor: pointer;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #ffffff;">열람하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 열람 확인 모달 (티켓 부족) -->
+    <div class="modal-overlay" id="modal-no-ticket">
+        <!-- 스니펫 값 정확히 적용 -->
+        <div style="display: flex; flex-direction: column; width: 480px; background: #ffffff; border-radius: 4px 8px 8px 4px; box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.15); overflow: hidden;">
+            <!-- 헤더 -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff;">
+                <span style="font-family: Pretendard, sans-serif; font-size: 18px; font-weight: 700; line-height: 27px; color: #0a0a0a;">티켓이 부족합니다</span>
+                <!-- 닫기 버튼 -->
+                <button onclick="closeModal('modal-no-ticket')" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0 6px; background: none; border: none; border-radius: 4px; cursor: pointer;">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+            <!-- 본문 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px;">
+                <!-- 아이콘: 56x56, background #fff3e0, 원형 -->
+                <div style="display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: #fff3e0; border-radius: 28px;">
+                    <img src="assets/에셋/Icons/Pricetag.svg" alt="" style="width: 28px; height: 28px;">
+                </div>
+                <!-- 설명 -->
+                <span style="font-family: Pretendard, sans-serif; font-size: 15px; font-weight: 400; line-height: 22.5px; color: #333333; text-align: center;">인재 상세 정보를 열람하려면 티켓 1개가 필요합니다.</span>
+                <!-- 티켓 정보 박스: padding 16px 16px 12px 16px -->
+                <div style="display: flex; align-items: center; justify-content: space-between; align-self: stretch; padding: 16px 16px 12px 16px; background: #fafafa; border-radius: 4px;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #525252;">현재 보유 티켓</span>
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 700; line-height: 21px; color: #cd3d36;">0개</span>
+                </div>
+            </div>
+            <!-- 푸터 -->
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 16px; background: #ffffff; border-bottom: 1px solid #f5f5f5;">
+                <!-- 취소 버튼: flex 1 -->
+                <button onclick="closeModal('modal-no-ticket')" style="display: flex; align-items: center; justify-content: center; flex: 1; height: 40px; padding: 0 8px; background: none; border: 1px solid #c1c1c1; border-radius: 4px; cursor: pointer;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #5b5b5b;">취소</span>
+                </button>
+                <!-- 구매하기 버튼: flex 1, CTA #6277ff -->
+                <button onclick="closeModal('modal-no-ticket'); openModal('modal-buy-ticket');" style="display: flex; align-items: center; justify-content: center; flex: 1; height: 40px; padding: 0 8px; background: #6277ff; border: none; border-radius: 4px; cursor: pointer;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #ffffff;">구매하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 티켓 구매 모달 -->
+    <div class="modal-overlay" id="modal-buy-ticket">
+        <!-- 스니펫 값: width 520px -->
+        <div style="display: flex; flex-direction: column; width: 520px; background: #ffffff; border-radius: 4px 8px 8px 4px; box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.15); overflow: hidden;">
+            <!-- 헤더 -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff;">
+                <span style="font-family: Pretendard, sans-serif; font-size: 18px; font-weight: 700; line-height: 27px; color: #0a0a0a;">티켓 구매</span>
+                <button onclick="closeModal('modal-buy-ticket')" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0 6px; background: none; border: none; border-radius: 4px; cursor: pointer;">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+            <!-- 본문: gap 20px -->
+            <div style="display: flex; flex-direction: column; gap: 20px; padding: 16px;">
+                <!-- 설명 -->
+                <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #525252;">인재 상세 정보 열람에 사용할 티켓을 구매하세요.</span>
+                <!-- 티켓 옵션: gap 12px -->
+                <div id="ticketOptions" style="display: flex; gap: 12px;">
+                    <!-- 5개 옵션 -->
+                    <div class="ticket-option" data-count="5" data-price="50000" onclick="selectTicketOption(this)" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px; border: 2px solid #e5e5e5; border-radius: 4px; cursor: pointer; background: #ffffff; transition: all 0.2s;">
+                        <span class="ticket-count" style="font-family: Pretendard, sans-serif; font-size: 24px; font-weight: 700; line-height: 36px; color: #1a1a1a;">5개</span>
+                        <span class="ticket-price" style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; color: #2c9371;">50,000원</span>
+                        <span style="font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px; color: #666666;">개당 10,000원</span>
+                    </div>
+                    <!-- 10개 옵션 (기본 선택) -->
+                    <div class="ticket-option selected" data-count="10" data-price="90000" onclick="selectTicketOption(this)" style="flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px; background: #e9e8f3; border: 2px solid #6277ff; border-radius: 4px; cursor: pointer; transition: all 0.2s;">
+                        <!-- 인기 배지 -->
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 2px 10px; background: #6277ff; border-radius: 10px;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 11px; font-weight: 600; line-height: 16.5px; color: #ffffff;">인기</span>
+                        </div>
+                        <span class="ticket-count" style="font-family: Pretendard, sans-serif; font-size: 24px; font-weight: 700; line-height: 36px; color: #1a1a1a;">10개</span>
+                        <span class="ticket-price" style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; color: #6277ff;">90,000원</span>
+                        <div style="text-align: center;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px; color: #666666;">개당 9,000원 </span>
+                            <span style="font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; color: #10b981;">10% 할인</span>
+                        </div>
+                    </div>
+                    <!-- 30개 옵션 -->
+                    <div class="ticket-option" data-count="30" data-price="240000" onclick="selectTicketOption(this)" style="flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px; border: 2px solid #e5e5e5; border-radius: 4px; cursor: pointer; background: #ffffff; transition: all 0.2s;">
+                        <!-- Best 배지 -->
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 2px 10px; background: #10b981; border-radius: 10px;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 11px; font-weight: 600; line-height: 16.5px; color: #ffffff;">Best</span>
+                        </div>
+                        <span class="ticket-count" style="font-family: Pretendard, sans-serif; font-size: 24px; font-weight: 700; line-height: 36px; color: #1a1a1a;">30개</span>
+                        <span class="ticket-price" style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; color: #2c9371;">240,000원</span>
+                        <div style="text-align: center;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px; color: #666666;">개당 8,000원 </span>
+                            <span style="font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; color: #10b981;">20% 할인</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 결제 수단: padding-top 24px, border-bottom -->
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-bottom: 1px solid #f5f5f5;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 13px; font-weight: 600; line-height: 19.5px; color: #333333;">결제 수단</span>
+                    <div id="paymentMethods" style="display: flex; gap: 12px;">
+                        <!-- FitplePay (기본 선택) -->
+                        <div class="payment-option selected" data-method="fitplepay" onclick="selectPaymentMethod(this)" style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #e9e8f3; border: 1px solid #6277ff; border-radius: 4px; cursor: pointer; transition: all 0.2s;">
+                            <img src="assets/에셋/dialog/fitple_logo.svg" alt="" style="width: 24px; height: 24px;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #333333;">FitplePay</span>
+                            <span style="font-family: Pretendard, sans-serif; font-size: 11px; font-weight: 600; line-height: 16.5px; color: #10b981;">+5% 추가 적립</span>
+                        </div>
+                        <!-- 신용카드 -->
+                        <div class="payment-option" data-method="creditcard" onclick="selectPaymentMethod(this)" style="flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 4px; cursor: pointer; transition: all 0.2s;">
+                            <img src="assets/에셋/Icons/Credit Card.svg" alt="" style="width: 24px; height: 24px;">
+                            <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #333333;">신용카드</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 푸터: gap 8px -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff; border-bottom: 1px solid #f5f5f5;">
+                <!-- 결제 금액 -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-family: Pretendard, sans-serif; font-size: 14px; font-weight: 400; line-height: 21px; color: #525252;">결제 금액</span>
+                    <span id="totalPrice" style="font-family: Pretendard, sans-serif; font-size: 20px; font-weight: 700; line-height: 30px; color: #0a0a0a;">90,000원</span>
+                </div>
+                <!-- 버튼들: gap 8px -->
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="closeModal('modal-buy-ticket')" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 40px; padding: 0 8px; background: none; border: 1px solid #c1c1c1; border-radius: 4px; cursor: pointer;">
+                        <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #5b5b5b; white-space: nowrap;">취소</span>
+                    </button>
+                    <button onclick="purchaseTicketAndProceed()" style="display: flex; align-items: center; justify-content: center; width: 72px; height: 40px; padding: 0 8px; background: #6277ff; border: none; border-radius: 4px; cursor: pointer;">
+                        <span style="font-family: Pretendard, sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; color: #ffffff; white-space: nowrap;">결제하기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <script src="js/app.js?v=4"></script>
+    <script>
+        // 티켓 옵션 선택 기능
+        function selectTicketOption(element) {
+            // 모든 티켓 옵션 초기화
+            document.querySelectorAll('.ticket-option').forEach(option => {
+                option.classList.remove('selected');
+                option.style.background = '#ffffff';
+                option.style.borderColor = '#e5e5e5';
+                
+                // 가격 색상 초기화
+                const priceEl = option.querySelector('.ticket-price');
+                if (priceEl) {
+                    priceEl.style.color = '#2c9371';
+                }
+            });
+            
+            // 선택된 옵션 스타일 적용
+            element.classList.add('selected');
+            element.style.background = '#e9e8f3';
+            element.style.borderColor = '#6277ff';
+            
+            // 선택된 옵션 가격 색상 변경
+            const selectedPrice = element.querySelector('.ticket-price');
+            if (selectedPrice) {
+                selectedPrice.style.color = '#6277ff';
+            }
+            
+            // 결제 금액 업데이트
+            const price = parseInt(element.dataset.price);
+            document.getElementById('totalPrice').textContent = price.toLocaleString() + '원';
+        }
+        
+        // 결제 수단 선택 기능
+        function selectPaymentMethod(element) {
+            // 모든 결제 수단 초기화
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+                option.style.background = '#ffffff';
+                option.style.borderColor = '#e5e5e5';
+            });
+            
+            // 선택된 결제 수단 스타일 적용
+            element.classList.add('selected');
+            element.style.background = '#e9e8f3';
+            element.style.borderColor = '#6277ff';
+        }
+        
+        // 티켓 구매 후 열람 모달 열기
+        function purchaseTicketAndProceed() {
+            closeModal('modal-buy-ticket');
+            showToast('티켓 10개가 구매되었습니다.', 'success');
+            setTimeout(() => {
+                openModal('modal-view-info');
+            }, 500);
+        }
+        
+        // 인재 상세 정보 열람
+        function viewTalentDetail() {
+            closeModal('modal-view-info');
+            showToast('티켓 1개가 사용되었습니다.', 'success');
+            setTimeout(() => {
+                window.location.href = 'talent-detail-read.html';
+            }, 800);
+        }
+        
+        // 저장 토글
+        let isSaved = false;
+        function toggleSaveTalent(btn) {
+            isSaved = !isSaved;
+            const icon = btn.querySelector('.save-icon');
+            const text = btn.querySelector('.save-text');
+            
+            if (isSaved) {
+                icon.textContent = '★';
+                text.textContent = '저장됨';
+                btn.style.borderColor = '#2c9371';
+                btn.style.color = '#2c9371';
+                showToast('인재가 저장되었습니다.', 'success');
+            } else {
+                icon.textContent = '☆';
+                text.textContent = '저장';
+                btn.style.borderColor = '#c1c1c1';
+                btn.style.color = '#5b5b5b';
+                showToast('저장이 취소되었습니다.', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

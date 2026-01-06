@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 오프보딩 상세</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/pages/offboarding-detail.css?v=33">
+</head>
+<body class="page--offd-detail">
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Top Header (global layout) -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="btn-stri btn-stri--md" type="button" onclick="navigateTo('offboarding.html')">
+                        <span class="btn-s__icon" aria-hidden="true">
+                            <img src="assets/에셋/Icons/Arrow/IOS/Left.svg" alt="">
+                        </span>
+                        <span class="btn-s__label">목록으로</span>
+                    </button>
+                    <nav class="breadcrumb" aria-label="breadcrumb">
+                        <span>직원</span>
+                        <span class="separator">›</span>
+                        <span>오프보딩 관리</span>
+                        <span class="separator">›</span>
+                        <span class="current">김민수</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" type="button" aria-label="알림">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="">
+                    </button>
+                    <button class="icon-btn" type="button" aria-label="설정">
+                        <img src="assets/에셋/Flat icons/setting.svg" alt="">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <div class="user-name">김인사</div>
+                            <div class="user-role">HR 매니저</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content (global padding) -->
+            <div class="page-content">
+                <div class="offd__container">
+                <!-- Top Section: Name + Progress + Actions -->
+                <div class="offd__top">
+                    <div class="offd__topL">
+                        <h1 class="offd__name">김민수</h1>
+                        <div class="offd__progress">
+                            <div class="offd__progressLabel">오프보딩 진행도</div>
+                            <div class="offd__progressWrap">
+                                <div class="offd__progressBar">
+                                    <div class="offd__progressFill"></div>
+                                </div>
+                                <div class="offd__progressText">4개 중 4개 완료</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offd__topR">
+                        <button class="btn-soto btn-soto--lg" type="button">퇴사일 변경</button>
+                        <button class="btn-ctoto btn-ctoto--lg btn-ctoti--danger" type="button">오프보딩 취소</button>
+                        <button class="btn-pfto btn-pfto--lg" type="button" onclick="openModal('modal-offboarding-confirm')">오프보딩 확정</button>
+                    </div>
+                </div>
+
+                <!-- 2-Column Grid: Employee Info + Fit Check -->
+                <div class="offd__grid2">
+                    <!-- Employee Info Card -->
+                    <div class="offd__card">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" class="offd__cardIcon">
+                                <div class="offd__cardTitle">직원 정보</div>
+                            </div>
+                        </div>
+                        <div class="offd__cardBd">
+                            <div class="offd__infoGrid">
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">직책</div>
+                                    <div class="offd__fieldValue">프론트엔드 개발자</div>
+                                </div>
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">부서</div>
+                                    <div class="offd__fieldValue">개발팀</div>
+                                </div>
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">입사일</div>
+                                    <div class="offd__fieldValue">2022.03.02</div>
+                                </div>
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">근속 기간</div>
+                                    <div class="offd__fieldValue offd__fieldValue--bold">2년 9개월</div>
+                                </div>
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">퇴사 사유</div>
+                                    <div class="offd__fieldValue offd__fieldValue--bold">컬처 갭</div>
+                                </div>
+                                <div class="offd__field">
+                                    <div class="offd__fieldLabel">퇴사 예정일</div>
+                                    <div class="offd__fieldValue offd__fieldValue--bold offd__fieldValue--warning">2025.12.31 (D-10)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fit Check Card -->
+                    <div class="offd__card">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" class="offd__cardIcon">
+                                <div class="offd__cardTitle">핏체크 결과</div>
+                            </div>
+                            <button class="btn-soto btn-soto--md" type="button" onclick="openModal('modal-fitcheck-history')">이력 보기</button>
+                        </div>
+                        <div class="offd__cardBd">
+                            <div class="offd__fit">
+                                <div class="offd__score">
+                                    <div class="offd__scoreCircle">
+                                        <div class="offd__scoreVal">3.0</div>
+                                        <div class="offd__scoreDen">/ 5.0</div>
+                                    </div>
+                                    <div class="offd__scoreLabel">종합 점수</div>
+                                </div>
+
+                                <div class="offd__bars">
+                                    <div class="offd__barRow">
+                                        <div class="offd__barName">업무 성과</div>
+                                        <div class="offd__miniBar" aria-hidden="true">
+                                            <div class="offd__miniFill offd__miniFill--64"></div>
+                                        </div>
+                                        <div class="offd__barNum">3.2</div>
+                                    </div>
+                                    <div class="offd__barRow">
+                                        <div class="offd__barName">협업</div>
+                                        <div class="offd__miniBar" aria-hidden="true">
+                                            <div class="offd__miniFill offd__miniFill--56"></div>
+                                        </div>
+                                        <div class="offd__barNum">2.8</div>
+                                    </div>
+                                    <div class="offd__barRow">
+                                        <div class="offd__barName">문화 적합</div>
+                                        <div class="offd__miniBar" aria-hidden="true">
+                                            <div class="offd__miniFill offd__miniFill--50"></div>
+                                        </div>
+                                        <div class="offd__barNum">2.5</div>
+                                    </div>
+                                    <div class="offd__barRow">
+                                        <div class="offd__barName">성장 가능성</div>
+                                        <div class="offd__miniBar" aria-hidden="true">
+                                            <div class="offd__miniFill offd__miniFill--70"></div>
+                                        </div>
+                                        <div class="offd__barNum">3.5</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Handover Card -->
+                <div class="offd__card">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__cardTitle">인수인계</div>
+                            <div class="offd__cardMeta">2/5 완료 · 공유됨</div>
+                        </div>
+                        <button class="btn-soto btn-soto--sm" type="button">
+                            <img src="assets/에셋/Icons/Plus/Plus.svg" alt="">
+                            항목 추가
+                        </button>
+                    </div>
+
+                    <div class="offd__handover">
+                        <div class="offd__handoverBanner">
+                            <div class="offd__bannerBadge">공유됨</div>
+                            <div class="offd__bannerText">12.18 공유 · 직원이 직접 체크</div>
+                        </div>
+                        <button class="btn-soto btn-soto--sm" type="button">리마인드 보내기</button>
+                    </div>
+
+                    <div class="offd__cardBd">
+                        <div class="offd__handoverList">
+                            <div class="offd__handoverItem offd__handoverItem--done">
+                                <label class="fi-check fi-check--sq fi-check--md fi-check--secondary fi-check--selected">
+                                    <input class="fi-check__input" type="checkbox" checked aria-label="OO 프로젝트 관리">
+                                    <span class="fi-check__wrap" aria-hidden="true">
+                                        <span class="fi-check__box"></span>
+                                    </span>
+                                </label>
+                                <div class="offd__handoverInfo">
+                                    <div class="offd__handoverTitle offd__handoverTitle--done">OO 프로젝트 관리</div>
+                                    <div class="offd__handoverMeta">
+                                        <span>인수자: 김철수</span>
+                                        <span class="offd__handoverDone">12.19 완료</span>
+                                    </div>
+                                </div>
+                                <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            </div>
+
+                            <div class="offd__handoverItem offd__handoverItem--done">
+                                <label class="fi-check fi-check--sq fi-check--md fi-check--secondary fi-check--selected">
+                                    <input class="fi-check__input" type="checkbox" checked aria-label="XX 클라이언트 담당">
+                                    <span class="fi-check__wrap" aria-hidden="true">
+                                        <span class="fi-check__box"></span>
+                                    </span>
+                                </label>
+                                <div class="offd__handoverInfo">
+                                    <div class="offd__handoverTitle offd__handoverTitle--done">XX 클라이언트 담당</div>
+                                    <div class="offd__handoverMeta">
+                                        <span>인수자: 박영희</span>
+                                        <span class="offd__handoverDone">12.20 완료</span>
+                                    </div>
+                                </div>
+                                <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            </div>
+
+                            <div class="offd__handoverItem">
+                                <label class="fi-check fi-check--sq fi-check--md fi-check--secondary fi-check--unselected">
+                                    <input class="fi-check__input" type="checkbox" aria-label="월간 보고서 작성">
+                                    <span class="fi-check__wrap" aria-hidden="true">
+                                        <span class="fi-check__box"></span>
+                                    </span>
+                                </label>
+                                <div class="offd__handoverInfo">
+                                    <div class="offd__handoverTitle">월간 보고서 작성</div>
+                                    <div class="offd__handoverMeta">
+                                        <span>인수자: 이영수</span>
+                                        <span class="offd__handoverTodo">미완료</span>
+                                    </div>
+                                </div>
+                                <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            </div>
+
+                            <div class="offd__handoverItem">
+                                <label class="fi-check fi-check--sq fi-check--md fi-check--secondary fi-check--unselected">
+                                    <input class="fi-check__input" type="checkbox" aria-label="신규 입사자 교육 자료">
+                                    <span class="fi-check__wrap" aria-hidden="true">
+                                        <span class="fi-check__box"></span>
+                                    </span>
+                                </label>
+                                <div class="offd__handoverInfo">
+                                    <div class="offd__handoverTitle">신규 입사자 교육 자료</div>
+                                    <div class="offd__handoverMeta">
+                                        <span class="offd__handoverTodo">미완료</span>
+                                    </div>
+                                </div>
+                                <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            </div>
+
+                            <div class="offd__handoverItem">
+                                <label class="fi-check fi-check--sq fi-check--md fi-check--secondary fi-check--unselected">
+                                    <input class="fi-check__input" type="checkbox" aria-label="거래처 연락처 정리">
+                                    <span class="fi-check__wrap" aria-hidden="true">
+                                        <span class="fi-check__box"></span>
+                                    </span>
+                                </label>
+                                <div class="offd__handoverInfo">
+                                    <div class="offd__handoverTitle">거래처 연락처 정리</div>
+                                    <div class="offd__handoverMeta">
+                                        <span class="offd__handoverTodo">미완료</span>
+                                    </div>
+                                </div>
+                                <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Redeployment Profile (Empty State) -->
+                <div class="offd__card offd__card--empty" data-card-type="redeployment">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__iconBox">
+                                <img src="assets/에셋/Flat icons/profile01.svg" alt="" class="offd__cardIcon">
+                            </div>
+                            <div class="offd__cardHdInfo">
+                                <div class="offd__cardTitle">재배치 프로필</div>
+                                <div class="offd__cardMeta">작성 전</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offd__cardBd">
+                        <div class="offd__emptyState">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" class="offd__emptyIcon">
+                            <p class="offd__emptyText">퇴사 직원에 대한 재배치 정보를 작성해주세요. 작성된 프로필은 인재풀 등록 시 함께 공개됩니다.</p>
+                            <button class="btn-pfto btn-pfto--xlg" type="button" onclick="openModal('modal-redeployment-profile')">프로필 작성하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Redeployment Profile (Filled State) -->
+                <div class="offd__card offd__card--filled offd__card--redeployment" data-card-type="redeployment" style="display: none;">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__iconBox offd__iconBox--green">
+                                <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" width="20" height="20">
+                            </div>
+                            <div class="offd__cardHdInfo">
+                                <div class="offd__cardTitle">재배치 프로필</div>
+                                <div class="offd__cardMeta offd__cardMeta--success">2025.12.18 작성 완료</div>
+                            </div>
+                        </div>
+                        <div class="offd__cardActions">
+                            <button class="btn-soto btn-soto--sm" type="button">수정</button>
+                            <button class="btn-srio btn-srio--md" type="button" aria-expanded="false">
+                                <span class="btn-s__icon">
+                                    <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="offd__cardBd offd__cardBd--collapsible">
+                        <div class="offd__redeployment">
+                            <div class="offd__redeploy-row">
+                                <div class="offd__redeploy-card">
+                                    <div class="offd__redeploy-label">업무 역량</div>
+                                    <div class="offd__redeploy-text">React, TypeScript 기반 프론트엔드 개발 3년차. 복잡한 UI 컴포넌트 설계와 성능 최적화에<br>강점을 보임. 코드 리뷰에 적극적으로 참여하며 팀 내 기술 공유 활동도 활발히 진행.</div>
+                                </div>
+                                <div class="offd__redeploy-card">
+                                    <div class="offd__redeploy-label">협업 스타일</div>
+                                    <div class="offd__redeploy-text">명확한 스펙 기반의 독립적 작업을 선호함. 비동기 커뮤니케이션에 익숙하며 문서화를 꼼꼼히<br>하는 편. 잦은 미팅보다는 집중 작업 시간 확보를 중요시함.</div>
+                                </div>
+                            </div>
+                            <div class="offd__redeploy-row">
+                                <div class="offd__redeploy-card">
+                                    <div class="offd__redeploy-label">문화 적합성</div>
+                                    <div class="offd__redeploy-text">스타트업보다는 체계가 잡힌 조직에서 역량 발휘가 기대됨. 명확한 R&R과 프로세스가 있는<br>환경에서 안정적인 성과를 낼 수 있음.</div>
+                                </div>
+                                <div class="offd__redeploy-card offd__redeploy-card--recommend">
+                                    <div class="offd__redeploy-label">추천 의향</div>
+                                    <div class="offd__recommend-score">
+                                        <div class="offd__recommend-num">4</div>
+                                        <div class="offd__recommend-den">/ 5</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="offd__historyLink" type="button">
+                            <img src="assets/에셋/Flat icons/edit.svg" alt="" width="14" height="14">
+                            작성 이력 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recommendation Letter (Empty State) -->
+                <div class="offd__card offd__card--empty" data-card-type="recommendation">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__iconBox">
+                                <img src="assets/에셋/Flat icons/document.svg" alt="" class="offd__cardIcon">
+                            </div>
+                            <div class="offd__cardHdInfo">
+                                <div class="offd__cardTitleRow">
+                                    <div class="offd__cardTitle">추천서</div>
+                                    <div class="offd__proBadge">Pro</div>
+                                </div>
+                                <div class="offd__cardMeta">생성 전</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offd__cardBd">
+                        <div class="offd__emptyState">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" class="offd__emptyIcon">
+                            <p class="offd__emptyText">AI가 핏체크 데이터와 프로필을 기반으로 추천서를 자동 생성합니다.</p>
+                            <button class="btn-pfto btn-pfto--xlg" type="button" onclick="openModal('modal-recommendation-letter')">추천서 생성하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Letter (Filled State) -->
+                <div class="offd__card offd__card--filled offd__card--recommendation" data-card-type="recommendation" style="display: none;">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__iconBox offd__iconBox--green">
+                                <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" width="20" height="20">
+                            </div>
+                            <div class="offd__cardHdInfo">
+                                <div class="offd__cardTitleRow">
+                                    <div class="offd__cardTitle">추천서</div>
+                                    <div class="offd__proBadge">Pro</div>
+                                </div>
+                                <div class="offd__cardMeta offd__cardMeta--success">2025.12.18 생성 완료</div>
+                            </div>
+                        </div>
+                        <div class="offd__cardActions">
+                            <button class="btn-soto btn-soto--md" type="button">수정</button>
+                            <button class="btn-srio btn-srio--md" type="button" aria-expanded="false">
+                                <span class="btn-s__icon">
+                                    <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="offd__cardBd offd__cardBd--collapsible">
+                        <div class="offd__letter">
+                            <div class="offd__letterHeader">
+                                <div class="offd__letterSubtitle">Letter of Recommendation</div>
+                                <div class="offd__letterTitle">인재 추천서</div>
+                            </div>
+                            <div class="offd__letterBody">
+                                <p><strong>김민수</strong>님은 프론트엔드 개발 분야에서 <strong>3년간의 실무 경력</strong>을 보유한 개발자입니다. 특히 <strong>React와 TypeScript</strong> 기반의 프로젝트에서 깊은 이해도와 문제 해결 능력을 보여주었습니다.</p>
+                                <p>핏체크 평가 결과, <strong>업무 성과(3.2점)</strong>와 <strong>성장 가능성(3.5점)</strong>에서 우수한 평가를 받았습니다. 복잡한 UI 컴포넌트 설계와 성능 최적화 업무에서 특히 뛰어난 역량을 발휘했습니다.</p>
+                                <p>협업 방식에 있어서는 <strong>명확한 요구사항 정의를 바탕으로 독립적으로 업무를 수행</strong>하는 것을 선호합니다. 비동기 커뮤니케이션과 문서화에 강점을 가지고 있어, 체계적인 프로세스가 갖춰진 조직<br>에서 안정적인 성과를 낼 수 있을 것으로 기대됩니다.</p>
+                                <p><strong>중견기업 이상의 규모</strong>에서 백오피스 시스템, 어드민 대시보드 등의 프로젝트에 적합하며, <strong class="offd__letterHighlight">5점 만점 중 4점의 추천 의향</strong>을 드립니다.</p>
+                            </div>
+                            <div class="offd__letterFooter">
+                                <div class="offd__letterMeta">
+                                    <div>작성일: 2024년 12월 18일</div>
+                                    <div>작성자: (주)테크컴퍼니</div>
+                                </div>
+                                <div class="offd__letterBrand">
+                                    <div class="offd__brandName">fitple</div>
+                                    <div class="offd__brandTag">AI-Powered</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="offd__historyLink" type="button">
+                            <img src="assets/에셋/Flat icons/edit.svg" alt="" width="14" height="14">
+                            생성 이력 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2-Column: Company Recommendation + Exit Feedback -->
+                <div class="offd__grid2">
+                    <!-- Company Recommendation (Empty State) -->
+                    <div class="offd__card offd__card--empty" data-card-type="company">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <div class="offd__iconBox">
+                                    <img src="assets/에셋/Flat icons/building.svg" alt="" class="offd__cardIcon">
+                                </div>
+                                <div class="offd__cardHdInfo">
+                                    <div class="offd__cardTitleRow">
+                                        <div class="offd__cardTitle">기업 추천</div>
+                                        <div class="offd__proBadge">Pro</div>
+                                    </div>
+                                    <div class="offd__cardMeta">추천 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offd__cardBd">
+                            <div class="offd__emptyState">
+                                <img src="assets/에셋/Flat icons/profile.svg" alt="" class="offd__emptyIcon">
+                                <p class="offd__emptyText">특정 기업에 이 인재를 직접 추천합니다. 추천받은 기업에게 알림이 발송됩니다.</p>
+                                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="openModal('modal-company-recommendation')">기업 추천하기</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Recommendation (Filled State) -->
+                    <div class="offd__card offd__card--filled offd__card--company" data-card-type="company" style="display: none;">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <div class="offd__iconBox offd__iconBox--green">
+                                    <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" width="20" height="20">
+                                </div>
+                                <div class="offd__cardHdInfo">
+                                    <div class="offd__cardTitleRow">
+                                        <div class="offd__cardTitle">기업 추천</div>
+                                        <div class="offd__proBadge">Pro</div>
+                                    </div>
+                                    <div class="offd__cardMeta offd__cardMeta--success">2개 기업 추천 완료</div>
+                                </div>
+                            </div>
+                            <div class="offd__cardActions">
+                                <button class="btn-poto btn-poto--sm" type="button" onclick="openModal('modal-company-recommendation')">추가 추천</button>
+                                <button class="btn-srio btn-srio--md" type="button" aria-expanded="false">
+                                    <span class="btn-s__icon">
+                                        <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="">
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="offd__cardBd offd__cardBd--collapsible">
+                            <div class="offd__companyList">
+                                <div class="offd__companyItem">
+                                    <div class="offd__companyAvatar">A</div>
+                                    <div class="offd__companyInfo">
+                                        <div class="offd__companyName">A테크</div>
+                                        <div class="offd__companyDesc">IT서비스 · 50-100명</div>
+                                    </div>
+                                    <div class="offd__companyDate">2025.12.19 추천</div>
+                                </div>
+                                <div class="offd__companyItem">
+                                    <div class="offd__companyAvatar">B</div>
+                                    <div class="offd__companyInfo">
+                                        <div class="offd__companyName">B소프트</div>
+                                        <div class="offd__companyDesc">소프트웨어 · 100-300명</div>
+                                    </div>
+                                    <div class="offd__companyDate">2025.12.20 추천</div>
+                                </div>
+                            </div>
+                            <button class="offd__historyLink" type="button">
+                                <img src="assets/에셋/Flat icons/edit.svg" alt="" width="14" height="14">
+                                추천 이력 보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exit Feedback (Empty State) -->
+                    <div class="offd__card offd__card--empty" data-card-type="exit-feedback" data-state="empty">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <div class="offd__iconBox">
+                                    <img src="assets/에셋/Flat icons/chat.svg" alt="" class="offd__cardIcon">
+                                </div>
+                                <div class="offd__cardHdInfo">
+                                    <div class="offd__cardTitle">퇴사 피드백</div>
+                                    <div class="offd__cardMeta">요청 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offd__cardBd">
+                            <div class="offd__emptyState">
+                                <img src="assets/에셋/Flat icons/profile.svg" alt="" class="offd__emptyIcon">
+                                <p class="offd__emptyText">퇴사 직원에게 회사에 대한 피드백을 요청합니다. 수집된 피드백은 익명으로 처리됩니다.</p>
+                                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="openModal('modal-exit-feedback')">피드백 요청하기</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exit Feedback (Filled State) -->
+                    <div class="offd__card offd__card--filled offd__card--feedback" data-card-type="exit-feedback" data-state="filled" style="display: none;">
+                        <div class="offd__cardHd">
+                            <div class="offd__cardHdL">
+                                <div class="offd__iconBox offd__iconBox--green">
+                                    <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" width="20" height="20">
+                                </div>
+                                <div class="offd__cardHdInfo">
+                                    <div class="offd__cardTitle">퇴사 피드백</div>
+                                    <div class="offd__cardMeta offd__cardMeta--success">2025.12.22 수신 완료</div>
+                                </div>
+                            </div>
+                            <div class="offd__cardActions">
+                                <button class="btn-soto btn-soto--md" type="button">재요청</button>
+                                <button class="btn-srio btn-srio--md" type="button" aria-expanded="false">
+                                    <span class="btn-s__icon">
+                                        <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="">
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="offd__cardBd offd__cardBd--collapsible">
+                            <div class="offd__feedback-item">
+                                <div class="offd__feedback-bar"></div>
+                                <div class="offd__feedback-text">전반적으로 좋은 회사였지만, 팀 내 커뮤니케이션 방식이 저와 맞지 않았습니다. 잦은 회의와 즉각적인 응답을 요구하는 문화가 집중 업무 시간을 확보하기 어렵게 만들었습니다. 기술적으로는 많이 배웠고, 동료들과의 관계도 좋았습니다. 온보딩 프로세스가 더 체계적이었으면 좋겠다는 생각이 들었습니다.</div>
+                            </div>
+                            <div class="offd__feedback-meta">익명 피드백 · 2025.12.22 16:45 수신</div>
+                            <button class="offd__historyLink" type="button">
+                                <img src="assets/에셋/Flat icons/edit.svg" alt="" width="14" height="14">
+                                요청 이력 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Talent Pool Registration (Empty State) -->
+                <div class="offd__card offd__card--pool offd__card--empty" data-card-type="talent-pool">
+                    <div class="offd__cardHd">
+                        <div class="offd__cardHdL">
+                            <div class="offd__iconBox offd__iconBox--pool">
+                                <img src="assets/에셋/Flat icons/team.svg" alt="" class="offd__cardIcon">
+                            </div>
+                            <div class="offd__cardHdInfo">
+                                <div class="offd__cardMeta">인재풀 등록</div>
+                                <div class="offd__cardTitle">등록 전</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offd__cardBd">
+                        <div class="offd__emptyState">
+                            <img src="assets/에셋/Flat icons/team.svg" alt="" class="offd__emptyIcon">
+                            <p class="offd__emptyText">퇴사 직원의 정보를 인재풀에 등록하여 다른 기업에 추천할 수 있습니다.</p>
+                            <button class="btn-pfto btn-pfto--xlg" type="button" onclick="openModal('modal-talent-pool-register')">인재풀 등록하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Talent Pool Registration (Filled State) -->
+                <div class="offd__card offd__card--pool offd__card--filled" data-card-type="talent-pool" data-state="filled" style="display: none;">
+                    <div class="offd__pool-filled">
+                        <div class="offd__pool-filled-left">
+                            <div class="offd__pool-icon">
+                                <img src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" width="20" height="20">
+                            </div>
+                            <div class="offd__pool-info">
+                                <div class="offd__pool-label">인재풀 등록</div>
+                                <div class="offd__pool-date">2025.12.19 등록 완료</div>
+                            </div>
+                            <button class="btn-soti btn-soti--sm" type="button" onclick="openModal('modal-talent-pool-preview')">
+                                <span class="btn-s__icon">
+                                    <img src="assets/에셋/Flat icons/file.svg" alt="">
+                                </span>
+                                <span class="btn-s__label">미리보기</span>
+                            </button>
+                        </div>
+                        <div class="offd__pool-filled-right">
+                            <button class="btn-ctoto btn-ctoto--lg" type="button">인재풀 등록 취소</button>
+                            <button class="btn-soto btn-soto--lg" type="button">인재풀 재등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal: 재배치 프로필 작성 -->
+    <div id="modal-redeployment-profile" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-redeployment-profile')"></div>
+        <div class="modal__dialog modal__dialog--redeployment-profile">
+            <!-- Header -->
+            <div class="modal__header modal__header--redeployment">
+                <h2 class="modal__title modal__title--redeployment">재배치 프로필 작성 · 김민수</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-redeployment-profile')">
+                    <span class="btn-s__icon" aria-hidden="true">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <div class="modal__body modal__body--redeployment">
+                <!-- Sidebar (Fitcheck Data Reference) -->
+                <aside class="redeployment__sidebar">
+                    <div class="redeployment__sidebar-header">
+                        <img src="assets/에셋/Flat icons/profile.svg" alt="" width="16" height="16" class="redeployment__sidebar-icon">
+                        <div class="redeployment__sidebar-title">핏체크 데이터 참조</div>
+                    </div>
+                    
+                    <!-- Overall Score -->
+                    <div class="redeployment__score-card">
+                        <div class="redeployment__score-value">3.0</div>
+                        <div class="redeployment__score-label">종합 점수</div>
+                    </div>
+                    
+                    <!-- Detail Scores -->
+                    <div class="redeployment__detail-scores">
+                        <div class="redeployment__detail-item">
+                            <div class="redeployment__detail-label">업무 성과</div>
+                            <div class="redeployment__detail-value">3.2</div>
+                        </div>
+                        <div class="redeployment__detail-item">
+                            <div class="redeployment__detail-label">협업</div>
+                            <div class="redeployment__detail-value">2.8</div>
+                        </div>
+                        <div class="redeployment__detail-item">
+                            <div class="redeployment__detail-label">문화 적합</div>
+                            <div class="redeployment__detail-value">2.5</div>
+                        </div>
+                        <div class="redeployment__detail-item">
+                            <div class="redeployment__detail-label">성장 가능성</div>
+                            <div class="redeployment__detail-value">3.5</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Comment -->
+                    <div class="redeployment__comment-card">
+                        <div class="redeployment__comment-title">최근 코멘트</div>
+                        <div class="redeployment__comment-text">"독립적인 업무 환경에서 높은 성과를 보이나, 팀 협업 상황에서 커뮤니케이션 빈도가 낮아 오해가 발생하는 경우가 있었습니다."</div>
+                    </div>
+                </aside>
+                
+                <!-- Form Content -->
+                <div class="redeployment__content">
+                    <!-- Section: 역량 평가 -->
+                    <div class="redeployment__section">
+                        <div class="redeployment__section-header">역량 평가</div>
+                        
+                        <div class="redeployment__field">
+                            <label class="redeployment__label">업무 역량 *</label>
+                            <textarea class="redeployment__textarea" placeholder="해당 직원의 업무 역량을 작성해주세요. (300자 이내)"></textarea>
+                        </div>
+                        
+                        <div class="redeployment__field">
+                            <label class="redeployment__label">협업 스타일 *</label>
+                            <textarea class="redeployment__textarea" placeholder="협업 방식과 커뮤니케이션 스타일을 작성해주세요. (300자 이내)"></textarea>
+                        </div>
+                        
+                        <div class="redeployment__field-row">
+                            <div class="redeployment__field">
+                                <label class="redeployment__label">문화 적합성 *</label>
+                                <textarea class="redeployment__textarea" placeholder="어떤 조직 문화에 적합한지 작성해주세요."></textarea>
+                            </div>
+                            <div class="redeployment__field">
+                                <label class="redeployment__label">성장 가능성 *</label>
+                                <textarea class="redeployment__textarea" placeholder="성장 가능성과 잠재력을 작성해주세요."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section: 추천 정보 -->
+                    <div class="redeployment__section">
+                        <div class="redeployment__section-header">추천 정보</div>
+                        
+                        <div class="redeployment__field-row">
+                            <div class="redeployment__field">
+                                <label class="redeployment__label">추천 직무</label>
+                                <input type="text" class="redeployment__input" placeholder="예: 프론트엔드 개발, 백오피스 시스템">
+                            </div>
+                            <div class="redeployment__field">
+                                <label class="redeployment__label">추천 의향 *</label>
+                                <select class="redeployment__select">
+                                    <option>4 - 추천함</option>
+                                    <option>5 - 매우 추천함</option>
+                                    <option>3 - 보통</option>
+                                    <option>2 - 비추천</option>
+                                    <option>1 - 매우 비추천</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="modal__footer modal__footer--redeployment">
+                <button class="btn-stro btn-stro--lg" type="button">임시저장</button>
+                <div class="modal__footer-actions">
+                    <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-redeployment-profile')">취소</button>
+                    <button class="btn-pfto btn-pfto--xlg" type="button" onclick="switchToFilledState('redeployment'); closeModal('modal-redeployment-profile'); showToast('재배치 프로필이 작성되었습니다.');">수정완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 인수인계 항목 추가 -->
+    <div id="modal-handover-add" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-handover-add')"></div>
+        <div class="modal__dialog modal__dialog--sm">
+            <div class="modal__header">
+                <h2 class="modal__title">인수인계 항목 추가</h2>
+                <button class="btn-stio btn-stio--md" type="button" onclick="closeModal('modal-handover-add')">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="" class="btn-stio__icon icon-mask icon-mask--close">
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="modal__field">
+                    <label class="modal__field-label">업무 항목 <span class="required">*</span></label>
+                    <input type="text" class="modal__input" placeholder="예: OO 프로젝트 관리, XX 클라이언트 담당">
+                </div>
+                <div class="modal__field">
+                    <label class="modal__field-label">인수자</label>
+                    <input type="text" class="modal__input" placeholder="인수자 이름">
+                </div>
+                <div class="modal__field">
+                    <label class="modal__field-label">메모</label>
+                    <textarea class="modal__textarea" rows="8" placeholder="인계 관련 추가 정보"></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--md" type="button" onclick="closeModal('modal-handover-add')">취소</button>
+                <button class="btn-pfto btn-pfto--md" type="button">추가하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 오프보딩 확정 -->
+    <div id="modal-offboarding-confirm" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-offboarding-confirm')"></div>
+        <div class="modal__dialog modal__dialog--sm">
+            <div class="modal__header">
+                <h2 class="modal__title">오프보딩 확정</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-offboarding-confirm')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="modal__offboarding-warning">
+                    <div class="modal__offboarding-warning-icon">
+                        <img src="assets/에셋/Flat icons/warning.svg" alt="">
+                    </div>
+                    <div class="modal__offboarding-warning-text">
+                        일부 항목이 완료되지 않았습니다.<br>
+                        이대로 확정할까요?
+                    </div>
+                </div>
+                <div class="modal__offboarding-list">
+                    <div class="modal__offboarding-item modal__offboarding-item--checked">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="modal__offboarding-icon">
+                        <span class="modal__offboarding-text">재배치 프로필 작성</span>
+                    </div>
+                    <div class="modal__offboarding-item modal__offboarding-item--checked">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="modal__offboarding-icon">
+                        <span class="modal__offboarding-text">추천서 생성</span>
+                    </div>
+                    <div class="modal__offboarding-item modal__offboarding-item--unchecked">
+                        <img src="assets/에셋/Flat icons/cancle.svg" alt="" class="modal__offboarding-icon">
+                        <span class="modal__offboarding-text">인재풀 등록</span>
+                    </div>
+                    <div class="modal__offboarding-item modal__offboarding-item--unchecked">
+                        <img src="assets/에셋/Flat icons/cancle.svg" alt="" class="modal__offboarding-icon">
+                        <span class="modal__offboarding-text">기업 추천</span>
+                    </div>
+                    <div class="modal__offboarding-item modal__offboarding-item--unchecked">
+                        <img src="assets/에셋/Flat icons/cancle.svg" alt="" class="modal__offboarding-icon">
+                        <span class="modal__offboarding-text">퇴사 피드백 요청</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-offboarding-confirm')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="showToast('오프보딩이 확정되었습니다.'); closeModal('modal-offboarding-confirm');">이대로 확정</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 기업 추천 -->
+    <div id="modal-company-recommendation" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-company-recommendation')"></div>
+        <div class="modal__dialog modal__dialog--company-recommendation">
+            <!-- Header -->
+            <div class="modal__header modal__header--company-recommendation">
+                <h2 class="modal__title modal__title--company-recommendation">기업 추천 · 김민수</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-company-recommendation')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="" width="20" height="20">
+                    </span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal__body modal__body--company-recommendation">
+                <!-- Search Box -->
+                <div class="company-rec__search-wrapper">
+                    <div class="company-rec__search-input-wrapper">
+                        <input type="text" class="company-rec__search-input" placeholder="기업명으로 검색">
+                    </div>
+                    <img src="assets/에셋/Icons/Search.svg" alt="" class="company-rec__search-icon" width="18" height="18">
+                </div>
+
+                <!-- Company List -->
+                <div class="company-rec__list">
+                    <!-- Company Item 1 (Selected) -->
+                    <label class="company-rec__item company-rec__item--selected">
+                        <label class="fi-check fi-check--square">
+                            <input type="checkbox" checked>
+                        </label>
+                        <div class="company-rec__avatar">A</div>
+                        <div class="company-rec__info">
+                            <div class="company-rec__name">A테크</div>
+                            <div class="company-rec__meta">IT서비스 · 50-100명 · 서울 강남</div>
+                        </div>
+                        <div class="company-rec__match">매칭률 85%</div>
+                    </label>
+
+                    <!-- Company Item 2 -->
+                    <label class="company-rec__item">
+                        <label class="fi-check fi-check--square">
+                            <input type="checkbox">
+                        </label>
+                        <div class="company-rec__avatar">B</div>
+                        <div class="company-rec__info">
+                            <div class="company-rec__name">B소프트</div>
+                            <div class="company-rec__meta">소프트웨어 · 100-300명 · 서울 판교</div>
+                        </div>
+                        <div class="company-rec__match">매칭률 78%</div>
+                    </label>
+
+                    <!-- Company Item 3 -->
+                    <label class="company-rec__item">
+                        <label class="fi-check fi-check--square">
+                            <input type="checkbox">
+                        </label>
+                        <div class="company-rec__avatar">C</div>
+                        <div class="company-rec__info">
+                            <div class="company-rec__name">C스타트업</div>
+                            <div class="company-rec__meta">AI · 10-50명 · 서울 성수</div>
+                        </div>
+                        <div class="company-rec__match">매칭률 72%</div>
+                    </label>
+                </div>
+
+                <!-- Message Textarea -->
+                <div class="company-rec__message-wrapper">
+                    <label class="company-rec__message-label">추천 메시지 (선택)</label>
+                    <textarea class="company-rec__message-textarea" placeholder="추천과 함께 전달할 메시지를 작성해주세요."></textarea>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal__footer modal__footer--company-recommendation">
+                <div class="modal__footer-actions">
+                    <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-company-recommendation')">취소</button>
+                    <button class="btn-pfto btn-pfto--xlg" type="button" onclick="switchToFilledState('company'); closeModal('modal-company-recommendation'); showToast('기업 추천이 완료되었습니다.');">추천 보내기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 리마인드 보내기 -->
+    <div id="modal-handover-remind" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-handover-remind')"></div>
+        <div class="modal__dialog modal__dialog--sm">
+            <div class="modal__header">
+                <h2 class="modal__title">리마인드 보내기</h2>
+                <button class="btn-stio btn-stio--md" type="button" onclick="closeModal('modal-handover-remind')">
+                    <img src="assets/에셋/Icons/Close/Close.svg" alt="" class="btn-stio__icon icon-mask icon-mask--close">
+                </button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__body-text"><strong>김민수</strong>님에게 인수인계 완료를 요청합니다.</p>
+                <div class="modal__info-row">
+                    <span>미완료 항목</span>
+                    <strong class="text-danger">3개</strong>
+                </div>
+                <div class="modal__divider"></div>
+                <ul class="modal__list">
+                    <li>월간 보고서 작성</li>
+                    <li>신규 입사자 교육 자료</li>
+                    <li>거래처 연락처 정리</li>
+                </ul>
+                <div class="modal__divider"></div>
+                <div class="modal__info-row">
+                    <span class="text-muted">마지막 리마인드</span>
+                    <span>12.19</span>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--md" type="button" onclick="closeModal('modal-handover-remind')">취소</button>
+                <button class="btn-pfto btn-pfto--md" type="button">보내기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 인재풀 등록 -->
+    <div id="modal-talent-pool-register" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-talent-pool-register')"></div>
+        <div class="modal__dialog modal__dialog--sm">
+            <div class="modal__header">
+                <h2 class="modal__title">인재풀 등록</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-talent-pool-register')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__talentpool-desc">다음 정보가 Fitple 인재풀에 등록됩니다.</p>
+                <div class="modal__talentpool-list">
+                    <div class="modal__talentpool-item modal__talentpool-item--checked">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="modal__talentpool-icon">
+                        <span class="modal__talentpool-text">직원 기본 정보 (직책, 경력, 스킬)</span>
+                    </div>
+                    <div class="modal__talentpool-item modal__talentpool-item--checked">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="modal__talentpool-icon">
+                        <span class="modal__talentpool-text">핏체크 결과</span>
+                    </div>
+                    <div class="modal__talentpool-item modal__talentpool-item--checked">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="modal__talentpool-icon">
+                        <span class="modal__talentpool-text">재배치 프로필</span>
+                    </div>
+                    <div class="modal__talentpool-item modal__talentpool-item--unchecked">
+                        <img src="assets/에셋/Flat icons/cancle.svg" alt="" class="modal__talentpool-icon">
+                        <span class="modal__talentpool-text">추천서 (미생성)</span>
+                    </div>
+                </div>
+                <div class="modal__talentpool-warning">
+                    <div class="modal__talentpool-warning-icon">
+                        <img src="assets/에셋/Flat icons/warning.svg" alt="">
+                    </div>
+                    <div class="modal__talentpool-warning-text">
+                        <strong>주의</strong><br>
+                        인재풀 등록 후에는 오프보딩을 취소할 수 없습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-talent-pool-register')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="updateCardState('talent-pool', 'filled'); closeModal('modal-talent-pool-register');">등록</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 피드백 요청 -->
+    <div id="modal-exit-feedback" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-exit-feedback')"></div>
+        <div class="modal__dialog modal__dialog--md">
+            <div class="modal__header">
+                <h2 class="modal__title">피드백 요청</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-exit-feedback')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__feedback-desc">
+                    퇴사하는 직원에게 피드백을 요청합니다.<br>
+                    수집된 피드백은 익명으로 처리됩니다.
+                </p>
+                <div class="modal__feedback-preview">
+                    <div class="modal__feedback-preview-title">직원에게 발송되는 메시지 미리보기</div>
+                    <div class="modal__feedback-preview-content">
+                        <p><strong>"(주)테크컴퍼니"</strong>에서 퇴사 피드백을 요청했습니다.</p>
+                        <p>솔직한 피드백은 회사 개선에 도움이 됩니다.<br>작성된 피드백은 익명으로 처리됩니다.</p>
+                    </div>
+                </div>
+                <div class="modal__feedback-timing">
+                    <label class="modal__feedback-timing-label">발송 시점</label>
+                    <div class="modal__feedback-timing-options">
+                        <label class="modal__feedback-timing-option modal__feedback-timing-option--selected">
+                            <input type="radio" name="send-timing" value="now" checked>
+                            <span class="modal__feedback-timing-radio"></span>
+                            <div class="modal__feedback-timing-text">
+                                <div class="modal__feedback-timing-title">지금 발송</div>
+                                <div class="modal__feedback-timing-desc">버튼 클릭 즉시 피드백 요청이 발송됩니다.</div>
+                            </div>
+                        </label>
+                        <label class="modal__feedback-timing-option">
+                            <input type="radio" name="send-timing" value="on-departure">
+                            <span class="modal__feedback-timing-radio"></span>
+                            <div class="modal__feedback-timing-text">
+                                <div class="modal__feedback-timing-title">퇴사일에 발송</div>
+                                <div class="modal__feedback-timing-desc">2025.12.31에 자동으로 발송됩니다.</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-exit-feedback')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="updateCardState('exit-feedback', 'filled'); closeModal('modal-exit-feedback');">요청 발송</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: AI 추천서 생성 -->
+    <div id="modal-recommendation-letter" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-recommendation-letter')"></div>
+        <div class="modal__dialog modal__dialog--recommendation-letter">
+            <!-- Header with Gradient -->
+            <div class="modal__header modal__header--gradient">
+                <div class="modal__header-left">
+                    <div class="modal__header-icon-box">
+                        <img src="assets/에셋/Flat icons/profile.svg" alt="" width="22" height="22">
+                    </div>
+                    <div class="modal__header-info">
+                        <h2 class="modal__header-title">AI 추천서 생성</h2>
+                        <div class="modal__header-subtitle">김민수 · 프론트엔드 개발자</div>
+                    </div>
+                </div>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-recommendation-letter')">
+                    <span class="btn-s__icon" style="filter: brightness(0) invert(1);">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Body: Sidebar + Content -->
+            <div class="modal__body modal__body--letter">
+                <!-- Left Sidebar (280px) -->
+                <aside class="modal__sidebar modal__sidebar--letter">
+                    <div class="modal__sidebar-title-sm">참조 데이터</div>
+                    
+                    <!-- Card 1: 핏체크 결과 -->
+                    <div class="modal__ref-card">
+                        <div class="modal__ref-card-header">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" width="16" height="16">
+                            <span class="modal__ref-card-title">핏체크 결과</span>
+                            <span class="modal__ref-badge">반영됨</span>
+                        </div>
+                        <div class="modal__ref-card-body">
+                            <div class="modal__fitcheck-grid">
+                                <div class="modal__fitcheck-cell">
+                                    <div class="modal__fitcheck-cell-label">종합</div>
+                                    <div class="modal__fitcheck-cell-value modal__fitcheck-cell-value--primary">3.0</div>
+                                </div>
+                                <div class="modal__fitcheck-cell">
+                                    <div class="modal__fitcheck-cell-label">업무</div>
+                                    <div class="modal__fitcheck-cell-value">3.2</div>
+                                </div>
+                                <div class="modal__fitcheck-cell">
+                                    <div class="modal__fitcheck-cell-label">협업</div>
+                                    <div class="modal__fitcheck-cell-value">2.8</div>
+                                </div>
+                                <div class="modal__fitcheck-cell">
+                                    <div class="modal__fitcheck-cell-label">문화</div>
+                                    <div class="modal__fitcheck-cell-value">2.5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: 재배치 프로필 -->
+                    <div class="modal__ref-card">
+                        <div class="modal__ref-card-header">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" width="16" height="16">
+                            <span class="modal__ref-card-title">재배치 프로필</span>
+                            <span class="modal__ref-badge">반영됨</span>
+                        </div>
+                        <div class="modal__ref-card-body">
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">추천 의향:</span>
+                                <span class="modal__ref-info-value">4/5</span>
+                            </div>
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">추천 직무:</span>
+                                <span class="modal__ref-info-value">백오피스, 어드민</span>
+                            </div>
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">협업 스타일:</span>
+                                <span class="modal__ref-info-value">독립적 작업 선호, 비동기 커뮤니케이션</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: 직원 정보 -->
+                    <div class="modal__ref-card">
+                        <div class="modal__ref-card-header">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" width="16" height="16">
+                            <span class="modal__ref-card-title">직원 정보</span>
+                            <span class="modal__ref-badge">반영됨</span>
+                        </div>
+                        <div class="modal__ref-card-body">
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">직책:</span>
+                                <span class="modal__ref-info-value">프론트엔드 개발자</span>
+                            </div>
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">경력:</span>
+                                <span class="modal__ref-info-value">3년</span>
+                            </div>
+                            <div class="modal__ref-info-item">
+                                <span class="modal__ref-info-label">주요 스킬:</span>
+                                <span class="modal__ref-info-value">React, TypeScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                
+                <!-- Right Content -->
+                <div class="modal__main-content modal__main-content--letter">
+                    <!-- Header: 생성된 추천서 + 버튼들 -->
+                    <div class="modal__letter-top">
+                        <div class="modal__letter-top-left">
+                            <span class="modal__letter-top-title">생성된 추천서</span>
+                            <span class="modal__ai-badge">AI Generated</span>
+                        </div>
+                        <div class="modal__letter-top-right">
+                            <button class="btn-soti btn-soti--xxsm" type="button">
+                                <span class="btn-s__icon" aria-hidden="true">
+                                    <img src="assets/에셋/Flat icons/setting.svg" alt="" width="12" height="12">
+                                </span>
+                                <span class="btn-s__label">톤 조절</span>
+                            </button>
+                            <button class="btn-soti btn-soti--xxsm" type="button">
+                                <span class="btn-s__icon" aria-hidden="true">
+                                    <img src="assets/에셋/Flat icons/file.svg" alt="" width="12" height="12">
+                                </span>
+                                <span class="btn-s__label">직접 편집</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 추천서 본문 카드 -->
+                    <div class="modal__letter-card">
+                        <div class="modal__letter-card-header">
+                            <div class="modal__letter-subtitle">LETTER OF RECOMMENDATION</div>
+                            <h3 class="modal__letter-title">인재 추천서</h3>
+                        </div>
+                        <div class="modal__letter-card-body">
+                            <p><strong>김민수</strong>님은 프론트엔드 개발 분야에서 <strong>3년간의 실무 경력</strong>을 보유한 개발자입니다. 특히 <strong>React 와 TypeScript</strong> 기반의 프로젝트에서 깊은 이해도와 문제 해결 능력을 보여주었습니다.</p>
+                            <p>핏체크 평가 결과, <strong>업무 성과(3.2점)</strong>와 <strong>성장 가능성(3.5점)</strong>에서 우수한 평가를 받았습니다. 복 잡한 UI 컴포넌트 설계와 성능 최적화 업무에서 특히 뛰어난 역량을 발휘했으며, 코드 리뷰 및 기술 공유 활동에도 적극적으로 참여했습니다.</p>
+                            <p>협업 방식에 있어서는 <strong>명확한 요구사항 정의를 바탕으로 독립적으로 업무를 수행</strong>하는 것을 선호합니다. 비동기 커뮤니케이션과 문서화에 강점을 가지고 있어, 체계적인 프로세스가 갖춰진 조직에서 안정적인 성과를 낼 수 있을 것으로 기대됩니다.</p>
+                            <p><strong>중견기업 이상의 규모</strong>에서 백오피스 시스템, 어드민 대시보드 등의 프로젝트에 적합하며,</p>
+                            <p class="modal__letter-highlight"><strong>5점 만점 중 4점의 추천 의향</strong>을 드립니다.</p>
+                        </div>
+                        <div class="modal__letter-card-footer">
+                            <div class="modal__letter-info-left">
+                                <div class="modal__letter-info-text">작성일: 2025년 12월 21일</div>
+                                <div class="modal__letter-info-text">작성자: (주)테크컴퍼니</div>
+                            </div>
+                            <div class="modal__letter-info-right">
+                                <div class="modal__letter-logo">fitple</div>
+                                <div class="modal__letter-powered">AI-Powered Recommendation</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 하단 인포 박스 -->
+                    <div class="modal__letter-notice">
+                        <img src="assets/에셋/Flat icons/info.svg" alt="" width="16" height="16">
+                        <span>추천서는 확정 후에도 언제든 수정하거나 재생성할 수 있습니다.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="modal__footer">
+                <button class="btn-stri btn-stri--md" type="button">
+                    <span class="btn-s__icon" aria-hidden="true">
+                        <img src="assets/에셋/Flat icons/refresh.svg" alt="" width="20" height="20">
+                    </span>
+                    <span class="btn-s__label">다시 생성</span>
+                </button>
+                <div class="modal__footer-actions">
+                    <button class="btn-soto btn-soto--lg" type="button" onclick="closeModal('modal-recommendation-letter')">취소</button>
+                    <button class="btn-pfto btn-pfto--lg" type="button" onclick="switchToFilledState('recommendation'); closeModal('modal-recommendation-letter'); showToast('추천서가 생성되었습니다.');">수정완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: 인재풀 공개 프로필 미리보기 -->
+    <div id="modal-talent-pool-preview" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-talent-pool-preview')"></div>
+        <div class="modal__dialog modal__dialog--talent-pool-preview">
+            <div class="modal__header">
+                <h2 class="modal__title"> 인재풀 공개 프로필 미리보기</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-talent-pool-preview')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="modal__info-banner">
+                    <img src="assets/에셋/Flat icons/profile.svg" alt="" class="modal__info-icon">
+                    구인 기업이 인재풀에서 이 프로필을 발견했을 때 보는 화면입니다.
+                </div>
+                <div class="modal__profile">
+                    <div class="modal__profile-header">
+                        <div class="modal__profile-avatar">김</div>
+                        <div class="modal__profile-info">
+                            <h3 class="modal__profile-name">김민수</h3>
+                            <div class="modal__profile-title">프론트엔드 개발자 · 3년차</div>
+                            <div class="modal__profile-company">
+                                <img src="assets/에셋/Flat icons/profile.svg" alt="" class="modal__profile-company-icon">
+                                (주)테크컴퍼니에서 추천
+                            </div>
+                        </div>
+                        <div class="modal__profile-fitcheck">
+                            <div class="modal__profile-fitcheck-label">핏체크</div>
+                            <div class="modal__profile-fitcheck-score">3.0</div>
+                            <div class="modal__profile-fitcheck-max">/ 5.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal__profile-section">
+                        <h4 class="modal__profile-section-title">보유 스킬</h4>
+                        <div class="modal__profile-tags">
+                            <span class="modal__profile-tag">React</span>
+                            <span class="modal__profile-tag">TypeScript</span>
+                            <span class="modal__profile-tag">Next.js</span>
+                            <span class="modal__profile-tag">Node.js</span>
+                            <span class="modal__profile-tag">GraphQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal__profile-section">
+                        <h4 class="modal__profile-section-title">핏체크 상세</h4>
+                        <div class="modal__profile-fitcheck-grid">
+                            <div class="modal__profile-fitcheck-card">
+                                <div class="modal__profile-fitcheck-card-label">업무 성과</div>
+                                <div class="modal__profile-fitcheck-card-score">3.2</div>
+                            </div>
+                            <div class="modal__profile-fitcheck-card">
+                                <div class="modal__profile-fitcheck-card-label">협업</div>
+                                <div class="modal__profile-fitcheck-card-score">2.8</div>
+                            </div>
+                            <div class="modal__profile-fitcheck-card">
+                                <div class="modal__profile-fitcheck-card-label">문화 적합</div>
+                                <div class="modal__profile-fitcheck-card-score">2.5</div>
+                            </div>
+                            <div class="modal__profile-fitcheck-card">
+                                <div class="modal__profile-fitcheck-card-label">성장 가능성</div>
+                                <div class="modal__profile-fitcheck-card-score text-success">3.5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal__profile-section">
+                        <h4 class="modal__profile-section-title">재배치 정보</h4>
+                        <div class="modal__profile-grid">
+                            <div class="modal__profile-info-card">
+                                <div class="modal__profile-info-label">추천 의향</div>
+                                <div class="modal__profile-stars">
+                                    <span class="star star--filled">★</span>
+                                    <span class="star star--filled">★</span>
+                                    <span class="star star--filled">★</span>
+                                    <span class="star star--filled">★</span>
+                                    <span class="star">★</span>
+                                    <span class="modal__profile-stars-text">4 / 5</span>
+                                </div>
+                            </div>
+                            <div class="modal__profile-info-card">
+                                <div class="modal__profile-info-label">추천 직무</div>
+                                <div class="modal__profile-info-value">프론트엔드 개발, 풀스택 개발</div>
+                            </div>
+                            <div class="modal__profile-info-card">
+                                <div class="modal__profile-info-label">협업 스타일</div>
+                                <div class="modal__profile-info-value">독립적 업무 수행, 비동기 커뮤니케이션 선호</div>
+                            </div>
+                            <div class="modal__profile-info-card">
+                                <div class="modal__profile-info-label">적합한 환경</div>
+                                <div class="modal__profile-info-value">체계적인 프로세스, 중견기업 이상</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal__profile-section">
+                        <h4 class="modal__profile-section-title">추천서</h4>
+                        <div class="modal__profile-ai-badge">
+                            <img src="assets/에셋/Flat icons/profile.svg" alt="" class="modal__profile-ai-icon">
+                            AI 추천서 포함
+                        </div>
+                        <div class="modal__profile-letter">
+                            <div class="modal__profile-letter-header">
+                                <div class="modal__profile-letter-subtitle">Letter of Recommendation</div>
+                                <h3 class="modal__profile-letter-title">인재 추천서</h3>
+                            </div>
+                            <div class="modal__profile-letter-body">
+                                <p><strong>김민수</strong>님은 프론트엔드 개발 분야에서 <strong>3년간의 실무 경력</strong>을 보유한 개발자입니다. 특히 <strong>React 와 TypeScript</strong> 기반의 프로젝트에서 깊은 이해도와 문제 해결 능력을 보여주었습니다.</p>
+                                <p>핏체크 평가 결과, <strong>업무 성과(3.2점)</strong>와 <strong>성장 가능성(3.5점)</strong>에서 우수한 평가를 받았습니다. 복잡한 UI 컴포넌트 설계와 성능 최적화 업무에서 특히 뛰어난 역량을 발휘했으며, 코드 리뷰 및 기술 공유 활동에도 적극적으로 참여했습니다.</p>
+                                <p>협업 방식에 있어서는 <strong>명확한 요구사항 정의를 바탕으로 독립적으로 업무를 수행</strong>하는 것을 선호합니다. 비동기 커뮤니케이션과 문서화에 강점을 가지고 있어, 체계적인 프로세스가 갖춰진 조직에서 안정적인 성과를 낼 수 있을 것으로 기대됩니다.</p>
+                                <p><strong>중견기업 이상의 규모</strong>에서 백오피스 시스템, 어드민 대시보드 등의 프로젝트에 적합하며, <strong style="color: #6277ff;">5점 만점 중 4점의 추천 의향</strong>을 드립니다.</p>
+                            </div>
+                            <div class="modal__profile-letter-footer">
+                                <div>
+                                    <div class="text-muted" style="font-size: 12px;">작성일: 2025년 12월 21일</div>
+                                    <div class="text-muted" style="font-size: 12px;">작성자: (주)테크컴퍼니</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-primary" style="font-weight: bold; font-size: 18px;">fitple</div>
+                                    <div class="text-muted" style="font-size: 10px;">AI-Powered Recommendation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-prto btn-prto--xlg" type="button">프로필 수정</button>
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-talent-pool-preview')">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal: 핏체크 이력 -->
+    <div id="modal-fitcheck-history" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="if(event.target === this) closeModal('modal-fitcheck-history')"></div>
+        <div class="modal__dialog modal__dialog--fitcheck-history">
+            <!-- Header -->
+            <div class="modal__header modal__header--fitcheck">
+                <h2 class="modal__title modal__title--fitcheck">핏체크 이력 · 김민수</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-fitcheck-history')">
+                    <span class="btn-s__icon" aria-hidden="true">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="">
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <div class="modal__body modal__body--fitcheck">
+                <!-- Employee Info Card -->
+                <div class="fitcheck__info-card">
+                    <div class="fitcheck__info-left">
+                        <div class="fitcheck__avatar">민</div>
+                        <div class="fitcheck__info-details">
+                            <div class="fitcheck__info-name">김민수</div>
+                            <div class="fitcheck__info-subtitle">프론트엔드 개발자 · 개발팀 · 2022.03 입사</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__info-right">
+                        <div class="fitcheck__info-label">총 핏체크</div>
+                        <div class="fitcheck__info-count">3회</div>
+                    </div>
+                </div>
+                
+                <!-- Summary Cards -->
+                <div class="fitcheck__summary-grid">
+                    <div class="fitcheck__summary-card">
+                        <div class="fitcheck__summary-label">평균 종합</div>
+                        <div class="fitcheck__summary-score">3.2</div>
+                    </div>
+                    <div class="fitcheck__summary-card">
+                        <div class="fitcheck__summary-label">최근 종합</div>
+                        <div class="fitcheck__summary-score fitcheck__summary-score--down">3.0 ↓</div>
+                    </div>
+                    <div class="fitcheck__summary-card">
+                        <div class="fitcheck__summary-label">교차검증</div>
+                        <div class="fitcheck__summary-score fitcheck__summary-score--warning">컬처 갭</div>
+                    </div>
+                </div>
+                
+                <!-- History Item 1 (Latest) -->
+                <div class="fitcheck__history-card">
+                    <div class="fitcheck__history-header">
+                        <div class="fitcheck__history-score-box">
+                            <div class="fitcheck__history-score fitcheck__history-score--primary">3.0</div>
+                            <div class="fitcheck__history-change fitcheck__history-change--down">▼ 0.2</div>
+                        </div>
+                        <div class="fitcheck__history-info">
+                            <div class="fitcheck__history-title-row">
+                                <div class="fitcheck__history-title">3회차 정기 핏체크</div>
+                                <div class="fitcheck__badge fitcheck__badge--warning">컬처 갭 감지</div>
+                            </div>
+                            <div class="fitcheck__history-meta">2025.12.05 · 평가자: 이팀장</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__history-scores">
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">업무</div>
+                            <div class="fitcheck__score-value">3.2</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">협업</div>
+                            <div class="fitcheck__score-value fitcheck__score-value--warning">2.8</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">문화</div>
+                            <div class="fitcheck__score-value fitcheck__score-value--warning">2.5</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">성장</div>
+                            <div class="fitcheck__score-value">3.5</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__comment">
+                        <strong>코멘트:</strong> 독립적인 업무 환경에서 높은 성과를 보이나, 팀 협업 상황에서 커뮤니케이션 빈도가 낮아 오해가 발생하는 경우가 있었습니다. 팀 미팅 참여도와 적극적인 의견 공유가 개선되면 좋겠습니다.
+                    </div>
+                </div>
+                
+                <!-- History Item 2 -->
+                <div class="fitcheck__history-card">
+                    <div class="fitcheck__history-header">
+                        <div class="fitcheck__history-score-box">
+                            <div class="fitcheck__history-score fitcheck__history-score--primary">3.2</div>
+                            <div class="fitcheck__history-change fitcheck__history-change--down">▼ 0.3</div>
+                        </div>
+                        <div class="fitcheck__history-info">
+                            <div class="fitcheck__history-title">2회차 정기 핏체크</div>
+                            <div class="fitcheck__history-meta">2025.09.10 · 평가자: 이팀장</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__history-scores">
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">업무</div>
+                            <div class="fitcheck__score-value">3.4</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">협업</div>
+                            <div class="fitcheck__score-value">3.0</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">문화</div>
+                            <div class="fitcheck__score-value fitcheck__score-value--warning-orange">2.8</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">성장</div>
+                            <div class="fitcheck__score-value">3.6</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__comment">
+                        <strong>코멘트:</strong> 기술적 역량은 우수하나, 팀 문화와의 적합성에서 약간의 갭이 느껴집니다. 본인의 업무 스타일에 대해 팀과 더 소통하면 좋겠습니다.
+                    </div>
+                </div>
+                
+                <!-- History Item 3 (First) -->
+                <div class="fitcheck__history-card">
+                    <div class="fitcheck__history-header">
+                        <div class="fitcheck__history-score-box">
+                            <div class="fitcheck__history-score fitcheck__history-score--success">3.5</div>
+                            <div class="fitcheck__history-change fitcheck__history-change--first">첫 평가</div>
+                        </div>
+                        <div class="fitcheck__history-info">
+                            <div class="fitcheck__history-title">1회차 정기 핏체크</div>
+                            <div class="fitcheck__history-meta">2025.06.15 · 평가자: 이팀장</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__history-scores">
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">업무</div>
+                            <div class="fitcheck__score-value">3.6</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">협업</div>
+                            <div class="fitcheck__score-value">3.4</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">문화</div>
+                            <div class="fitcheck__score-value">3.2</div>
+                        </div>
+                        <div class="fitcheck__score-item">
+                            <div class="fitcheck__score-label">성장</div>
+                            <div class="fitcheck__score-value">3.8</div>
+                        </div>
+                    </div>
+                    <div class="fitcheck__comment">
+                        <strong>코멘트:</strong> 입사 초기 적응을 잘 해내고 있습니다. 기술 습득 속도가 빠르고 맡은 업무에 대한 책임감이 강합니다. 앞으로의 성장이 기대됩니다.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="modal__footer modal__footer--fitcheck">
+                <button class="btn-stri btn-stri--lg" type="button">
+                    <span class="btn-s__icon" aria-hidden="true">
+                        <img src="assets/에셋/Icons/Arrow/Diagonal/Right Up.svg" alt="" width="20" height="20">
+                    </span>
+                    <span class="btn-s__label">핏체크 상세페이지로 이동</span>
+                </button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="closeModal('modal-fitcheck-history')">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast-container"></div>
+    <script src="js/app.js?v=3"></script>
+    <script src="js/offboarding-detail.js"></script>
+</body>
+</html>
+
+</html>
+

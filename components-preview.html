@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitple - Components Preview</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar (reuse existing structure) -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" class="logo-img" alt="fitple" />
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/home.svg" class="nav-icon" alt="" />
+                        <span>대시보드</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="" />
+                        <span>직원 관리</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="" />
+                        <span>온보딩 관리</span>
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="" />
+                        <span>오프보딩 관리</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="" />
+                        <span>추천 인재 목록</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="" />
+                    <span>설정</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/help.svg" class="nav-icon" alt="" />
+                    <span>고객 지원</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <span>Design System</span>
+                    <span class="separator">›</span>
+                    <span class="current">Components Preview</span>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" type="button" onclick="showToast('알림 클릭', 'success')">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="알림" />
+                    </button>
+                    <button class="icon-btn" type="button" onclick="showToast('설정 클릭', 'success')">
+                        <img src="assets/에셋/Icons/Settings/Setting 1.svg" alt="설정" />
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <span class="user-name">김인사</span>
+                            <span class="user-role">HR 매니저</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">Components Preview</h1>
+                    <p class="preview-note">
+                        - 실제 상태 확인: hover/active/focus/disabled<br />
+                        - Figma 상태 강제 확인: <code>.is-hovered</code>, <code>.is-pressed</code>, <code>.is-focused</code>, <code>.is-disabled</code>
+                    </p>
+                </div>
+
+                <div class="preview-page">
+                    <!-- Buttons -->
+                    <section class="preview-section">
+                        <div class="preview-section__title">Buttons</div>
+                        <div class="preview-grid">
+                            <div class="card preview-card">
+                                <div class="preview-caption">Primary (Filled / Outlined / Transparent)</div>
+                                <div class="preview-row">
+                                    <button class="btn-pfti btn-pfti--md" type="button">
+                                        <img class="btn-pfti__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                        <span class="btn-pfti__label">Primary Filled</span>
+                                    </button>
+                                    <button class="btn-poto btn-poto--md" type="button">
+                                        <span class="btn-poto__label">Primary Outlined</span>
+                                    </button>
+                                    <button class="btn-prto btn-prto--md" type="button">
+                                        <span class="btn-prto__label">Primary Transparent</span>
+                                    </button>
+                                </div>
+                                <div class="preview-row">
+                                    <button class="btn-pfto btn-pfto--sm" type="button">Text Only</button>
+                                    <button class="btn-pfio btn-pfio--sm" type="button" aria-label="icon only">
+                                        <img class="btn-pfio__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                    <button class="btn-poio btn-poio--sm" type="button" aria-label="outlined icon only">
+                                        <img class="btn-poio__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                    <button class="btn-prio btn-prio--sm" type="button" aria-label="transparent icon only">
+                                        <img class="btn-prio__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                </div>
+                                <div class="preview-divider"></div>
+                                <div class="preview-row">
+                                    <button class="btn-pfti btn-pfti--md is-hovered" type="button">
+                                        <img class="btn-pfti__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                        <span class="btn-pfti__label">Forced Hover</span>
+                                    </button>
+                                    <button class="btn-pfti btn-pfti--md is-pressed" type="button">
+                                        <img class="btn-pfti__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                        <span class="btn-pfti__label">Forced Pressed</span>
+                                    </button>
+                                    <button class="btn-pfti btn-pfti--md" type="button" disabled>
+                                        <img class="btn-pfti__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                        <span class="btn-pfti__label">Disabled</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">CTA + Neutral(Secondary)</div>
+                                <div class="preview-row">
+                                    <button class="btn-ctfti btn-ctfti--md" type="button">
+                                        <span class="btn-cta__label">CTA Filled</span>
+                                        <img class="btn-cta__icon" src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" />
+                                    </button>
+                                    <button class="btn-ctfto btn-ctfto--md" type="button">CTA Text</button>
+                                    <button class="btn-ctfio btn-ctfio--md" type="button" aria-label="cta icon only">
+                                        <img class="btn-cta__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                </div>
+                                <div class="preview-row">
+                                    <button class="btn-sfti btn-sfti--md" type="button">
+                                        <span class="btn-s__label">Neutral Filled</span>
+                                        <img class="btn-s__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                    <button class="btn-soto btn-soto--md" type="button">
+                                        <span class="btn-s__label">Neutral Outlined</span>
+                                    </button>
+                                    <button class="btn-stro btn-stro--md" type="button">
+                                        <span class="btn-s__label">Neutral Transparent</span>
+                                    </button>
+                                </div>
+                                <div class="preview-divider"></div>
+                                <div class="preview-row">
+                                    <button class="btn-ctfti btn-ctfti--md is-hovered" type="button">
+                                        <span class="btn-cta__label">CTA Hover</span>
+                                        <img class="btn-cta__icon" src="assets/에셋/Icons/Checkmark/Checkmark.svg" alt="" />
+                                    </button>
+                                    <button class="btn-sfti btn-sfti--md is-pressed" type="button">
+                                        <span class="btn-s__label">Neutral Pressed</span>
+                                        <img class="btn-s__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                    <button class="btn-sfti btn-sfti--md" type="button" disabled>
+                                        <span class="btn-s__label">Neutral Disabled</span>
+                                        <img class="btn-s__icon" src="assets/에셋/Icons/Plus/Plus.svg" alt="" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Inputs -->
+                    <section class="preview-section">
+                        <div class="preview-section__title">Inputs / Dropdown</div>
+                        <div class="preview-grid">
+                            <div class="card preview-card">
+                                <div class="preview-caption">Outlined input (label above)</div>
+                                <div class="preview-row preview-row--col">
+                                    <div class="fi-input fi-input--label-above fi-input--md">
+                                        <div class="fi-input__label">
+                                            <span class="fi-input__label-text">label</span>
+                                        </div>
+                                        <div class="fi-input__control" tabindex="0">
+                                            <div class="fi-input__text">
+                                                <span class="fi-input__placeholder">placeholder</span>
+                                            </div>
+                                            <span class="fi-input__icon">
+                                                <img src="assets/에셋/Icons/Search.svg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div class="fi-input__helper">helper text</div>
+                                    </div>
+                                    <div class="fi-input fi-input--label-above fi-input--md is-focused">
+                                        <div class="fi-input__label">
+                                            <span class="fi-input__label-text">focused</span>
+                                        </div>
+                                        <div class="fi-input__control" tabindex="0">
+                                            <div class="fi-input__text">
+                                                <span class="fi-input__value">value</span>
+                                            </div>
+                                            <span class="fi-input__icon">
+                                                <img src="assets/에셋/Icons/Search.svg" alt="" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">Outlined search (addon)</div>
+                                <div class="preview-row preview-row--col">
+                                    <div class="fi-input fi-input--label-above fi-input--search fi-input--lg">
+                                        <div class="fi-input__label">
+                                            <span class="fi-input__label-text">search</span>
+                                        </div>
+                                        <div class="fi-input__control" tabindex="0">
+                                            <div class="fi-input__text">
+                                                <span class="fi-input__placeholder">검색어 입력</span>
+                                            </div>
+                                            <button class="fi-input__addon" type="button" onclick="showToast('검색', 'success')">
+                                                <span class="fi-input__addon-text">Search</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="fi-input fi-input--label-above fi-input--md is-disabled">
+                                        <div class="fi-input__label">
+                                            <span class="fi-input__label-text">disabled</span>
+                                        </div>
+                                        <div class="fi-input__control">
+                                            <div class="fi-input__text">
+                                                <span class="fi-input__placeholder">disabled</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Switch / Checkbox -->
+                    <section class="preview-section">
+                        <div class="preview-section__title">Selection Controls</div>
+                        <div class="preview-grid">
+                            <div class="card preview-card">
+                                <div class="preview-caption">Switch</div>
+                                <div class="preview-row">
+                                    <label class="fi-switch fi-switch--only is-on">
+                                        <input class="fi-switch__input" type="checkbox" checked />
+                                        <span class="fi-switch__switch" aria-hidden="true">
+                                            <span class="fi-switch__track"></span>
+                                            <span class="fi-switch__thumb"></span>
+                                        </span>
+                                    </label>
+                                    <label class="fi-switch fi-switch--label-right">
+                                        <input class="fi-switch__input" type="checkbox" />
+                                        <span class="fi-switch__switch" aria-hidden="true">
+                                            <span class="fi-switch__track"></span>
+                                            <span class="fi-switch__thumb"></span>
+                                        </span>
+                                        <span class="fi-switch__label">switch + label</span>
+                                    </label>
+                                </div>
+                                <div class="preview-row">
+                                    <label class="fi-switch fi-switch--only is-on is-hovered">
+                                        <input class="fi-switch__input" type="checkbox" checked />
+                                        <span class="fi-switch__switch" aria-hidden="true">
+                                            <span class="fi-switch__track"></span>
+                                            <span class="fi-switch__thumb"></span>
+                                        </span>
+                                    </label>
+                                    <label class="fi-switch fi-switch--only is-on is-pressed">
+                                        <input class="fi-switch__input" type="checkbox" checked />
+                                        <span class="fi-switch__switch" aria-hidden="true">
+                                            <span class="fi-switch__track"></span>
+                                            <span class="fi-switch__thumb"></span>
+                                        </span>
+                                    </label>
+                                    <label class="fi-switch fi-switch--only is-disabled is-on">
+                                        <input class="fi-switch__input" type="checkbox" checked disabled />
+                                        <span class="fi-switch__switch" aria-hidden="true">
+                                            <span class="fi-switch__track"></span>
+                                            <span class="fi-switch__thumb"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">Checkbox / Indeterminate / Circle</div>
+                                <div class="preview-row preview-row--col">
+                                    <label class="fi-check fi-check--selected">
+                                        <input class="fi-check__input" type="checkbox" checked />
+                                        <span class="fi-check__wrap">
+                                            <span class="fi-check__box"></span>
+                                        </span>
+                                        <span class="fi-check__label">selected</span>
+                                    </label>
+
+                                    <label class="fi-check fi-check--indeterminate">
+                                        <input id="chk-indeterminate" class="fi-check__input" type="checkbox" />
+                                        <span class="fi-check__wrap">
+                                            <span class="fi-check__box"></span>
+                                        </span>
+                                        <span class="fi-check__label">indeterminate</span>
+                                    </label>
+
+                                    <label class="fi-check fi-check--unselected">
+                                        <input class="fi-check__input" type="checkbox" />
+                                        <span class="fi-check__wrap">
+                                            <span class="fi-check__box"></span>
+                                        </span>
+                                        <span class="fi-check__label">unselected</span>
+                                    </label>
+
+                                    <label class="fi-check fi-check--circle fi-check--selected">
+                                        <input class="fi-check__input" type="checkbox" checked />
+                                        <span class="fi-check__wrap">
+                                            <span class="fi-check__box"></span>
+                                        </span>
+                                        <span class="fi-check__label">circle selected</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Segment Control -->
+                    <section class="preview-section">
+                        <div class="preview-section__title">Segment Control</div>
+                        <div class="preview-grid">
+                            <div class="card preview-card">
+                                <div class="preview-caption">size=lg / label=none / segments=3</div>
+                                <div class="fi-seg fi-seg--lg" data-seg-group>
+                                    <div class="fi-seg__control">
+                                        <button class="fi-seg__item" type="button" data-seg aria-pressed="true">Option</button>
+                                        <button class="fi-seg__item" type="button" data-seg aria-pressed="false">Option</button>
+                                        <button class="fi-seg__item" type="button" data-seg aria-pressed="false">Option</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">size=md / label=left / segments=2</div>
+                                <div class="fi-seg fi-seg--md fi-seg--label-left" data-seg-group>
+                                    <div class="fi-seg__label">
+                                        label <span class="fi-seg__required">*</span>
+                                    </div>
+                                    <div class="fi-seg__control">
+                                        <button class="fi-seg__item" type="button" data-seg aria-pressed="true">Option</button>
+                                        <button class="fi-seg__item" type="button" data-seg aria-pressed="false">Option</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Tabs -->
+                    <section class="preview-section">
+                        <div class="preview-section__title">Tabs (Horizontal)</div>
+                        <div class="preview-grid">
+                            <div class="card preview-card">
+                                <div class="preview-caption">icon above (lg)</div>
+                                <div class="preview-row" data-tabset>
+                                    <button class="fi-tab fi-tab--lg fi-tab--icon-above is-selected" type="button" role="tab" aria-selected="true">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                                                <use href="assets/에셋/Icons/blank.svg#icon"></use>
+                                            </svg>
+                                        </span>
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--lg fi-tab--icon-above" type="button" role="tab" aria-selected="false">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--lg fi-tab--icon-above" type="button" role="tab" aria-selected="false" disabled>
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">icon before (md)</div>
+                                <div class="preview-row" data-tabset>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-before" type="button" role="tab" aria-selected="true">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-before" type="button" role="tab" aria-selected="false">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-before is-unselected is-hovered" type="button" role="tab" aria-selected="false">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                        <span class="fi-tab__label">Hover</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">text only (lg)</div>
+                                <div class="preview-row" data-tabset>
+                                    <button class="fi-tab fi-tab--lg fi-tab--text-only" type="button" role="tab" aria-selected="true">
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--lg fi-tab--text-only" type="button" role="tab" aria-selected="false">
+                                        <span class="fi-tab__label">Tab</span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--lg fi-tab--text-only is-unselected is-pressed" type="button" role="tab" aria-selected="false">
+                                        <span class="fi-tab__label">Pressed</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card preview-card">
+                                <div class="preview-caption">icon only (md)</div>
+                                <div class="preview-row" data-tabset>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-only" type="button" role="tab" aria-selected="true" aria-label="tab icon">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-only" type="button" role="tab" aria-selected="false" aria-label="tab icon">
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                    </button>
+                                    <button class="fi-tab fi-tab--md fi-tab--icon-only" type="button" role="tab" aria-selected="false" aria-label="tab icon" disabled>
+                                        <span class="fi-tab__icon" aria-hidden="true">
+                                            <img src="assets/에셋/Icons/blank.svg" alt="" />
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/components-preview.js"></script>
+</body>
+</html>
+
+

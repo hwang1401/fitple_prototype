@@ -1,0 +1,678 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+        "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+        "Source Han Sans CN", sans-serif;
+}
+
+.main-container {
+    overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+    box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+    outline: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 1920px;
+    min-width: 1920px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    overflow: hidden auto;
+}
+.group {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    min-width: 0;
+    height: 1080px;
+}
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    width: 239px;
+    height: 1080px;
+    background: #ffffff;
+    z-index: 1;
+}
+.box-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    padding: 16px 24px 16px 24px;
+    z-index: 2;
+}
+.group-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+    width: 110.142px;
+    height: 40px;
+    z-index: 3;
+}
+.pic {
+    flex-shrink: 0;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: url(./assets/images/dff9af04-b6ad-4fbb-b56d-c47f7fb61ab3.svg)
+        no-repeat center;
+    background-size: cover;
+    z-index: 4;
+}
+.pic-2 {
+    flex-shrink: 0;
+    position: relative;
+    width: 62.142px;
+    height: 25.997px;
+    background: url(./assets/images/4e9633f7-44c6-4664-b4d6-802950bcb06a.svg)
+        no-repeat center;
+    background-size: cover;
+    z-index: 5;
+}
+.box-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    position: relative;
+    width: 239px;
+    min-height: 0;
+    z-index: 6;
+}
+.group-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    position: relative;
+    min-width: 0;
+    padding: 0 16px 0 16px;
+    z-index: 7;
+}
+
+/* 사이드바 메뉴 */
+.box-4, .box-5, .section-3, .box-c, .wrapper-9 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.wrapper, .group-5, .section-4, .group-a, .group-d {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    padding: 16px 12px 8px 12px;
+}
+
+.text, .text-3, .text-7, .text-a, .text-d {
+    align-self: stretch;
+    flex-shrink: 0;
+    flex-basis: auto;
+    position: relative;
+    height: 17px;
+    color: #9ca3af;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 16.5px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.wrapper-2, .box-6, .section, .section-2, .box-9, .box-a, .group-b, .wrapper-8, .group-e {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    height: 40px;
+    padding: 0 12px 0 12px;
+    border-radius: 4px;
+}
+
+.text-2, .text-4, .text-5, .text-6, .text-8, .text-9, .text-b, .text-c, .text-e {
+    flex-shrink: 0;
+    flex-basis: auto;
+    position: relative;
+    height: 22px;
+    color: #5b5b5b;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.14px;
+    overflow: hidden;
+    max-width: 300px;
+}
+
+/* 하단 설정/고객지원 */
+.wrapper-b {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+    min-width: 0;
+    padding: 16px 16px 16px 16px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+/* 메인 컨텐츠 영역 */
+.box-10 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    position: relative;
+    min-height: 0;
+}
+
+/* 헤더 */
+.wrapper-c {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    height: 73px;
+    padding: 16px 16px 16px 16px;
+    background: #ffffff;
+}
+
+/* Breadcrumb */
+.group-11 {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+}
+
+.text-12, .text-14 {
+    color: #6b7280;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.text-16 {
+    color: #111827;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+}
+
+/* 인재 정보 영역 */
+.section-c {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    gap: 24px;
+    position: relative;
+    padding: 24px 24px 24px 24px;
+    overflow: hidden;
+}
+
+.text-1a {
+    color: #0a0a0a;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: -0.43px;
+}
+
+.text-1b {
+    color: #525252;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+/* 연락처 미공개 박스 */
+.section-f {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+    padding: 12px 16px 12px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+/* 매칭 분석 카드 */
+.group-1b {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    gap: 20px;
+    position: relative;
+    height: 442px;
+    padding: 24px 24px 24px 24px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.text-1f, .text-2a, .text-2e, .text-32, .text-38 {
+    color: #1a1a1a;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+/* 매칭률 */
+.text-20 {
+    color: #10b981;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 72px;
+}
+
+/* 프로그레스 바 */
+.wrapper-16 {
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
+    height: 12px;
+    background: #f5f5f5;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+/* 매칭 지표 */
+.section-11, .section-13, .wrapper-17 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    gap: 8px;
+    position: relative;
+    padding: 16px 16px 16px 16px;
+    background: #fafafa;
+    border-radius: 4px;
+}
+
+.text-23, .text-25, .text-27 {
+    color: #10b981;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+}
+
+/* AI 인사이트 박스 */
+.box-1c {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 12px;
+    position: relative;
+    padding: 16px 16px 16px 16px;
+    background: linear-gradient(177.18deg, #f0f9ff, #e0f2fe);
+    border: 1px solid #bae6fd;
+    border-radius: 4px;
+}
+
+.text-28 {
+    color: #0284c7;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 19.5px;
+}
+
+/* 핏 체크 점수 카드 */
+.box-1f {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    gap: 20px;
+    position: relative;
+    padding: 24px 24px 24px 24px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.text-2c {
+    color: #2c9371;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+/* 이력서/포트폴리오 카드 */
+.group-1f {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 16px;
+    position: relative;
+    padding: 16px 16px 16px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+/* 탭 */
+.text-2f {
+    color: #2c9371;
+    font-family: Arial, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+}
+
+.text-30 {
+    color: #666666;
+    font-family: Arial, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+}
+
+/* 기술 스택 카드 */
+.wrapper-1f {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 20px;
+    position: relative;
+    padding: 24px 24px 24px 24px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+/* 기술 태그 (매칭됨) */
+.group-23, .group-24, .group-25 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    position: relative;
+    padding: 6px 12px 6px 12px;
+    background: #dceee8;
+    border-radius: 4px;
+}
+
+.text-33, .text-34, .text-35 {
+    color: #0d7a5f;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 19.5px;
+}
+
+/* 기술 태그 (일반) */
+.wrapper-21, .box-26 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    position: relative;
+    padding: 6px 12px 6px 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.text-36, .text-37 {
+    color: #333333;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 19.5px;
+}
+
+/* 퇴사 사유 카드 */
+.section-1d {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 20px;
+    position: relative;
+    padding: 24px 24px 24px 24px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+/* 퇴사 사유 태그 */
+.section-1e {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 6px;
+    position: relative;
+    padding: 8px 14px 8px 14px;
+    background: #fff3e0;
+    border-radius: 4px;
+}
+
+.text-39 {
+    color: #b45309;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+}
+
+/* 하단 고정 바 */
+.group-28 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    padding: 16px 24px 16px 24px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* 프로필 아바타 */
+.box-28 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 9px 0 10px 0;
+    background: linear-gradient(135deg, #2c9371, #a8ddcb);
+    border-radius: 20px;
+}
+
+.text-3b {
+    color: #ffffff;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+}
+
+/* 티켓 정보 */
+.section-24 {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+    position: relative;
+    padding: 8px 16px 8px 16px;
+    background: #e9e8f3;
+    border-radius: 4px;
+}
+
+.text-3f {
+    color: #2c9371;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+}
+
+/* 저장 버튼 */
+.group-2a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    width: 72px;
+    height: 40px;
+    padding: 0 8px 0 8px;
+    border: 1px solid #c1c1c1;
+    border-radius: 4px;
+}
+
+.text-40 {
+    color: #5b5b5b;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+}
+
+/* 열람하기 버튼 */
+.group-2b {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    width: 232px;
+    height: 40px;
+    padding: 0 8px 0 8px;
+    background: #6277ff;
+    border-radius: 4px;
+}
+
+.text-41 {
+    color: #ffffff;
+    font-family: Pretendard, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+}
+

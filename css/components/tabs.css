@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Tabs (Horizontal)
+   Figma: 559:40348 (tab-horizontal section)
+
+   Variants:
+   - content: icon-above | icon-before | icon-after | text-only | icon-only
+   - status: selected | unselected
+   - state: default | hovered | pressed | focused | disabled
+   - size: lg | md
+
+   Notes:
+   - Use <button> (recommended) so :disabled works.
+   - Mark selected with aria-selected="true" (or .is-selected).
+   - For Figma state previews, you can force states with .is-hovered/.is-pressed/.is-focused/.is-disabled.
+   ========================================================================== */
+
+.fi-tab {
+    /* tokens (fallbacks from Figma vars) */
+    --fi-tab-primary: #2c9371;
+    --fi-tab-primary-hover: #63c7a6;
+    --fi-tab-primary-pressed: #34ad85;
+    --fi-tab-focus: #141414;
+
+    --fi-tab-text-selected: var(--fi-tab-primary);
+    --fi-tab-text-unselected: #999999; /* semantic/neutral/foreground/inverse/default */
+    --fi-tab-text-unselected-hover: #858585;
+    --fi-tab-text-unselected-pressed: #707070;
+
+    --fi-tab-text-disabled: #d6d6d6; /* semantic/neutral/stroke/normal/default */
+    --fi-tab-icon-selected: #333333; /* icon+text variants */
+    --fi-tab-icon-unselected: #999999;
+    --fi-tab-icon-disabled: #e0e0e0;
+
+    --fi-tab-underline: 2px;
+    --fi-tab-gap: 4px; /* spacing/sp40 */
+
+    /* sizing defaults (lg) */
+    --fi-tab-font-size: 18px;
+    --fi-tab-line-height: 1.445;
+    --fi-tab-letter-spacing: -0.0036px;
+    --fi-tab-icon-size: 24px;
+
+    --fi-tab-pad-x: 16px; /* spacing/sp120 */
+    --fi-tab-pad-y: 12px; /* spacing/sp120 */
+    --fi-tab-radius: 4px; /* radius/sm */
+
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: var(--fi-tab-pad-y) var(--fi-tab-pad-x);
+    border-radius: var(--fi-tab-radius);
+    cursor: pointer;
+    user-select: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fi-tab-gap);
+
+    position: relative;
+    white-space: nowrap;
+}
+
+.fi-tab__label {
+    font-family: var(--font);
+    font-size: var(--fi-tab-font-size);
+    line-height: var(--fi-tab-line-height);
+    letter-spacing: var(--fi-tab-letter-spacing);
+}
+
+.fi-tab__icon {
+    width: var(--fi-tab-icon-size);
+    height: var(--fi-tab-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: currentColor;
+}
+
+.fi-tab__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: currentColor;
+}
+
+/* Selected underline */
+.fi-tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--fi-tab-underline);
+    background: transparent;
+    border-radius: var(--fi-tab-underline);
+}
+
+.fi-tab[aria-selected="true"]::after,
+.fi-tab.is-selected::after {
+    background: var(--fi-tab-primary);
+}
+
+.fi-tab[aria-selected="true"].is-hovered::after,
+.fi-tab[aria-selected="true"]:hover::after {
+    background: var(--fi-tab-primary-hover);
+}
+
+.fi-tab[aria-selected="true"].is-pressed::after,
+.fi-tab[aria-selected="true"]:active::after {
+    background: var(--fi-tab-primary-pressed);
+}
+
+/* Colors: label and icon are intentionally independent (Figma) */
+.fi-tab[aria-selected="true"] .fi-tab__label,
+.fi-tab.is-selected .fi-tab__label {
+    font-weight: 700;
+    color: var(--fi-tab-text-selected);
+}
+
+.fi-tab:not([aria-selected="true"]) .fi-tab__label,
+.fi-tab.is-unselected .fi-tab__label {
+    font-weight: 400;
+    color: var(--fi-tab-text-unselected);
+}
+
+.fi-tab:not([aria-selected="true"]):hover .fi-tab__label,
+.fi-tab.is-unselected.is-hovered .fi-tab__label {
+    color: var(--fi-tab-text-unselected-hover);
+}
+
+.fi-tab:not([aria-selected="true"]):active .fi-tab__label,
+.fi-tab.is-unselected.is-pressed .fi-tab__label {
+    color: var(--fi-tab-text-unselected-pressed);
+}
+
+/* Icon colors */
+.fi-tab[aria-selected="true"] .fi-tab__icon,
+.fi-tab.is-selected .fi-tab__icon {
+    color: var(--fi-tab-icon-selected);
+}
+
+.fi-tab:not([aria-selected="true"]) .fi-tab__icon,
+.fi-tab.is-unselected .fi-tab__icon {
+    color: var(--fi-tab-icon-unselected);
+}
+
+.fi-tab:disabled .fi-tab__label,
+.fi-tab.is-disabled .fi-tab__label {
+    color: var(--fi-tab-text-disabled);
+}
+
+.fi-tab:disabled .fi-tab__icon,
+.fi-tab.is-disabled .fi-tab__icon {
+    color: var(--fi-tab-icon-disabled);
+}
+
+.fi-tab:disabled,
+.fi-tab.is-disabled {
+    cursor: not-allowed;
+}
+
+/* Focus */
+.fi-tab:focus-visible,
+.fi-tab.is-focused {
+    outline: 2px solid var(--fi-tab-focus);
+    outline-offset: 0;
+}
+
+/* Content variants */
+.fi-tab--icon-above {
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fi-tab--icon-before,
+.fi-tab--text-only {
+    flex-direction: row;
+}
+
+.fi-tab--icon-after {
+    flex-direction: row;
+}
+
+.fi-tab--icon-after .fi-tab__icon {
+    order: 2;
+}
+
+.fi-tab--icon-after .fi-tab__label {
+    order: 1;
+}
+
+.fi-tab--icon-only {
+    --fi-tab-pad-x: 12px;
+    --fi-tab-pad-y: 12px;
+}
+
+/* Icon-only selected color in Figma is primary */
+.fi-tab--icon-only[aria-selected="true"] .fi-tab__icon,
+.fi-tab--icon-only.is-selected .fi-tab__icon {
+    color: var(--fi-tab-primary);
+}
+
+/* Sizes */
+.fi-tab--lg {
+    --fi-tab-font-size: 18px;
+    --fi-tab-line-height: 1.445;
+    --fi-tab-letter-spacing: -0.0036px;
+    --fi-tab-icon-size: 24px;
+}
+
+.fi-tab--md {
+    --fi-tab-font-size: 16px;
+    --fi-tab-line-height: 1.5;
+    --fi-tab-letter-spacing: 0.0912px;
+    --fi-tab-icon-size: 20px;
+    --fi-tab-pad-y: 12px;
+}
+
+

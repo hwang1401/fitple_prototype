@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Inputs / Dropdown Fields (Outlined)
+   Figma: 559:64167
+   - label: above / before / none
+   - variants: default / search
+   - states: default / hovered / pressed / focused / disabled / active
+   - sizes: xlg(40) / lg(36) / md(32)
+   ========================================================================== */
+
+/* Root wrapper */
+.fi-input {
+    --fi-input-height: 40px;
+    --fi-input-radius: 4px;      /* xxsm */
+    --fi-input-pad-x: 16px;      /* component/padding/element/text_input_field/default */
+    --fi-input-gap: 8px;         /* component/gap/element/dropdown_field */
+    --fi-input-text-gap: 6px;    /* spacing/sp60 */
+    --fi-input-icon: 20px;
+
+    --fi-input-border: #d6d6d6;  /* semantic/neutral/stroke/normal/default */
+    --fi-input-border-hover: #c2c2c2; /* semantic/neutral/stroke/normal/hovered */
+    --fi-input-border-pressed: #a3a3a3; /* semantic/neutral/stroke/normal/pressed */
+    --fi-input-focus: #141414;   /* semantic/focused/global/global/default */
+
+    --fi-input-fg: #333333;      /* semantic/neutral/foreground/normal/default */
+    --fi-input-fg-strong: #474747; /* semantic/neutral/foreground/strong/default */
+    --fi-input-fg-muted: #999999; /* semantic/neutral/foreground/inverse/default */
+    --fi-input-fg-disabled: #c2c2c2; /* semantic/disabled/foreground/global/default */
+
+    width: 100%;
+}
+
+/* Label */
+.fi-input__label {
+    display: flex;
+    align-items: center;
+    padding-right: 4px;
+}
+
+.fi-input__label-text {
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.467;
+    letter-spacing: 0.144px;
+    color: var(--fi-input-fg);
+    white-space: nowrap;
+}
+
+/* Field */
+.fi-input__control {
+    display: flex;
+    align-items: center;
+    gap: var(--fi-input-gap);
+    width: 100%;
+    height: var(--fi-input-height);
+    padding: 0 var(--fi-input-pad-x);
+    border-radius: var(--fi-input-radius);
+    border: 1px solid var(--fi-input-border);
+    background: var(--gray-50, #fafafa); /* semantic/neutral/background/normal/default */
+    overflow: hidden;
+}
+
+.fi-input__text {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--fi-input-text-gap);
+    min-width: 0;
+}
+
+.fi-input__icon {
+    width: var(--fi-input-icon);
+    height: var(--fi-input-icon);
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fi-input__icon img,
+.fi-input__icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.fi-input__value,
+.fi-input__placeholder {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+}
+
+.fi-input__placeholder { color: var(--fi-input-fg-muted); }
+.fi-input__value { color: var(--fi-input-fg); }
+
+/* Helper */
+.fi-input__helper {
+    margin-top: 4px; /* spacing/sp40 */
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: var(--fi-input-fg-muted);
+}
+
+/* Layout: label above */
+.fi-input--label-above {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.fi-input--label-above .fi-input__label {
+    height: 28px;
+}
+
+.fi-input--label-above .fi-input__label-text {
+    padding-bottom: 4px; /* spacing/sp40 */
+}
+
+/* Layout: label before */
+.fi-input--label-before {
+    --fi-input-label-width: 33px;
+    --fi-input-helper-indent: 35px;
+}
+
+.fi-input--label-before .fi-input__row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.fi-input--label-before .fi-input__label {
+    width: var(--fi-input-label-width);
+    padding-right: 4px;
+    align-self: stretch;
+}
+
+.fi-input--label-before .fi-input__helper {
+    padding-left: var(--fi-input-helper-indent);
+}
+
+/* Size variants */
+.fi-input--xlg { --fi-input-height: 40px; }
+.fi-input--lg  { --fi-input-height: 36px; }
+.fi-input--md  { --fi-input-height: 32px; }
+
+/* Search variant (button addon inside control) */
+.fi-input--search {
+    --fi-input-text-gap: 8px; /* spacing/sp80 (search variants use 8px) */
+}
+
+.fi-input--search .fi-input__control {
+    padding-right: 0;
+}
+
+.fi-input__addon {
+    flex: 0 0 auto;
+    height: 100%;
+    min-width: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 8px; /* xsm */
+    background: #f0f0f0; /* semantic/neutral/background/strong/default */
+    border-left: 1px solid #c2c2c2; /* semantic/neutral/stroke/strong/default */
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.fi-input__addon-text {
+    font-family: var(--font);
+    font-weight: 500; /* Label 1 Normal - Medium */
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: var(--fi-input-fg);
+    white-space: nowrap;
+}
+
+/* States (pseudo) */
+.fi-input:not(.is-disabled) .fi-input__control:hover { border-color: var(--fi-input-border-hover); }
+.fi-input:not(.is-disabled) .fi-input__control:active { border-color: var(--fi-input-border-pressed); }
+
+.fi-input:not(.is-disabled) .fi-input__control:focus-within {
+    border: 2px solid var(--fi-input-focus);
+}
+
+/* Active (value present / selected) */
+.fi-input.is-active .fi-input__placeholder {
+    color: var(--fi-input-fg);
+}
+
+/* Disabled */
+.fi-input.is-disabled .fi-input__control {
+    border-color: var(--fi-input-border);
+    background: var(--gray-50, #fafafa);
+}
+
+.fi-input.is-disabled .fi-input__label-text,
+.fi-input.is-disabled .fi-input__value,
+.fi-input.is-disabled .fi-input__placeholder,
+.fi-input.is-disabled .fi-input__helper {
+    color: var(--fi-input-fg-disabled);
+}
+
+.fi-input.is-disabled .fi-input__icon {
+    opacity: 0.75;
+    filter: grayscale(1) brightness(1.1);
+}
+
+/* Manual state helpers (for parity with Figma state variants) */
+.fi-input.is-hovered .fi-input__control { border-color: var(--fi-input-border-hover); }
+.fi-input.is-pressed .fi-input__control { border-color: var(--fi-input-border-pressed); }
+.fi-input.is-focused .fi-input__control { border: 2px solid var(--fi-input-focus); }
+
+

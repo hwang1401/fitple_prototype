@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Components Preview Page helpers
+   - Keep minimal and isolated
+   ========================================================================== */
+
+.preview-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.preview-section__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-700);
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.preview-card {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.preview-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.preview-row--col {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.preview-caption {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.preview-divider {
+    height: 1px;
+    background: var(--gray-200);
+    margin: 8px 0;
+}
+
+.preview-note {
+    font-size: 12px;
+    color: var(--gray-600);
+}
+
+@media (max-width: 1100px) {
+    .preview-grid { grid-template-columns: 1fr; }
+}
+
+
