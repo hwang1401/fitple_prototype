@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 자기평가 상세</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/pages/onboarding-self-eval.css?v=1">
+</head>
+<body class="page--onboarding-self-eval-detail">
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="employee-list.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="onboarding-fitcheck-list.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-item" type="button">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </button>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+
+        <div class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <nav class="breadcrumb" aria-label="breadcrumb">
+                        <span class="breadcrumb-item">직원</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item">온보딩 관리</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item breadcrumb-item--active">자기평가 상세</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" type="button" aria-label="알림">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="">
+                    </button>
+                    <button class="icon-btn" type="button" aria-label="설정">
+                        <img src="assets/에셋/Flat icons/setting.svg" alt="">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <div class="user-name">김인사</div>
+                            <div class="user-role">HR 매니저</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Action Bar -->
+                <div class="se-detail-header">
+                    <button class="se-back-btn" type="button" onclick="backToList()">
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="">
+                        목록으로
+                    </button>
+                </div>
+
+                <!-- Success Alert -->
+                <div class="se-alert">
+                    <div class="se-alert-content">
+                        <img src="assets/에셋/Icons/Checkmark/Circle.svg" alt="" class="se-alert-icon">
+                        <div class="se-alert-text">
+                            <div class="se-alert-title">자기평가 완료</div>
+                            <div class="se-alert-message">김민수님의 자기평가가 완료되어 교차 검증이 가능합니다.</div>
+                        </div>
+                    </div>
+                    <button class="btn-poto btn-poto--lg" type="button" onclick="viewCrossVerification()">
+                        <span class="btn-poto__label">교차검증 보기</span>
+                    </button>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="se-profile-card">
+                    <div class="se-profile-content">
+                        <div class="se-profile-avatar">김</div>
+                        <div class="se-profile-info">
+                            <h2 class="se-profile-name">김민수</h2>
+                            <p class="se-profile-job">프론트엔드 개발자 · 개발팀</p>
+                        </div>
+                    </div>
+
+                    <div class="se-profile-score-section">
+                        <div class="se-profile-score">
+                            <span class="se-profile-score-label">자기평가 평균</span>
+                            <div>
+                                <span class="se-profile-score-value">4.0</span>
+                                <span class="se-profile-score-max"> / 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="se-summary-cards">
+                    <div class="se-summary-card">
+                        <div class="se-summary-card-label">총 평가 횟수</div>
+                        <div class="se-summary-card-value">3회</div>
+                    </div>
+                    <div class="se-summary-card">
+                        <div class="se-summary-card-label">최근 평균 점수</div>
+                        <div class="se-summary-card-value">4.0점</div>
+                    </div>
+                    <div class="se-summary-card">
+                        <div class="se-summary-card-label">점수 성장률</div>
+                        <div class="se-summary-card-value">
+                            <span class="se-summary-card-trend">
+                                <img src="assets/에셋/Icons/Arrow/Up.svg" alt="">
+                                +0.2
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Check History Section -->
+                <div class="se-section">
+                    <h3 class="se-section-title">체크 이력</h3>
+                    <div class="se-history-list">
+                        <!-- History Card 1 -->
+                        <div class="se-history-card">
+                            <div class="se-history-header">
+                                <div class="se-history-date">
+                                    <span class="se-history-date-text">2025.12.01</span>
+                                    <span class="se-history-label">3차 자기평가</span>
+                                </div>
+                                <span class="se-history-score">4.0</span>
+                            </div>
+                            <div class="se-history-comment">
+                                업무에 대한 이해도가 높아졌고, 팀원들과의 협업도 원활하게 진행되고 있습니다. 다만 타 부서와의 커뮤니케이션에서 조금 더 적극적인 태도가 필요할 것 같습니다.
+                            </div>
+                            <div class="se-history-cross-verify">
+                                <span class="se-history-cross-verify-badge">교차검증 완료</span>
+                                <span class="se-history-cross-verify-text">매니저 평가와의 차이: 0.2점 (양호)</span>
+                            </div>
+                            <button class="se-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+
+                        <!-- History Card 2 -->
+                        <div class="se-history-card">
+                            <div class="se-history-header">
+                                <div class="se-history-date">
+                                    <span class="se-history-date-text">2025.11.01</span>
+                                    <span class="se-history-label">2차 자기평가</span>
+                                </div>
+                                <span class="se-history-score">3.9</span>
+                            </div>
+                            <div class="se-history-comment">
+                                업무 프로세스에 익숙해지면서 생산성이 향상되고 있습니다. 회사 문화에도 잘 적응하고 있으며, 동료들과의 관계도 좋습니다.
+                            </div>
+                            <div class="se-history-cross-verify">
+                                <span class="se-history-cross-verify-badge">교차검증 완료</span>
+                                <span class="se-history-cross-verify-text">매니저 평가와의 차이: 0점 (일치)</span>
+                            </div>
+                            <button class="se-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+
+                        <!-- History Card 3 -->
+                        <div class="se-history-card">
+                            <div class="se-history-header">
+                                <div class="se-history-date">
+                                    <span class="se-history-date-text">2025.10.01</span>
+                                    <span class="se-history-label">1차 자기평가</span>
+                                </div>
+                                <span class="se-history-score">3.8</span>
+                            </div>
+                            <div class="se-history-comment">
+                                새로운 환경에 적응하는 중이며, 업무를 배우는 속도가 빠른 편입니다. 팀원들이 친절하게 도와주셔서 감사합니다.
+                            </div>
+                            <div class="se-history-cross-verify">
+                                <span class="se-history-cross-verify-badge">교차검증 완료</span>
+                                <span class="se-history-cross-verify-text">매니저 평가와의 차이: -0.1점 (양호)</span>
+                            </div>
+                            <button class="se-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=1.0.9"></script>
+    <script src="js/onboarding-self-eval.js?v=1"></script>
+</body>
+</html>
+

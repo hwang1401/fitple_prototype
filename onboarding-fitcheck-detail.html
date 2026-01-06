@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 핏 체크 상세</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/pages/onboarding-fitcheck.css?v=1">
+</head>
+<body class="page--onboarding-fitcheck-detail">
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="employee-list.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="onboarding-fitcheck-list.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-item" type="button">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </button>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+
+        <div class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <nav class="breadcrumb" aria-label="breadcrumb">
+                        <span class="breadcrumb-item">직원</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item">온보딩 관리</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item breadcrumb-item--active">핏 체크 상세</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" type="button" aria-label="알림">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="">
+                    </button>
+                    <button class="icon-btn" type="button" aria-label="설정">
+                        <img src="assets/에셋/Flat icons/setting.svg" alt="">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <div class="user-name">김인사</div>
+                            <div class="user-role">HR 매니저</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Action Bar -->
+                <div class="onb-detail-header">
+                    <button class="onb-back-btn" type="button" onclick="backToList()">
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="">
+                        목록으로
+                    </button>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="onb-profile-card">
+                    <div class="onb-profile-content">
+                        <div class="onb-profile-avatar">김</div>
+                        <div class="onb-profile-info">
+                            <div class="onb-profile-top">
+                                <h2 class="onb-profile-name">김민수</h2>
+                            </div>
+                            <p class="onb-profile-job">프론트엔드 개발자 · 개발팀</p>
+                        </div>
+                    </div>
+
+                    <div class="onb-profile-score-section">
+                        <div class="onb-profile-score">
+                            <span class="onb-profile-score-label">전체 핏 체크 평균</span>
+                            <div>
+                                <span class="onb-profile-score-value">4.2</span>
+                                <span class="onb-profile-score-max"> / 5</span>
+                            </div>
+                        </div>
+                        <div class="onb-profile-trend">
+                            <img src="assets/에셋/Icons/Arrow/Up.svg" alt="">
+                            이전 대비 +0.3
+                        </div>
+                    </div>
+
+                    <div class="onb-profile-actions">
+                        <button class="btn-poto btn-poto--lg" type="button" onclick="requestSelfEval()">
+                            <span class="btn-poto__label">자기평가 요청</span>
+                        </button>
+                        <button class="btn-pfto btn-pfto--lg" type="button" onclick="openModal('modal-fitcheck')">
+                            <span class="btn-pfto__label">핏 체크 하기</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Score Trend Section -->
+                <div class="onb-section">
+                    <div class="onb-section-header">
+                        <h3 class="onb-section-title">점수 추이</h3>
+                        <div class="onb-time-filters">
+                            <button class="onb-time-filter" type="button" onclick="selectTimeFilter(this)">1개월</button>
+                            <button class="onb-time-filter onb-time-filter--active" type="button" onclick="selectTimeFilter(this)">3개월</button>
+                            <button class="onb-time-filter" type="button" onclick="selectTimeFilter(this)">6개월</button>
+                            <button class="onb-time-filter" type="button" onclick="selectTimeFilter(this)">전체</button>
+                        </div>
+                    </div>
+                    <div class="onb-chart-placeholder">
+                        점수 추이 차트 영역
+                    </div>
+                </div>
+
+                <!-- Check History Section -->
+                <div class="onb-section">
+                    <h3 class="onb-section-title">체크 이력</h3>
+                    <div class="onb-history-list">
+                        <!-- History Card 1 -->
+                        <div class="onb-history-card">
+                            <div class="onb-history-header">
+                                <div class="onb-history-date">
+                                    <span class="onb-history-date-text">2025.12.01</span>
+                                    <span class="onb-history-checkpoint-label">3차 체크포인트</span>
+                                </div>
+                                <div class="onb-history-score-section">
+                                    <span class="onb-history-score">4.2</span>
+                                    <span class="onb-history-score-change">
+                                        <img src="assets/에셋/Icons/Arrow/Up.svg" alt="" style="width: 10px; height: 10px;">
+                                        +0.3
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="onb-history-categories">
+                                <span class="onb-history-category">
+                                    업무 성과: <span class="onb-history-category-score">4.3</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    협업: <span class="onb-history-category-score">3.7</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    문화 적합: <span class="onb-history-category-score">4.5</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    성장 가능성: <span class="onb-history-category-score">4.5</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    유지 의향: <span class="onb-history-category-score">4.0</span>
+                                </span>
+                            </div>
+                            <div class="onb-history-comment">
+                                전반적으로 업무 수행 능력이 우수하며, 팀과의 협업도 잘 이루어지고 있습니다. 다만 타 부서와의 커뮤니케이션 부분에서 조금 더 적극적인 태도가 필요해 보입니다.
+                            </div>
+                            <button class="onb-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+
+                        <!-- History Card 2 -->
+                        <div class="onb-history-card">
+                            <div class="onb-history-header">
+                                <div class="onb-history-date">
+                                    <span class="onb-history-date-text">2025.11.01</span>
+                                    <span class="onb-history-checkpoint-label">2차 체크포인트</span>
+                                </div>
+                                <div class="onb-history-score-section">
+                                    <span class="onb-history-score">3.9</span>
+                                    <span class="onb-history-score-change">
+                                        <img src="assets/에셋/Icons/Arrow/Up.svg" alt="" style="width: 10px; height: 10px;">
+                                        +0.2
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="onb-history-categories">
+                                <span class="onb-history-category">
+                                    업무 성과: <span class="onb-history-category-score">4.0</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    협업: <span class="onb-history-category-score">3.5</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    문화 적합: <span class="onb-history-category-score">4.2</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    성장 가능성: <span class="onb-history-category-score">4.0</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    유지 의향: <span class="onb-history-category-score">3.8</span>
+                                </span>
+                            </div>
+                            <div class="onb-history-comment">
+                                업무 적응이 빠르게 이루어지고 있으며, 기술적인 부분에서 꾸준한 성장이 보입니다. 팀 문화에도 잘 적응하고 있습니다.
+                            </div>
+                            <button class="onb-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+
+                        <!-- History Card 3 -->
+                        <div class="onb-history-card">
+                            <div class="onb-history-header">
+                                <div class="onb-history-date">
+                                    <span class="onb-history-date-text">2025.10.01</span>
+                                    <span class="onb-history-checkpoint-label">1차 체크포인트</span>
+                                </div>
+                                <div class="onb-history-score-section">
+                                    <span class="onb-history-score">3.7</span>
+                                </div>
+                            </div>
+                            <div class="onb-history-categories">
+                                <span class="onb-history-category">
+                                    업무 성과: <span class="onb-history-category-score">3.8</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    협업: <span class="onb-history-category-score">3.3</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    문화 적합: <span class="onb-history-category-score">4.0</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    성장 가능성: <span class="onb-history-category-score">3.8</span>
+                                </span>
+                                <span class="onb-history-category">
+                                    유지 의향: <span class="onb-history-category-score">3.6</span>
+                                </span>
+                            </div>
+                            <div class="onb-history-comment">
+                                초기 적응 단계로, 업무 프로세스를 익히는 중입니다. 적극적인 태도를 보이고 있어 긍정적으로 평가됩니다.
+                            </div>
+                            <button class="onb-history-detail-btn" type="button">상세 보기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback Comment Section -->
+                <div class="onb-feedback-section">
+                    <label class="onb-feedback-label" for="feedback-textarea">피드백 코멘트</label>
+                    <textarea 
+                        id="feedback-textarea" 
+                        class="onb-feedback-textarea" 
+                        placeholder="직원에 대한 추가 피드백을 입력해주세요."
+                    ></textarea>
+                    <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
+                        <button class="btn-pfto btn-pfto--lg" type="button" onclick="saveFeedback()">
+                            <span class="btn-pfto__label">저장</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Fit Check (reuse from employee-list) -->
+    <div id="modal-fitcheck" class="modal" style="display: none;">
+        <div class="modal__overlay" onclick="closeModal('modal-fitcheck')"></div>
+        <div class="modal__dialog modal__dialog--fitcheck">
+            <div class="modal__header">
+                <div class="modal__header-content">
+                    <h2 class="modal__title">핏 체크</h2>
+                    <p class="modal__subtitle">직원의 현재 적합도를 평가해주세요</p>
+                </div>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-fitcheck')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+                    </span>
+                </button>
+            </div>
+            <div class="modal__body modal__body--fitcheck">
+                <p style="text-align: center; padding: 40px; color: #8a8a8a;">
+                    핏 체크 평가 폼이 표시됩니다.
+                </p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-fitcheck')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="submitFitCheck()">완료</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=1.0.9"></script>
+    <script src="js/onboarding-fitcheck.js?v=1"></script>
+</body>
+</html>
+

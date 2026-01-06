@@ -7,6 +7,8 @@
 @import url("./components/tabs.css");
 @import url("./pages/offboarding-detail.css");
 @import url("./pages/employee-list.css");
+@import url("./pages/onboarding-fitcheck.css");
+@import url("./pages/onboarding-self-eval.css");
 @import url("./components/components-preview.css");
 
 :root {

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>핏플 - 직원 관리</title>
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
-    <link rel="stylesheet" href="css/pages/employee-list.css?v=1">
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/pages/employee-list.css?v=3">
 </head>
 <body class="page--employee-list">
     <div class="app">
@@ -43,7 +43,7 @@
 
                 <div class="nav-section">
                     <span class="nav-section-label">인재 관리</span>
-                    <a href="#" class="nav-item">
+                    <a href="index.html" class="nav-item">
                         <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
                         추천 인재 목록
                     </a>
@@ -75,10 +75,10 @@
             </nav>
 
             <div class="sidebar-footer">
-                <a href="#" class="nav-item">
+                <button class="nav-item" type="button">
                     <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
                     설정
-                </a>
+                </button>
                 <a href="#" class="nav-item">
                     <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
                     고객 지원
@@ -86,9 +86,8 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <div class="main">
-            <!-- Top Header (global layout) -->
+            <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
                     <nav class="breadcrumb" aria-label="breadcrumb">
@@ -98,19 +97,17 @@
                     </nav>
                 </div>
                 <div class="header-right">
-                    <button class="header-icon-btn" type="button" aria-label="알림">
-                        <img src="assets/에셋/Icons/Notification/Notification.svg" alt="">
+                    <button class="icon-btn" type="button" aria-label="알림">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="">
                     </button>
-                    <button class="header-icon-btn" type="button" aria-label="도움말">
-                        <img src="assets/에셋/Icons/Info/Info Circle.svg" alt="">
+                    <button class="icon-btn" type="button" aria-label="설정">
+                        <img src="assets/에셋/Flat icons/setting.svg" alt="">
                     </button>
-                    <div class="header-profile">
-                        <div class="profile-avatar">
-                            <span>김</span>
-                        </div>
-                        <div class="profile-info">
-                            <div class="profile-name">김인사</div>
-                            <div class="profile-role">HR 매니저</div>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <div class="user-name">김인사</div>
+                            <div class="user-role">HR 매니저</div>
                         </div>
                     </div>
                 </div>
@@ -118,245 +115,799 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <div class="empl-list">
-                    <!-- Page Header -->
-                    <div class="empl-list__header">
-                        <h1 class="empl-list__title">직원 관리</h1>
-                        <div class="empl-list__actions">
-                            <!-- Segment Control -->
-                            <div class="fi-seg fi-seg--lg">
-                                <div class="fi-seg__control">
-                                    <button class="fi-seg__item" aria-pressed="true" type="button">재직중</button>
-                                    <button class="fi-seg__item" aria-pressed="false" type="button">수습</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Action Buttons -->
-                            <button class="btn-soti btn-soti--lg" type="button" aria-label="필터">
-                                <span class="btn-s__icon" aria-hidden="true">
-                                    <img src="assets/에셋/Icons/Filter/Filter.svg" alt="">
-                                </span>
+                <!-- Page Header -->
+                <div class="empl-page-header">
+                    <h1 class="empl-page-title">직원 관리</h1>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="empl-toolbar">
+                    <!-- Segment Control with Counts -->
+                    <div class="fi-seg fi-seg--lg">
+                        <div class="fi-seg__control">
+                            <button class="fi-seg__item" aria-pressed="true" type="button">
+                                전체
+                                <span class="fi-seg__badge fi-seg__badge--active">43</span>
                             </button>
-                            <button class="btn-pfti btn-pfti--lg" type="button" onclick="openModal('modal-employee-register')">
-                                <span class="btn-pf__icon" aria-hidden="true">
-                                    <img src="assets/에셋/Icons/Add/Circle.svg" alt="" class="icon-mask">
-                                </span>
-                                <span class="btn-pf__label">직원 추가</span>
+                            <button class="fi-seg__item" aria-pressed="false" type="button">
+                                기업 추천
+                                <span class="fi-seg__badge">2</span>
+                            </button>
+                            <button class="fi-seg__item" aria-pressed="false" type="button">
+                                저장됨
+                                <span class="fi-seg__badge">3</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Employee Table -->
-                    <div class="empl-list__table-wrap">
+                    <!-- Action Buttons -->
+                    <div class="empl-toolbar-actions">
+                        <button class="btn-pfto btn-pfto--lg" type="button">
+                            <span class="btn-pfto__label">필터</span>
+                            <img src="assets/에셋/Icons/Options/Options 2.svg" alt="" class="btn-pfto__icon">
+                        </button>
+                        <button class="btn-pfti btn-pfti--lg" type="button">
+                            <img src="assets/에셋/Icons/Plus/Plus.svg" alt="" class="btn-pfti__icon">
+                            <span class="btn-pfti__label">직원 등록</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="empl-table-container">
+                    <div class="empl-table-wrapper">
                         <table class="empl-table">
                             <thead>
                                 <tr>
-                                    <th class="empl-table__th empl-table__th--name">이름</th>
-                                    <th class="empl-table__th">부서</th>
+                                    <th class="empl-table__th empl-table__th--checkbox">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </th>
+                                    <th class="empl-table__th empl-table__th--employee">직원</th>
                                     <th class="empl-table__th">직책</th>
                                     <th class="empl-table__th">입사일</th>
-                                    <th class="empl-table__th empl-table__th--center">상태</th>
-                                    <th class="empl-table__th">다음 체크포인트</th>
-                                    <th class="empl-table__th">체크포인트 주기</th>
+                                    <th class="empl-table__th">적합도</th>
+                                    <th class="empl-table__th">상태</th>
+                                    <th class="empl-table__th empl-table__th--actions"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="empl-table__row" onclick="openEmployeeDetail('김민수')">
-                                    <td class="empl-table__td empl-table__td--name">
-                                        <div class="empl-info">
+                                <!-- Row 1 -->
+                                <tr class="empl-table__row" onclick="openEmployeeSlide('김민수')">
+                                    <td class="empl-table__td empl-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="empl-table__td empl-table__td--employee">
+                                        <div class="empl-employee">
                                             <div class="empl-avatar">김</div>
-                                            <span class="empl-name">김민수</span>
+                                            <div class="empl-employee-info">
+                                                <div class="empl-employee-name">김민수</div>
+                                                <div class="empl-employee-email">minsu.kim@company.com</div>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="empl-table__td">개발팀</td>
                                     <td class="empl-table__td">프론트엔드 개발자</td>
-                                    <td class="empl-table__td">2024.09.01</td>
-                                    <td class="empl-table__td empl-table__td--center">
-                                        <span class="status-badge status-badge--normal">정상</span>
+                                    <td class="empl-table__td">2025.09.01</td>
+                                    <td class="empl-table__td">
+                                        <div class="empl-fit">
+                                            <div class="empl-fit-bar">
+                                                <div class="empl-fit-bar-fill" style="width: 84%;"></div>
+                                            </div>
+                                            <span class="empl-fit-score">4.2</span>
+                                        </div>
                                     </td>
                                     <td class="empl-table__td">
-                                        <span class="empl-checkpoint">2025.12.01</span>
-                                        <span class="empl-checkpoint-badge empl-checkpoint-badge--warning">D-6</span>
+                                        <span class="empl-badge empl-badge--normal">정상</span>
                                     </td>
-                                    <td class="empl-table__td">1개월마다</td>
+                                    <td class="empl-table__td empl-table__td--actions">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
                                 </tr>
-                                <tr class="empl-table__row" onclick="openEmployeeDetail('이지은')">
-                                    <td class="empl-table__td empl-table__td--name">
-                                        <div class="empl-info">
+
+                                <!-- Row 2 -->
+                                <tr class="empl-table__row" onclick="openEmployeeSlide('이지은')">
+                                    <td class="empl-table__td empl-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="empl-table__td empl-table__td--employee">
+                                        <div class="empl-employee">
                                             <div class="empl-avatar">이</div>
-                                            <span class="empl-name">이지은</span>
+                                            <div class="empl-employee-info">
+                                                <div class="empl-employee-name">이지은</div>
+                                                <div class="empl-employee-email">jieun.lee@company.com</div>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="empl-table__td">디자인팀</td>
-                                    <td class="empl-table__td">UX 디자이너</td>
-                                    <td class="empl-table__td">2023.03.15</td>
-                                    <td class="empl-table__td empl-table__td--center">
-                                        <span class="status-badge status-badge--normal">정상</span>
+                                    <td class="empl-table__td">백엔드 개발자</td>
+                                    <td class="empl-table__td">2025.06.15</td>
+                                    <td class="empl-table__td">
+                                        <div class="empl-fit">
+                                            <div class="empl-fit-bar">
+                                                <div class="empl-fit-bar-fill empl-fit-bar-fill--warning" style="width: 58%;"></div>
+                                            </div>
+                                            <span class="empl-fit-score">2.9</span>
+                                        </div>
                                     </td>
                                     <td class="empl-table__td">
-                                        <span class="empl-checkpoint">2025.12.15</span>
-                                        <span class="empl-checkpoint-badge empl-checkpoint-badge--safe">D-20</span>
+                                        <span class="empl-badge empl-badge--warning">주의</span>
                                     </td>
-                                    <td class="empl-table__td">2주마다</td>
+                                    <td class="empl-table__td empl-table__td--actions">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
                                 </tr>
-                                <tr class="empl-table__row" onclick="openEmployeeDetail('박서준')">
-                                    <td class="empl-table__td empl-table__td--name">
-                                        <div class="empl-info">
+
+                                <!-- Row 3 -->
+                                <tr class="empl-table__row" onclick="openEmployeeSlide('박준호')">
+                                    <td class="empl-table__td empl-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="empl-table__td empl-table__td--employee">
+                                        <div class="empl-employee">
                                             <div class="empl-avatar">박</div>
-                                            <span class="empl-name">박서준</span>
+                                            <div class="empl-employee-info">
+                                                <div class="empl-employee-name">박준호</div>
+                                                <div class="empl-employee-email">junho.park@company.com</div>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="empl-table__td">영업팀</td>
-                                    <td class="empl-table__td">영업 관리자</td>
-                                    <td class="empl-table__td">2022.06.01</td>
-                                    <td class="empl-table__td empl-table__td--center">
-                                        <span class="status-badge status-badge--normal">정상</span>
+                                    <td class="empl-table__td">프로덕트 디자이너</td>
+                                    <td class="empl-table__td">2025.11.01</td>
+                                    <td class="empl-table__td">
+                                        <span class="empl-no-data">-</span>
                                     </td>
                                     <td class="empl-table__td">
-                                        <span class="empl-checkpoint">2025.12.01</span>
-                                        <span class="empl-checkpoint-badge empl-checkpoint-badge--warning">D-6</span>
+                                        <span class="empl-badge empl-badge--warning">신규</span>
                                     </td>
-                                    <td class="empl-table__td">1개월마다</td>
+                                    <td class="empl-table__td empl-table__td--actions">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4 -->
+                                <tr class="empl-table__row" onclick="openEmployeeSlide('최서연')">
+                                    <td class="empl-table__td empl-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="empl-table__td empl-table__td--employee">
+                                        <div class="empl-employee">
+                                            <div class="empl-avatar">최</div>
+                                            <div class="empl-employee-info">
+                                                <div class="empl-employee-name">최서연</div>
+                                                <div class="empl-employee-email">seoyeon.choi@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="empl-table__td">데이터 분석가</td>
+                                    <td class="empl-table__td">2025.03.01</td>
+                                    <td class="empl-table__td">
+                                        <div class="empl-fit">
+                                            <div class="empl-fit-bar">
+                                                <div class="empl-fit-bar-fill" style="width: 92%;"></div>
+                                            </div>
+                                            <span class="empl-fit-score">4.6</span>
+                                        </div>
+                                    </td>
+                                    <td class="empl-table__td">
+                                        <span class="empl-badge empl-badge--normal">정상</span>
+                                    </td>
+                                    <td class="empl-table__td empl-table__td--actions">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- Pagination -->
-                    <div class="empl-list__pagination">
-                        <button class="pagination-btn pagination-btn--prev" type="button" disabled>
-                            <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="이전">
-                        </button>
-                        <button class="pagination-page pagination-page--active" type="button">1</button>
-                        <button class="pagination-page" type="button">2</button>
-                        <button class="pagination-page" type="button">3</button>
-                        <button class="pagination-btn pagination-btn--next" type="button">
-                            <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="다음">
-                        </button>
+                    <!-- Table Footer -->
+                    <div class="empl-table-footer">
+                        <!-- Search Box (Left) -->
+                        <div class="empl-search">
+                            <img src="assets/에셋/Icons/Search.svg" alt="" class="empl-search-icon">
+                            <input type="text" placeholder="이름, 기술, 회사로 검색" class="empl-search-input">
+                        </div>
+
+                        <!-- Pagination (Right) -->
+                        <div class="empl-pagination">
+                            <button class="empl-pagination-btn empl-pagination-btn--prev" type="button" disabled>
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="이전">
+                            </button>
+                            <button class="empl-pagination-page empl-pagination-page--active" type="button">1</button>
+                            <button class="empl-pagination-page" type="button">2</button>
+                            <button class="empl-pagination-page" type="button">3</button>
+                            <button class="empl-pagination-btn empl-pagination-btn--next" type="button">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="다음">
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Slide Tab: Employee Detail -->
-        <div class="empl-detail-slide" id="emplDetailSlide">
-            <div class="empl-detail-slide__overlay" onclick="closeEmployeeDetail()"></div>
-            <div class="empl-detail-slide__panel">
-                <!-- Header -->
-                <div class="empl-detail__header">
-                    <h2 class="empl-detail__title">직원 상세</h2>
-                    <button class="empl-detail__close-btn btn-srio btn-srio--md" type="button" onclick="closeEmployeeDetail()">
-                        <span class="btn-s__icon" aria-hidden="true">
-                            <img src="assets/에셋/Icons/Close/Close.svg" alt="">
-                        </span>
-                    </button>
-                </div>
-
-                <!-- Employee Profile -->
-                <div class="empl-detail__profile">
-                    <div class="empl-detail__profile-top">
-                        <div class="empl-detail__avatar">김</div>
-                        <div class="empl-detail__profile-info">
-                            <div class="empl-detail__name-row">
-                                <h3 class="empl-detail__name">김민수</h3>
-                                <span class="status-badge status-badge--normal">정상</span>
-                            </div>
-                            <p class="empl-detail__role">프론트엔드 개발자 · 개발팀</p>
-                            <p class="empl-detail__hire-date">2024.09.01 입사 · 근속 4개월</p>
-                        </div>
-                    </div>
-
-                    <!-- Fit Score Summary -->
-                    <div class="empl-detail__fit-summary">
-                        <div class="fit-score-item">
-                            <div class="fit-score-item__value">4.2</div>
-                            <div class="fit-score-item__label">핏 체크</div>
-                        </div>
-                        <div class="fit-score-item">
-                            <div class="fit-score-item__value">4.0</div>
-                            <div class="fit-score-item__label">자기평가</div>
-                        </div>
-                        <div class="fit-score-item">
-                            <div class="fit-score-item__value">0.2</div>
-                            <div class="fit-score-item__label">교차 검증 갭</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabs -->
-                <div class="empl-detail__tabs">
-                    <button class="fi-tab fi-tab--md fi-tab--text-only" aria-selected="true" type="button">
-                        <span class="fi-tab__label">기본 정보</span>
-                    </button>
-                    <button class="fi-tab fi-tab--md fi-tab--text-only" aria-selected="false" type="button">
-                        <span class="fi-tab__label">핏체크 기록</span>
-                    </button>
-                    <button class="fi-tab fi-tab--md fi-tab--text-only" aria-selected="false" type="button">
-                        <span class="fi-tab__label">활동 로그</span>
-                    </button>
-                </div>
-
-                <!-- Tab Content: Basic Info -->
-                <div class="empl-detail__content">
-                    <div class="empl-detail__info-table">
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">이메일</div>
-                            <div class="empl-detail__info-value">minsu.kim@company.com</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">부서</div>
-                            <div class="empl-detail__info-value">개발팀</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">직책</div>
-                            <div class="empl-detail__info-value">프론트엔드 개발자</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">고용 형태</div>
-                            <div class="empl-detail__info-value">정규직</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">입사일</div>
-                            <div class="empl-detail__info-value">2024.09.01</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">수습 기간</div>
-                            <div class="empl-detail__info-value">3개월</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">체크포인트</div>
-                            <div class="empl-detail__info-value">1개월마다</div>
-                        </div>
-                        <div class="empl-detail__info-row">
-                            <div class="empl-detail__info-label">다음 체크포인트</div>
-                            <div class="empl-detail__info-value">
-                                <span>2025.12.01</span>
-                                <span class="empl-checkpoint-badge empl-checkpoint-badge--warning">D-6</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Actions -->
-                <div class="empl-detail__footer">
-                    <button class="btn-pfto btn-pfto--lg" type="button" onclick="openModal('modal-fitcheck')">
-                        <span class="btn-pf__label">핏 체크</span>
-                    </button>
-                    <button class="btn-pfto btn-pfto--lg" type="button" onclick="openModal('modal-self-eval-request')">
-                        <span class="btn-pf__label">자기평가 요청</span>
-                    </button>
-                    <button class="btn-ctoto btn-ctoto--lg" type="button">
-                        <span class="btn-cto__label">오프보딩</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modals (will be added next) -->
     </div>
 
-    <script src="js/app.js?v=2"></script>
+    <!-- Employee Detail Slide -->
+    <div class="empl-slide" id="emplSlide">
+        <div class="empl-slide__overlay" onclick="closeEmployeeSlide()"></div>
+        <div class="empl-slide__panel">
+            <!-- Header -->
+            <div class="empl-slide__header">
+                <h2 class="empl-slide__title">직원 상세</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeEmployeeSlide()">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+                    </span>
+                </button>
+            </div>
+
+            <!-- Profile -->
+            <div class="empl-slide__profile">
+                <div class="empl-slide__avatar">김</div>
+                <div class="empl-slide__profile-info">
+                    <div class="empl-slide__profile-top">
+                        <h3 class="empl-slide__name">김민수</h3>
+                        <span class="empl-badge empl-badge--normal">정상</span>
+                    </div>
+                    <div class="empl-slide__job">프론트엔드 개발자 · 개발팀</div>
+                    <div class="empl-slide__tenure">2025.09.01 입사 · 3개월차</div>
+                </div>
+            </div>
+
+            <!-- Fit Summary -->
+            <div class="empl-slide__fit-summary">
+                <h4 class="empl-slide__section-title">적합도 요약</h4>
+                <div class="empl-slide__fit-items">
+                    <button class="empl-slide__fit-item" type="button">
+                        <div class="empl-slide__fit-left">
+                            <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="empl-slide__fit-icon">
+                            <span class="empl-slide__fit-label">핏 체크</span>
+                        </div>
+                        <div class="empl-slide__fit-right">
+                            <span class="empl-slide__fit-score">4.2</span>
+                            <span class="empl-slide__fit-date">12.01</span>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="" class="empl-slide__fit-chevron">
+                        </div>
+                    </button>
+                    <button class="empl-slide__fit-item" type="button">
+                        <div class="empl-slide__fit-left">
+                            <img src="assets/에셋/Flat icons/pen.svg" alt="" class="empl-slide__fit-icon">
+                            <span class="empl-slide__fit-label">자기평가</span>
+                        </div>
+                        <div class="empl-slide__fit-right">
+                            <span class="empl-slide__fit-score">4.0</span>
+                            <span class="empl-slide__fit-date">12.03</span>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="" class="empl-slide__fit-chevron">
+                        </div>
+                    </button>
+                    <button class="empl-slide__fit-item" type="button">
+                        <div class="empl-slide__fit-left">
+                            <img src="assets/에셋/Flat icons/handshake.svg" alt="" class="empl-slide__fit-icon">
+                            <span class="empl-slide__fit-label">교차 검증</span>
+                        </div>
+                        <div class="empl-slide__fit-right">
+                            <span class="empl-slide__fit-score">갭 0.2</span>
+                            <span class="empl-slide__fit-date">양호</span>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="" class="empl-slide__fit-chevron">
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="empl-slide__tabs">
+                <button class="empl-slide__tab empl-slide__tab--active" type="button" data-tab="basic">기본 정보</button>
+                <button class="empl-slide__tab" type="button" data-tab="fitcheck">핏체크 기록</button>
+                <button class="empl-slide__tab" type="button" data-tab="log">활동 로그</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="empl-slide__content">
+                <div class="empl-slide__info-list">
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">이메일</span>
+                        <span class="empl-slide__info-value">minsu.kim@company.com</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">부서</span>
+                        <span class="empl-slide__info-value">개발팀</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">직책</span>
+                        <span class="empl-slide__info-value">프론트엔드 개발자</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">고용형태</span>
+                        <span class="empl-slide__info-value">정규직</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">입사일</span>
+                        <span class="empl-slide__info-value">2024년 9월 1일</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">수습 기간</span>
+                        <span class="empl-slide__info-value empl-slide__info-value--primary">3개월 (2025.09.01 ~ 2025.12.01)</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">체크포인트</span>
+                        <span class="empl-slide__info-value">1개월마다</span>
+                    </div>
+                    <div class="empl-slide__info-item">
+                        <span class="empl-slide__info-label">다음 체크포인트</span>
+                        <div class="empl-slide__info-value">
+                            <span>2025.12.01 </span>
+                            <span class="empl-badge empl-badge--warning empl-badge--sm">D-6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="empl-slide__footer">
+                <button class="empl-slide__action-btn" type="button" onclick="openFitCheckModal()">
+                    <img src="assets/에셋/Flat icons/confirm.svg" alt="" class="empl-slide__action-icon">
+                    <span class="empl-slide__action-label">핏 체크</span>
+                </button>
+                <button class="empl-slide__action-btn" type="button" onclick="openSelfEvalModal()">
+                    <img src="assets/에셋/Flat icons/pen.svg" alt="" class="empl-slide__action-icon">
+                    <span class="empl-slide__action-label">자기평가 요청</span>
+                </button>
+                <button class="empl-slide__action-btn" type="button" onclick="openOffboardingModal()">
+                    <img src="assets/에셋/Flat icons/export.svg" alt="" class="empl-slide__action-icon">
+                    <span class="empl-slide__action-label">오프보딩</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Fit Check -->
+    <div id="modal-fitcheck" class="modal">
+        <div class="modal__overlay" onclick="closeModal('modal-fitcheck')"></div>
+        <div class="modal__dialog modal__dialog--fitcheck">
+            <!-- Header -->
+            <div class="modal__header">
+                <div class="modal__header-content">
+                    <h2 class="modal__title">핏 체크</h2>
+                    <p class="modal__subtitle">직원의 현재 적합도를 평가해주세요</p>
+                </div>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-fitcheck')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+                    </span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal__body modal__body--fitcheck">
+                <!-- Checkpoint Info -->
+                <div class="fitcheck__checkpoint-info">
+                    <div class="fitcheck__checkpoint-icon">
+                        <img src="assets/에셋/Flat icons/confirm.svg" alt="" style="width: 20px; height: 20px;">
+                    </div>
+                    <div class="fitcheck__checkpoint-text">
+                        <div class="fitcheck__checkpoint-title">3차 체크포인트</div>
+                        <div class="fitcheck__checkpoint-date">2025.11.01 (D+60)</div>
+                    </div>
+                </div>
+
+                <!-- Employee Info -->
+                <div class="fitcheck__employee-info">
+                    <div class="fitcheck__employee-avatar">김</div>
+                    <div class="fitcheck__employee-details">
+                        <div class="fitcheck__employee-name">김민수</div>
+                        <div class="fitcheck__employee-job">프론트엔드 개발자 · 개발팀</div>
+                    </div>
+                </div>
+
+                <!-- Section 1: 업무 성과 -->
+                <div class="fitcheck__section">
+                    <div class="fitcheck__section-header">
+                        <div class="fitcheck__section-left">
+                            <div class="fitcheck__section-number">1</div>
+                            <h3 class="fitcheck__section-title">업무 성과</h3>
+                        </div>
+                        <div class="fitcheck__section-score">4.3점</div>
+                    </div>
+                    <div class="fitcheck__questions">
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">맡은 업무를 기한 내에 완료하고 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">업무 결과물의 품질이 기대 수준을 충족합니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">주도적으로 업무를 찾아서 수행합니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: 협업 -->
+                <div class="fitcheck__section">
+                    <div class="fitcheck__section-header">
+                        <div class="fitcheck__section-left">
+                            <div class="fitcheck__section-number">2</div>
+                            <h3 class="fitcheck__section-title">협업</h3>
+                        </div>
+                        <div class="fitcheck__section-score">3.7점</div>
+                    </div>
+                    <div class="fitcheck__questions">
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">팀원들과 원활하게 소통하고 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">다른 팀과의 협업에 적극적입니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">피드백을 수용하고 반영하려는 자세가 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: 문화 적합 -->
+                <div class="fitcheck__section">
+                    <div class="fitcheck__section-header">
+                        <div class="fitcheck__section-left">
+                            <div class="fitcheck__section-number">3</div>
+                            <h3 class="fitcheck__section-title">문화 적합</h3>
+                        </div>
+                        <div class="fitcheck__section-score">4.5점</div>
+                    </div>
+                    <div class="fitcheck__questions">
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">회사의 핵심 가치를 이해하고 실천하고 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">팀 분위기에 긍정적인 영향을 주고 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: 성장 가능성 -->
+                <div class="fitcheck__section">
+                    <div class="fitcheck__section-header">
+                        <div class="fitcheck__section-left">
+                            <div class="fitcheck__section-number">4</div>
+                            <h3 class="fitcheck__section-title">성장 가능성</h3>
+                        </div>
+                        <div class="fitcheck__section-score">4.5점</div>
+                    </div>
+                    <div class="fitcheck__questions">
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">새로운 것을 배우려는 의지가 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">이전보다 업무 역량이 향상되고 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: 유지 의향 -->
+                <div class="fitcheck__section">
+                    <div class="fitcheck__section-header">
+                        <div class="fitcheck__section-left">
+                            <div class="fitcheck__section-number">5</div>
+                            <h3 class="fitcheck__section-title">유지 의향</h3>
+                        </div>
+                        <div class="fitcheck__section-score">4.0점</div>
+                    </div>
+                    <div class="fitcheck__questions">
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">이 직원과 계속 함께 일하고 싶습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                        <div class="fitcheck__question">
+                            <p class="fitcheck__question-text">다른 팀에도 추천할 수 있습니까?</p>
+                            <div class="fitcheck__rating">
+                                <button class="fitcheck__rating-btn" data-value="1">1</button>
+                                <button class="fitcheck__rating-btn" data-value="2">2</button>
+                                <button class="fitcheck__rating-btn" data-value="3">3</button>
+                                <button class="fitcheck__rating-btn fitcheck__rating-btn--selected" data-value="4">4</button>
+                                <button class="fitcheck__rating-btn" data-value="5">5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="fitcheck__summary">
+                    <div class="fitcheck__summary-left">
+                        <span class="fitcheck__summary-label">전체 평균 점수</span>
+                    </div>
+                    <div class="fitcheck__summary-right">
+                        <span class="fitcheck__summary-total">4.2 / 5</span>
+                    </div>
+                </div>
+
+                <!-- Self Evaluation Option -->
+                <div class="fitcheck__option">
+                    <label class="fi-check fi-check--sq fi-check--md fi-check--selected">
+                        <input class="fi-check__input" type="checkbox" checked />
+                        <span class="fi-check__wrap" aria-hidden="true">
+                            <span class="fi-check__box"></span>
+                        </span>
+                    </label>
+                    <div class="fitcheck__option-text">
+                        <div class="fitcheck__option-title">자기평가도 함께 요청</div>
+                        <div class="fitcheck__option-desc">직원에게 자기평가 요청 이메일이 발송됩니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-fitcheck')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="submitFitCheck()">완료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Self Evaluation Request -->
+    <div id="modal-self-eval" class="modal">
+        <div class="modal__overlay" onclick="closeModal('modal-self-eval')"></div>
+        <div class="modal__dialog modal__dialog--self-eval">
+            <!-- Header -->
+            <div class="modal__header">
+                <h2 class="modal__title">자기평가 요청</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-self-eval')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+                    </span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal__body modal__body--self-eval">
+                <!-- Employee Info -->
+                <div class="self-eval__employee-info">
+                    <div class="self-eval__employee-avatar">김</div>
+                    <div class="self-eval__employee-details">
+                        <div class="self-eval__employee-name">김민수</div>
+                        <div class="self-eval__employee-job">프론트엔드 개발자 · 개발팀</div>
+                        <div class="self-eval__employee-email">minsu.kim@company.com</div>
+                    </div>
+                </div>
+
+                <!-- Info Message -->
+                <div class="self-eval__info-message">
+                    <p>선택한 직원에게 자기평가 요청 이메일이 발송됩니다.</p>
+                    <p>응답 완료 시 교차 검증이 가능해집니다.</p>
+                </div>
+
+                <!-- Deadline Selection -->
+                <div class="self-eval__deadline-section">
+                    <label class="self-eval__label">응답 기한 <span class="self-eval__required">*</span></label>
+                    <div class="self-eval__deadline-options">
+                        <button class="self-eval__deadline-btn" data-days="3">
+                            <span class="self-eval__deadline-days">3일</span>
+                            <span class="self-eval__deadline-date">12월 21일까지</span>
+                        </button>
+                        <button class="self-eval__deadline-btn self-eval__deadline-btn--selected" data-days="7">
+                            <span class="self-eval__deadline-days">7일</span>
+                            <span class="self-eval__deadline-date">12월 25일까지</span>
+                        </button>
+                        <button class="self-eval__deadline-btn" data-days="14">
+                            <span class="self-eval__deadline-days">14일</span>
+                            <span class="self-eval__deadline-date">1월 1일까지</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Message Preview -->
+                <div class="self-eval__message-section">
+                    <label class="self-eval__label">발송 메시지 미리보기</label>
+                    <div class="self-eval__message-preview">
+                        <div class="self-eval__message-to">To: 2명에게 발송</div>
+                        <div class="self-eval__message-body">
+                            <p>안녕하세요 <strong>[직원명]</strong>님,</p>
+                            <p>회사에서 정기 적합도 평가를 진행하고 있습니다.<br>본인의 업무 수행과 회사 생활에 대해 자기평가를 부탁드립니다.</p>
+                            <p>아래 링크에서 5분 내로 완료하실 수 있습니다.<br><strong>응답 기한: 12월 25일</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-self-eval')">취소</button>
+                <button class="btn-pfto btn-pfto--xlg" type="button" onclick="submitSelfEval()">요청 발송</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Offboarding -->
+    <div id="modal-offboarding" class="modal">
+        <div class="modal__overlay" onclick="closeModal('modal-offboarding')"></div>
+        <div class="modal__dialog modal__dialog--offboarding">
+            <!-- Header -->
+            <div class="modal__header">
+                <h2 class="modal__title">오프보딩</h2>
+                <button class="btn-srio btn-srio--md" type="button" onclick="closeModal('modal-offboarding')">
+                    <span class="btn-s__icon">
+                        <img src="assets/에셋/Icons/Close/Close.svg" alt="닫기">
+                    </span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal__body modal__body--offboarding">
+                <!-- Employee Info -->
+                <div class="offboarding__employee-info">
+                    <div class="offboarding__employee-avatar">김</div>
+                    <div class="offboarding__employee-details">
+                        <div class="offboarding__employee-name">김민수</div>
+                        <div class="offboarding__employee-job">프론트엔드 개발자 · 개발팀</div>
+                        <div class="offboarding__employee-tenure">입사 2025.09.01 · 근속 3개월</div>
+                    </div>
+                </div>
+
+                <!-- Warning Message -->
+                <div class="offboarding__warning">
+                    <img src="assets/에셋/Flat icons/info.svg" alt="" class="offboarding__warning-icon">
+                    <p>오프보딩 실행 시 해당 직원의 상태가 '퇴사 예정'으로 변경됩니다.</p>
+                </div>
+
+                <!-- Resignation Reason -->
+                <div class="offboarding__field">
+                    <label class="offboarding__label">
+                        퇴사사유 <span class="offboarding__required">*</span>
+                    </label>
+                    <div class="offboarding__select">
+                        <select class="offboarding__select-input" required>
+                            <option value="">선택해주세요.</option>
+                            <option value="career">커리어 성장</option>
+                            <option value="culture">조직 문화</option>
+                            <option value="personal">개인 사유</option>
+                            <option value="salary">급여 및 복지</option>
+                            <option value="worklife">워라밸</option>
+                            <option value="other">기타</option>
+                        </select>
+                        <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" class="offboarding__select-icon">
+                    </div>
+                </div>
+
+                <!-- Resignation Date -->
+                <div class="offboarding__field">
+                    <label class="offboarding__label">
+                        퇴사 예정일 <span class="offboarding__required">*</span>
+                    </label>
+                    <div class="offboarding__date-input">
+                        <img src="assets/에셋/Icons/Calendar.svg" alt="" class="offboarding__date-icon">
+                        <input type="text" placeholder="12/31/2025" class="offboarding__date-field" required>
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div class="offboarding__field offboarding__field--textarea">
+                    <label class="offboarding__label">비고</label>
+                    <textarea class="offboarding__textarea" placeholder="추가 메모 (선택)" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal__footer">
+                <button class="btn-soto btn-soto--xlg" type="button" onclick="closeModal('modal-offboarding')">취소</button>
+                <button class="btn-ctoto btn-ctoto--xlg btn-ctoti--danger" type="button" onclick="submitOffboarding()">오프보딩</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="js/app.js?v=1.0.9"></script>
     <script src="js/employee-list.js?v=1"></script>
 </body>
 </html>
-

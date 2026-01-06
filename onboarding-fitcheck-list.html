@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핏플 - 온보딩 관리</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/pages/onboarding-fitcheck.css?v=1">
+</head>
+<body class="page--onboarding-fitcheck">
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="assets/에셋/menu/logo.png" alt="fitple" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-label">메인</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/monitor.svg" class="nav-icon" alt="">
+                        대시보드
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">직원</span>
+                    <a href="employee-list.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/team.svg" class="nav-icon" alt="">
+                        직원 관리
+                    </a>
+                    <a href="onboarding-fitcheck-list.html" class="nav-item active">
+                        <img src="assets/에셋/Flat icons/inport.svg" class="nav-icon" alt="">
+                        온보딩 관리
+                    </a>
+                    <a href="offboarding.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/export.svg" class="nav-icon" alt="">
+                        오프보딩 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">인재 관리</span>
+                    <a href="index.html" class="nav-item">
+                        <img src="assets/에셋/Flat icons/profile.svg" class="nav-icon" alt="">
+                        추천 인재 목록
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/success.svg" class="nav-icon" alt="">
+                        채용 제안 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">채용 관리</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/work.svg" class="nav-icon" alt="">
+                        공고 관리
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/file.svg" class="nav-icon" alt="">
+                        지원자 관리
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-label">분석</span>
+                    <a href="#" class="nav-item">
+                        <img src="assets/에셋/Flat icons/bar-chart.svg" class="nav-icon" alt="">
+                        인사이트
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-item" type="button">
+                    <img src="assets/에셋/Flat icons/setting.svg" class="nav-icon" alt="">
+                    설정
+                </button>
+                <a href="#" class="nav-item">
+                    <img src="assets/에셋/Flat icons/info.svg" class="nav-icon" alt="">
+                    고객 지원
+                </a>
+            </div>
+        </aside>
+
+        <div class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <nav class="breadcrumb" aria-label="breadcrumb">
+                        <span class="breadcrumb-item">직원</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item breadcrumb-item--active">온보딩 관리</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" type="button" aria-label="알림">
+                        <img src="assets/에셋/Icons/Bell/On.svg" alt="">
+                    </button>
+                    <button class="icon-btn" type="button" aria-label="설정">
+                        <img src="assets/에셋/Flat icons/setting.svg" alt="">
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">김</div>
+                        <div class="user-detail">
+                            <div class="user-name">김인사</div>
+                            <div class="user-role">HR 매니저</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Header -->
+                <div class="onb-page-header">
+                    <h1 class="onb-page-title">온보딩 관리</h1>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="onb-tabs">
+                    <button class="onb-tab onb-tab--active" data-tab="fitcheck" type="button">핏 체크</button>
+                    <button class="onb-tab" data-tab="self-eval" type="button">자기 평가</button>
+                    <button class="onb-tab" data-tab="cross-verify" type="button">교차 검증</button>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="onb-toolbar">
+                    <!-- Filters -->
+                    <div class="onb-filters">
+                        <div class="onb-filter">
+                            <select class="onb-filter-select">
+                                <option value="">전체 부서</option>
+                                <option value="dev">개발팀</option>
+                                <option value="design">디자인팀</option>
+                                <option value="marketing">마케팅팀</option>
+                                <option value="sales">영업팀</option>
+                            </select>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" class="onb-filter-icon">
+                        </div>
+                        <div class="onb-filter">
+                            <select class="onb-filter-select">
+                                <option value="">1차 핏 체크</option>
+                                <option value="1st">1차 핏 체크</option>
+                                <option value="2nd">2차 핏 체크</option>
+                                <option value="3rd">3차 핏 체크</option>
+                            </select>
+                            <img src="assets/에셋/Icons/Arrow/Chevron/Down.svg" alt="" class="onb-filter-icon">
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button class="btn-pfto btn-pfto--lg" type="button">
+                        <span class="btn-pfto__label">기준 설정</span>
+                    </button>
+                </div>
+
+                <!-- Table Container -->
+                <div class="onb-table-container">
+                    <div class="onb-table-wrapper">
+                        <table class="onb-table">
+                            <thead>
+                                <tr>
+                                    <th class="onb-table__th onb-table__th--checkbox">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </th>
+                                    <th class="onb-table__th onb-table__th--employee">직원</th>
+                                    <th class="onb-table__th">부서</th>
+                                    <th class="onb-table__th">점수</th>
+                                    <th class="onb-table__th">체크포인트</th>
+                                    <th class="onb-table__th">상태</th>
+                                    <th class="onb-table__th onb-table__th--actions"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Row 1 -->
+                                <tr class="onb-table__row" onclick="navigateToFitCheckDetail('김민수')">
+                                    <td class="onb-table__td onb-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--employee">
+                                        <div class="onb-employee">
+                                            <div class="onb-avatar">김</div>
+                                            <div class="onb-employee-info">
+                                                <div class="onb-employee-name">김민수</div>
+                                                <div class="onb-employee-email">minsu.kim@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">개발팀</td>
+                                    <td class="onb-table__td">
+                                        <div class="onb-score">
+                                            <div class="onb-score-bar">
+                                                <div class="onb-score-bar-fill" style="width: 84%;"></div>
+                                            </div>
+                                            <span class="onb-score-value">4.2</span>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-checkpoint">1차 핏 체크 (D+30)</span>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-badge onb-badge--complete">완료</span>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--actions" onclick="event.stopPropagation()">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2 -->
+                                <tr class="onb-table__row" onclick="navigateToFitCheckDetail('이지은')">
+                                    <td class="onb-table__td onb-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--employee">
+                                        <div class="onb-employee">
+                                            <div class="onb-avatar">이</div>
+                                            <div class="onb-employee-info">
+                                                <div class="onb-employee-name">이지은</div>
+                                                <div class="onb-employee-email">jieun.lee@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">디자인팀</td>
+                                    <td class="onb-table__td">
+                                        <div class="onb-score">
+                                            <div class="onb-score-bar">
+                                                <div class="onb-score-bar-fill" style="width: 78%;"></div>
+                                            </div>
+                                            <span class="onb-score-value">3.9</span>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-checkpoint">2차 핏 체크 (D+60)</span>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-badge onb-badge--waiting">대기</span>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--actions" onclick="event.stopPropagation()">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3 -->
+                                <tr class="onb-table__row" onclick="navigateToFitCheckDetail('박준호')">
+                                    <td class="onb-table__td onb-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--employee">
+                                        <div class="onb-employee">
+                                            <div class="onb-avatar">박</div>
+                                            <div class="onb-employee-info">
+                                                <div class="onb-employee-name">박준호</div>
+                                                <div class="onb-employee-email">junho.park@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">마케팅팀</td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-no-data">-</span>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-checkpoint">1차 핏 체크 (D+30)</span>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-badge onb-badge--not-started">미실시</span>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--actions" onclick="event.stopPropagation()">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4 -->
+                                <tr class="onb-table__row" onclick="navigateToFitCheckDetail('최서연')">
+                                    <td class="onb-table__td onb-table__td--checkbox" onclick="event.stopPropagation()">
+                                        <label class="fi-check fi-check--sq fi-check--md fi-check--unselected">
+                                            <input class="fi-check__input" type="checkbox" />
+                                            <span class="fi-check__wrap" aria-hidden="true">
+                                                <span class="fi-check__box"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--employee">
+                                        <div class="onb-employee">
+                                            <div class="onb-avatar">최</div>
+                                            <div class="onb-employee-info">
+                                                <div class="onb-employee-name">최서연</div>
+                                                <div class="onb-employee-email">seoyeon.choi@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">개발팀</td>
+                                    <td class="onb-table__td">
+                                        <div class="onb-score">
+                                            <div class="onb-score-bar">
+                                                <div class="onb-score-bar-fill" style="width: 92%;"></div>
+                                            </div>
+                                            <span class="onb-score-value">4.6</span>
+                                        </div>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-checkpoint">3차 핏 체크 (D+90)</span>
+                                    </td>
+                                    <td class="onb-table__td">
+                                        <span class="onb-badge onb-badge--complete">완료</span>
+                                    </td>
+                                    <td class="onb-table__td onb-table__td--actions" onclick="event.stopPropagation()">
+                                        <button class="btn-srio btn-srio--md" type="button">
+                                            <span class="btn-s__icon">
+                                                <img src="assets/에셋/Icons/header dots.svg" alt="">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Footer -->
+                    <div class="onb-table-footer">
+                        <!-- Search Box (Left) -->
+                        <div class="onb-search">
+                            <img src="assets/에셋/Icons/Search.svg" alt="" class="onb-search-icon">
+                            <input type="text" placeholder="이름, 부서로 검색" class="onb-search-input">
+                        </div>
+
+                        <!-- Pagination (Right) -->
+                        <div class="onb-pagination">
+                            <button class="onb-pagination-btn onb-pagination-btn--prev" type="button" disabled>
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Left.svg" alt="이전">
+                            </button>
+                            <button class="onb-pagination-page onb-pagination-page--active" type="button">1</button>
+                            <button class="onb-pagination-page" type="button">2</button>
+                            <button class="onb-pagination-page" type="button">3</button>
+                            <button class="onb-pagination-btn onb-pagination-btn--next" type="button">
+                                <img src="assets/에셋/Icons/Arrow/Chevron/Right.svg" alt="다음">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=1.0.9"></script>
+    <script src="js/onboarding-fitcheck.js?v=1"></script>
+</body>
+</html>
+

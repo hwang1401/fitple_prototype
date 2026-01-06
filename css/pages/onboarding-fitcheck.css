@@ -1,0 +1,827 @@
+/* Onboarding Management - Fit Check & Detail Styles */
+
+/* ==========================================================================
+   Page Header
+   ========================================================================== */
+
+.onb-page-header {
+    margin-bottom: 20px;
+}
+
+.onb-page-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.33;
+    letter-spacing: -0.048px;
+    color: #141414;
+}
+
+/* ==========================================================================
+   Tab Navigation
+   ========================================================================== */
+
+.onb-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 24px;
+}
+
+.onb-tab {
+    position: relative;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.467;
+    letter-spacing: 0.144px;
+    color: #8a8a8a;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.onb-tab:hover {
+    color: #5c5c5c;
+}
+
+.onb-tab--active {
+    color: #141414;
+}
+
+.onb-tab--active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+}
+
+/* ==========================================================================
+   Toolbar
+   ========================================================================== */
+
+.onb-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.onb-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.onb-filter {
+    position: relative;
+    display: inline-block;
+}
+
+.onb-filter-select {
+    appearance: none;
+    height: 36px;
+    padding: 0 36px 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #5c5c5c;
+    background: white;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.onb-filter-select:hover {
+    border-color: #a3a3a3;
+}
+
+.onb-filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.onb-filter-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Table Container
+   ========================================================================== */
+
+.onb-table-container {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.onb-table-wrapper {
+    overflow-x: auto;
+}
+
+.onb-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.onb-table__th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #5c5c5c;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.onb-table__th--checkbox {
+    width: 48px;
+    padding-left: 20px;
+}
+
+.onb-table__th--employee {
+    min-width: 220px;
+}
+
+.onb-table__th--actions {
+    width: 60px;
+}
+
+.onb-table__row {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.onb-table__row:hover {
+    background: #fafafa;
+}
+
+.onb-table__td {
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #333333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.onb-table__row:last-child .onb-table__td {
+    border-bottom: none;
+}
+
+.onb-table__td--checkbox {
+    padding-left: 20px;
+}
+
+.onb-table__td--employee {
+    min-width: 220px;
+}
+
+.onb-table__td--actions {
+    text-align: center;
+}
+
+/* Employee Info */
+.onb-employee {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.onb-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.onb-employee-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.onb-employee-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #141414;
+}
+
+.onb-employee-email {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #8a8a8a;
+}
+
+/* Score Display */
+.onb-score {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.onb-score-bar {
+    flex: 1;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 120px;
+}
+
+.onb-score-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.onb-score-value {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #141414;
+    min-width: 32px;
+}
+
+.onb-no-data {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.429;
+    color: #c2c2c2;
+}
+
+/* Checkpoint */
+.onb-checkpoint {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #5c5c5c;
+}
+
+/* Status Badges */
+.onb-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+}
+
+.onb-badge--complete {
+    background: #dff7ed;
+    color: #207b5d;
+}
+
+.onb-badge--waiting {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.onb-badge--not-started {
+    background: #e0e0e0;
+    color: #5c5c5c;
+}
+
+/* ==========================================================================
+   Table Footer
+   ========================================================================== */
+
+.onb-table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #e0e0e0;
+    background: white;
+}
+
+/* Search Box */
+.onb-search {
+    position: relative;
+    width: 280px;
+}
+
+.onb-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
+.onb-search-input {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px 0 38px;
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #333333;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    transition: border-color 0.15s ease;
+}
+
+.onb-search-input::placeholder {
+    color: #a3a3a3;
+}
+
+.onb-search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Pagination */
+.onb-pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.onb-pagination-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.onb-pagination-btn:not(:disabled):hover {
+    background: #fafafa;
+    border-color: #c2c2c2;
+}
+
+.onb-pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.onb-pagination-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.onb-pagination-page {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.429;
+    color: #5c5c5c;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.onb-pagination-page:hover {
+    background: #fafafa;
+    color: #333333;
+}
+
+.onb-pagination-page--active {
+    background: var(--primary);
+    color: white;
+}
+
+.onb-pagination-page--active:hover {
+    background: var(--primary-dark);
+}
+
+/* ==========================================================================
+   Fit Check Detail Page
+   ========================================================================== */
+
+.onb-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.onb-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #5c5c5c;
+    background: white;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.onb-back-btn:hover {
+    background: #fafafa;
+    border-color: #a3a3a3;
+}
+
+.onb-back-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Profile Card */
+.onb-profile-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.onb-profile-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.onb-profile-avatar {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.onb-profile-info {
+    flex: 1;
+}
+
+.onb-profile-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.onb-profile-name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.04px;
+    color: #141414;
+}
+
+.onb-profile-job {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.467;
+    letter-spacing: 0.144px;
+    color: #5c5c5c;
+}
+
+.onb-profile-score-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.onb-profile-score {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.onb-profile-score-label {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #8a8a8a;
+}
+
+.onb-profile-score-value {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.222;
+    letter-spacing: -0.072px;
+    color: #141414;
+}
+
+.onb-profile-score-max {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8a8a8a;
+}
+
+.onb-profile-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: #dff7ed;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #207b5d;
+}
+
+.onb-profile-trend img {
+    width: 12px;
+    height: 12px;
+}
+
+.onb-profile-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Score Trend Section */
+.onb-section {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.onb-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.onb-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.444;
+    letter-spacing: -0.036px;
+    color: #141414;
+}
+
+.onb-time-filters {
+    display: flex;
+    gap: 4px;
+}
+
+.onb-time-filter {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #5c5c5c;
+    background: transparent;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.onb-time-filter:hover {
+    background: #fafafa;
+}
+
+.onb-time-filter--active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.onb-chart-placeholder {
+    height: 200px;
+    background: #fafafa;
+    border: 1px dashed #c2c2c2;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+/* Check History Section */
+.onb-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.onb-history-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.onb-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.onb-history-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.onb-history-date-text {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.467;
+    letter-spacing: 0.144px;
+    color: #141414;
+}
+
+.onb-history-checkpoint-label {
+    padding: 4px 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.23px;
+    color: #5c5c5c;
+}
+
+.onb-history-score-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.onb-history-score {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #141414;
+}
+
+.onb-history-score-change {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    background: #dff7ed;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #207b5d;
+}
+
+.onb-history-score-change--negative {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.onb-history-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.onb-history-category {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: #5c5c5c;
+}
+
+.onb-history-category-score {
+    font-weight: 600;
+    color: #141414;
+}
+
+.onb-history-comment {
+    padding: 12px;
+    background: #fafafa;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.571;
+    letter-spacing: 0.203px;
+    color: #333333;
+    margin-bottom: 12px;
+}
+
+.onb-history-detail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.385;
+    letter-spacing: 0.2522px;
+    color: var(--primary);
+    background: transparent;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.onb-history-detail-btn:hover {
+    background: var(--primary-light);
+}
+
+/* Feedback Section */
+.onb-feedback-section {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.onb-feedback-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.429;
+    letter-spacing: 0.203px;
+    color: #141414;
+}
+
+.onb-feedback-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.571;
+    letter-spacing: 0.203px;
+    color: #333333;
+    background: white;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: var(--font);
+    transition: border-color 0.15s ease;
+}
+
+.onb-feedback-textarea::placeholder {
+    color: #a3a3a3;
+}
+
+.onb-feedback-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
