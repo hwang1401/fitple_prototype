@@ -1289,6 +1289,27 @@
 .btn-ctoto.is-selected { background: var(--cta-bg-strong-selected); border-color: var(--cta-bg); }
 .btn-ctoto.is-focused { border: 2px solid #141414; }
 
+/* Danger variant for btn-ctoto (offboarding modal) */
+.btn-ctoto--danger {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.btn-ctoto--danger:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--danger-light);
+    border-color: var(--danger);
+}
+
+.btn-ctoto--danger:not(:disabled):not([aria-disabled="true"]):active {
+    background: var(--danger-light);
+    border-color: var(--danger);
+}
+
+.btn-ctoto--danger[aria-pressed="true"] {
+    background: var(--danger-light);
+    border-color: var(--danger);
+}
+
 /* ========================================================================== */
 /* CTA Outlined: Icon Only (CtaButtonOutlinedIconOnly)                         */
 /* NOTE: state names include hover/focus in Figma; we map to hover/focus        */
